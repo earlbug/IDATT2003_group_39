@@ -19,6 +19,11 @@ public class Board {
     return tiles.get(tileId);
   }
 
+  /**
+   * Adds Tile parameter to list of tiles. Its ID will be the number of tiles already existing.
+   *
+   * @param tile to be added in
+   */
   public void addTile(Tile tile) {
     tiles.put(tiles.size(), tile);
   }
