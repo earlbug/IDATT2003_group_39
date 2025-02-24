@@ -9,8 +9,12 @@ public class LadderAction implements TileAction{
     setDestinationTileId(destinationTileId);
   }
 
-  public void preform(Player player) {}
-
+  @Override
+  public void preform(Player player) {
+    Tile destinationTile = player.getCurrentGame().getBoard().getTile(destinationTileId);
+    // todo: implement getCurrentGame(), getBoard() and getTile()
+    player.placeOnTile(destinationTile);
+  }
 
 
   private int getDestinationTileId() {
