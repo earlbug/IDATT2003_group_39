@@ -5,9 +5,11 @@ import controllers.BoardGame;
 public class Player {
   private String name;
   private Tile currentTile;
+  private BoardGame currentGame;
 
   Player(String name, BoardGame game){
     setName(name);
+    setCurrentGame(game);
   }
 
   public void move(int steps) {
@@ -22,11 +24,19 @@ public class Player {
     setCurrentTile(tile);
   }
 
+  public BoardGame getCurrentGame() {
+    return currentGame;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
 
   public void setCurrentTile(Tile currentTile) {
     this.currentTile = currentTile;
+  }
+
+  public void setCurrentGame(BoardGame currentGame) {
+    this.currentGame = currentGame;
   }
 }
