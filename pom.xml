@@ -10,9 +10,9 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <!-- Per Januar 2025 the LTS version is 21 -->
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <!-- Per Januar 2025 the LTS version is 22 -->
+    <maven.compiler.source>22</maven.compiler.source>
+    <maven.compiler.target>22</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
