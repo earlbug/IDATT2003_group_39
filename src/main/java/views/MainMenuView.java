@@ -1,4 +1,4 @@
-package GUI;
+package views;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,12 +27,14 @@ public class MainMenuView {
   private Pane display = new Pane();
   private HBox titleContainer = new HBox();
   private HBox title = new HBox();
+  private Text titleText = new Text();
+
   private VBox playersContainer = new VBox();
   private HBox playersTitle = new HBox();
-  private Text titleText = new Text();
   private Text playersText = new Text();
-  private Button startButton = new Button();
   private Button playersButton = new Button();
+
+  private Button startButton = new Button();
 
   private final int TITLE_WIDTH = 580;
   private final int TITLE_HEIGHT = 94;
