@@ -10,9 +10,9 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <!-- Per Januar 2025 the LTS version is 21 -->
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <!-- Per Januar 2025 the LTS version is 22 -->
+    <maven.compiler.source>22</maven.compiler.source>
+    <maven.compiler.target>22</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
@@ -42,14 +42,25 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.5.2</version>
       </plugin>
-      <!-- Plugin to execute JavaFX applications from Maven -->
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
+      </plugin>
+      <!-- Plugin to execute JavaFX applications from Maven -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
-          <!-- TODO: Replace with your own main-class -->
-          <mainClass>App.java</mainClass>
+          <mainClass>views.MainApp</mainClass>
         </configuration>
       </plugin>
     </plugins>
