@@ -26,13 +26,13 @@ public class BoardView {
   private final int rows = 10;
   private final int columns = 9;
 
-  private PlayerView playerView;
+  //private PlayerView playerView;
 
   public BoardView() {
     createBoard();
     display.setCenter(gridPane);
-    playerView = new PlayerView();
-    display.getChildren().add(playerView.getPlayer());
+    //playerView = new PlayerView();
+    //display.getChildren().add(playerView.getPlayer());
     setPlayerPosition(10, 0);
   }
 
@@ -77,7 +77,7 @@ private void createBoard() {
   public void setPlayerPosition(int row, int column) {
     double x = column * elementSizeX;
     double y = row * elementSizeY;
-    playerView.setPosition(x, y);
+    //playerView.setPosition(x, y);
   }
 
   /**
