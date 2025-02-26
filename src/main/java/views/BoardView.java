@@ -1,5 +1,6 @@
-package GUI;
+package views;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -20,7 +21,7 @@ public class BoardView {
   private final double elementSizeY = 59;
 
   private GridPane gridPane = new GridPane();
-  private Pane display = new Pane(gridPane);
+  private BorderPane display = new BorderPane(gridPane);
 
   private final int rows = 10;
   private final int columns = 9;
@@ -29,19 +30,10 @@ public class BoardView {
 
   public BoardView() {
     createBoard();
-
+    display.setCenter(gridPane);
     playerView = new PlayerView();
     display.getChildren().add(playerView.getPlayer());
     setPlayerPosition(10, 0);
-  }
-
-  /**
-   * Returns the view of the game board.
-   *
-   * @return the view of the game board
-   */
-  public Pane getView() {
-    return display;
   }
 
   /**
@@ -86,5 +78,14 @@ private void createBoard() {
     double x = column * elementSizeX;
     double y = row * elementSizeY;
     playerView.setPosition(x, y);
+  }
+
+  /**
+   * Returns the view of the game board.
+   *
+   * @return the view of the game board
+   */
+  public Pane getView() {
+    return display;
   }
 }
