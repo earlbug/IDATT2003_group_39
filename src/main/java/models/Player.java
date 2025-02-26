@@ -46,6 +46,15 @@ public class Player {
     return currentGame;
   }
 
+  public Tile getCurrentTile() {
+    return currentTile;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+
   public void setName(String name) {
     this.name = name;
   }
