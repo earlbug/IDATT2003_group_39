@@ -15,7 +15,7 @@ public class Player {
   private Tile currentTile;
   private BoardGame currentGame;
 
-  Player(String name, BoardGame game){
+  public Player(String name, BoardGame game){
     setName(name);
     setCurrentGame(game);
   }
