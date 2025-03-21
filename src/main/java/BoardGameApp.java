@@ -1,12 +1,16 @@
 import controllers.BoardGame;
 import controllers.PlayerReadWrite;
 import java.io.IOException;
+import javafx.application.Application;
 import models.GamePiece;
 import models.Player;
+import views.MainApp;
 
 public class BoardGameApp {
 
   public static void main(String[] args) {
+
+    Application.launch(MainApp.class, args);
 
     PlayerReadWrite playerIO = new PlayerReadWrite();
     Player player = new Player("erlendPlayer2", new BoardGame(), GamePiece.THIMBLE);
