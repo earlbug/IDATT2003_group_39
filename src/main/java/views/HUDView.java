@@ -21,15 +21,15 @@ public class HUDView extends VBox{
   private final VBox playerContainer;
   private final VBox diceContainer;
 
-  private Text playerTitle;
-  private Text playerNumber;
+  private final Text playerTitle;
+  private final Text playerNumber;
 
-  private Region spacer;
+  private final Region spacer;
 
-  private Button rollDiceButton;
-  private Text diceNumber;
+  private final Button rollDiceButton;
+  private final Text diceNumber;
 
-  private Button testPlayerPos;
+  private final Button testPlayerPos;
   private Player player;
 
   public HUDView(MainView mainView, BoardView boardView) {
