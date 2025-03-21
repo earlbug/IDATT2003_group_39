@@ -1,5 +1,7 @@
-package controllers;
+package IO;
 
+import java.util.HashMap;
+import java.util.Map;
 import models.Player;
 
 import java.io.*;
@@ -7,12 +9,14 @@ import java.io.*;
 /**
  * Responsible for reading and writing player-related data to local file.
  * Opening and closing of the fileWriter is done automatically by this class.
+ *
+ * @author Erlend Sundsdal
+ * @since 0.1.0
+ * @version 0.1.0
  */
 public class PlayerReadWrite {
   String pathName = "src/main/resources/data/players.csv";
   char delimiter = ',';
-  File playerFile = new File(pathName);
-
 
   public PlayerReadWrite() {
   }
@@ -41,4 +45,29 @@ public class PlayerReadWrite {
     }
   }
 
+  /**
+   * Reads player data from a local file, where each line contains player name and game piece,
+   * separated by a delimiter, and returns it as a map.
+   *
+   * @return a map where the key is the player's name and the value is their game piece
+   * @throws IOException if the file cannot be read
+   */
+  public Map<String, String> getPlayers() throws IOException {
+    Map<String, String> playerMap = new HashMap<>();
+
+    // Opens a BufferedReader
+    try(BufferedReader reader = new BufferedReader(new FileReader(pathName))) {
+      String line;
+      // Reads all lines, and adds them to the HashMap
+      while ((line = reader.readLine()) != null) {
+        String[] readValues = line.split(",");
+        playerMap.put(readValues[0], readValues[1]);
+      }
+
+      return playerMap;
+
+    } catch (IOException e) {
+      throw new IOException("File could not be read: " + pathName);
+    }
+  }
 }
