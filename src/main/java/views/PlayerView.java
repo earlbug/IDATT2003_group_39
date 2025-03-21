@@ -2,25 +2,28 @@ package views;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import models.Player;
 
 
-public class PlayerView {
-  private Rectangle player;
-  private double playerSize = 40;
+public class PlayerView extends Rectangle{
 
-  public PlayerView() {
-    player = new Rectangle(playerSize, playerSize);
-    player.setFill(Color.BLUE);
+  private final Color color;
+
+  public PlayerView(Player player, Color color) {
+    this.color = color;
+
+    initialize();
   }
 
-  public Rectangle getPlayer() {
-    return player;
+  private void initialize(){
+    double playerSize = 40;
+    this.setHeight(playerSize);
+    this.setWidth(playerSize);
+    this.setFill(color);
+    this.getStyleClass().add("player-avatar");
   }
 
-  public void setPosition(double x, double y) {
-    player.setX(x + 10);
-    player.setY(y + 10);
+  public Rectangle getView(){
+    return this;
   }
-
-
 }
