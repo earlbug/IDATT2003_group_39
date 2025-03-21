@@ -1,5 +1,5 @@
 import controllers.BoardGame;
-import controllers.PlayerReadWrite;
+import IO.PlayerReadWrite;
 import java.io.IOException;
 import javafx.application.Application;
 import models.GamePiece;
