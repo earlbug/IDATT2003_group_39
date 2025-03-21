@@ -16,7 +16,7 @@ public class Tile {
   private TileAction landAction;
 
   public Tile(int tileId) {
-    setTileId(tileId);
+    this.tileId = tileId;
   }
 
   /**
