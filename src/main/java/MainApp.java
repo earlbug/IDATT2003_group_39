@@ -1,9 +1,8 @@
-package views;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import views.container.MainView;
 
 /**
  * This class represents the main application.
@@ -22,8 +21,6 @@ public class MainApp extends Application {
     BorderPane root = new BorderPane();
 
 
-    //MainMenuView mainMenuView = new MainMenuView();
-    //root.setCenter(mainMenuView.getView());
     /*
     * Add the board view to the top of the root layout.
     */
@@ -33,7 +30,7 @@ public class MainApp extends Application {
     /*
     * Setting up the scene and stage.
     */
-    Scene scene = new Scene(root, 800, 600);
+    Scene scene = new Scene(root);
     scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
     primaryStage.setTitle("JavaFX Multi-View Application");
     primaryStage.setScene(scene);
