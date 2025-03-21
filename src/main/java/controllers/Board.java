@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.HashMap;
 import java.util.Map;
 import models.Tile;
 
@@ -13,7 +14,9 @@ import models.Tile;
 public class Board {
   private Map<Integer, Tile> tiles;
 
-  public Board(){}
+  public Board(){
+    this.tiles = new HashMap<>();
+  }
 
   public Tile getTile(int tileId) {
     return tiles.get(tileId);
