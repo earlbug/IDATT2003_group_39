@@ -16,7 +16,7 @@ public class Dice {
    * Constructor Creates a given number of dice, and stores it in an ArrayList
    * @param numberOfDice how many dice to be made
    */
-  Dice(int numberOfDice){
+  public Dice(int numberOfDice){
     for (int i = 0; i < numberOfDice; i++) {
       addDie(new Die());
     }
