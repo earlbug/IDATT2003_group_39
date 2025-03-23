@@ -14,10 +14,12 @@ public class Player {
   private String name;
   private Tile currentTile;
   private BoardGame currentGame;
+  private GamePiece gamePiece;
 
-  public Player(String name, BoardGame game){
+  public Player(String name, BoardGame game, GamePiece gamePiece){
     setName(name);
     setCurrentGame(game);
+    setGamePiece(gamePiece);
   }
 
   /**
@@ -42,6 +44,7 @@ public class Player {
     setCurrentTile(tile);
   }
 
+
   public BoardGame getCurrentGame() {
     return currentGame;
   }
@@ -54,6 +57,9 @@ public class Player {
     return name;
   }
 
+  public GamePiece getGamePiece() {
+    return gamePiece;
+  }
 
   public void setName(String name) {
     this.name = name;
@@ -65,5 +71,9 @@ public class Player {
 
   public void setCurrentGame(BoardGame currentGame) {
     this.currentGame = currentGame;
+  }
+
+  public void setGamePiece(GamePiece gamePiece) {
+    this.gamePiece = gamePiece;
   }
 }
