@@ -1,4 +1,4 @@
-package views;
+package views.container;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,33 +22,40 @@ import javafx.scene.text.Text;
  * @since 1.0
  */
 
-public class MainMenuView {
+public class MainMenuView extends Pane{
 
-  private Pane display = new Pane();
-  private HBox titleContainer = new HBox();
-  private HBox title = new HBox();
-  private Text titleText = new Text();
+  private final HBox titleContainer;
+  private final HBox title;
+  private final Text titleText;
 
-  private VBox playersContainer = new VBox();
-  private HBox playersTitle = new HBox();
-  private Text playersText = new Text();
-  private Button playersButton = new Button();
+  private final VBox playersContainer;
+  private final HBox playersTitle;
+  private final Text playersText;
+  private final Button playersButton;
 
-  private Button startButton = new Button();
-
-  private final int TITLE_WIDTH = 580;
-  private final int TITLE_HEIGHT = 94;
-  private final int PLAYERS_WIDTH = 300;
-  private final int PLAYERS_HEIGHT = 70;
+  private final Button startButton;
 
   /*
    * Add the buttons and titles
    */
   public MainMenuView() {
+    titleContainer = new HBox();
+    title = new HBox();
+    titleText = new Text();
+    playersContainer = new VBox();
+    playersTitle = new HBox();
+    playersText = new Text();
+    playersButton = new Button();
+    startButton = new Button();
 
-    // Title
+    initialize();
+  }
+
+  private void initialize(){
     title.setAlignment(Pos.CENTER);
-    title.setPrefSize(TITLE_WIDTH, TITLE_HEIGHT);
+    int titleWidth = 580;
+    int titleHeight = 94;
+    title.setPrefSize(titleWidth, titleHeight);
     title.setBackground(
         new Background(new BackgroundFill(Color.BLACK, new CornerRadii(10), Insets.EMPTY)));
     titleText.setFont(Font.font("Arial Black", FontWeight.BLACK, 38));
@@ -58,15 +65,17 @@ public class MainMenuView {
 
     // Title container
     titleContainer.setAlignment(Pos.CENTER);
-    titleContainer.prefWidthProperty().bind(display.widthProperty());
+    titleContainer.prefWidthProperty().bind(this.widthProperty());
     titleContainer.setPadding(new Insets(20, 0, 0, 0));
     titleContainer.getChildren().add(title);
 
-    display.getChildren().add(titleContainer);
+    this.getChildren().add(titleContainer);
 
     // Players
     playersTitle.setAlignment(Pos.CENTER);
-    playersTitle.setPrefSize(PLAYERS_WIDTH, PLAYERS_HEIGHT);
+    int playersWidth = 300;
+    int playersHeight = 70;
+    playersTitle.setPrefSize(playersWidth, playersHeight);
     playersTitle.setBackground(
         new Background(new BackgroundFill(Color.BLACK, new CornerRadii(10), Insets.EMPTY)));
     playersText.setFont(Font.font("Arial Black", FontWeight.BLACK, 30));
@@ -76,11 +85,9 @@ public class MainMenuView {
 
     // Players container
     playersContainer.setAlignment(Pos.CENTER);
-    playersContainer.getChildren().add(playersTitle);
-    playersContainer.getChildren().add(playersButton);
+    playersContainer.getChildren().setAll(playersTitle, playersButton);
 
-    display.getChildren().add(playersContainer);
-    display.getChildren().add(startButton);
+    this.getChildren().setAll(playersContainer, startButton);
   }
 
   /**
@@ -89,7 +96,6 @@ public class MainMenuView {
    * @return display of the main menu
    */
   public Pane getView() {
-    return display;
+    return this;
   }
-
 }
