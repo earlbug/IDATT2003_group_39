@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 import models.Player;
 import models.Tile;
 
@@ -13,20 +14,23 @@ import models.Tile;
  *
  */
 public class BoardGame {
-  private Board board;
-  private ArrayList<Player> playerList;
+  private final Board board = new Board();
+  private final List<Player> players = new ArrayList<>();
   private Player currentPlayer;
   private Dice dice;
 
-  public BoardGame() {
-    playerList = new ArrayList<>();
-  }
   /**
    * Adds a player to the game.
    * @param player player to be added to the game.
    */
   public void addPlayer(Player player) {
-    playerList.add(player);
+    players.add(player);
+  }
+
+  public void createBoard(int numberOfTiles){
+    for (int i = 1;i <= numberOfTiles;i++) {
+      board.addTile(new Tile(i));
+    }
   }
 
   /**
@@ -48,11 +52,11 @@ public class BoardGame {
    * Passes the turn to the next player.
    */
   public void nextPlayer() {
-    int currentPlayerIndex = playerList.indexOf(currentPlayer);
-    if(currentPlayerIndex + 1 >= playerList.size()) {
-      currentPlayer = playerList.getFirst();
+    int currentPlayerIndex = players.indexOf(currentPlayer);
+    if(currentPlayerIndex + 1 >= players.size()) {
+      currentPlayer = players.getFirst();
     } else {
-      currentPlayer = playerList.get(currentPlayerIndex  + 1);
+      currentPlayer = players.get(currentPlayerIndex  + 1);
     }
   }
 
@@ -73,4 +77,8 @@ public class BoardGame {
     return currentPlayer;
   }
 
+
+  public Board getBoard(){
+    return board;
+  }
 }

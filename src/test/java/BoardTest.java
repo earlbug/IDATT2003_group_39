@@ -18,7 +18,7 @@ public class BoardTest {
   public void testAddTile(){
     Tile tile = new Tile(1);
     board.addTile(tile);
-    assertEquals(tile, board.getTile(0));
+    assertEquals(tile, board.getTile(1));
   }
 
   @Test
@@ -27,8 +27,8 @@ public class BoardTest {
     Tile tile2 = new Tile(2);
     board.addTile(tile1);
     board.addTile(tile2);
-    assertEquals(tile1, board.getTile(0));
-    assertEquals(tile2, board.getTile(1));
+    assertEquals(tile1, board.getTile(1));
+    assertEquals(tile2, board.getTile(2));
   }
 
 }

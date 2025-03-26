@@ -5,13 +5,11 @@ import java.util.Random;
 /**
  * @version 0.1
  * @since 0.1
- * @author Erlend Sundsdal
+ * @author Erlend Sundsdal, Tord Fosse
  */
 public class Die {
   private int lastRolledValue;
-  private Random random = new Random();
-
-  public Die(){}
+  private final Random random = new Random();
 
   /**
    * Sets <code>lastRolledValue</code> to a number between 1 and 6
@@ -20,13 +18,9 @@ public class Die {
   public int roll(){
     int dieMinValue = 1;
     int dieMaxValue = 6;
-    int numberRolled = random.nextInt(dieMaxValue - dieMinValue + 1) + dieMinValue;
-    setLastRolledValue(numberRolled);
+    int numberRolled = random.nextInt(dieMinValue, dieMaxValue);
+    lastRolledValue = numberRolled;
     return numberRolled;
-  }
-
-  public void setLastRolledValue(int lastRolledValue) {
-    this.lastRolledValue = lastRolledValue;
   }
 
   public int getValue() {

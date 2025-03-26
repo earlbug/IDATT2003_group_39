@@ -1,6 +1,7 @@
 package models;
 
 import interfaces.TileAction;
+import models.validators.ArgumentValidator;
 
 /**
  * Represents a tile in the ladder game. A TileActions is stored as a class variable, and decides
@@ -16,7 +17,7 @@ public class Tile {
   private TileAction landAction;
 
   public Tile(int tileId) {
-    this.tileId = tileId;
+    setTileId(tileId);
   }
 
   /**
@@ -25,7 +26,7 @@ public class Tile {
    * @param player the player whom the action shall be preformed on
    */
   public void landPlayer(Player player) {
-    landAction.preform(player);
+    landAction.perform(player);
   }
 
   public void leavePlayer(Player player) {}
@@ -35,21 +36,22 @@ public class Tile {
     return tileId;
   }
 
-
-
   public Tile getNextTile() {
     return nextTile;
   }
 
   public void setTileId(int tileId) {
+    ArgumentValidator.tileSetTileIdValidator(tileId);
     this.tileId = tileId;
   }
 
   public void setNextTile(Tile nextTile) {
+    ArgumentValidator.tileSetNextTileValidator(nextTile);
     this.nextTile = nextTile;
   }
 
   public void setLandAction(TileAction landAction) {
+    ArgumentValidator.tileSetLandActionValidator(landAction);
     this.landAction = landAction;
   }
 }
