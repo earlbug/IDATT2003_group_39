@@ -29,7 +29,7 @@ public class LadderAction implements TileAction{
   }
 
 
-  private int getDestinationTileId() {
+  public int getDestinationTileId() {
     return destinationTileId;
   }
 
