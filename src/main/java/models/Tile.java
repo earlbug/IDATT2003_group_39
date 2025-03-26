@@ -52,4 +52,8 @@ public class Tile {
   public void setLandAction(TileAction landAction) {
     this.landAction = landAction;
   }
+
+  public TileAction getLandAction() {
+    return landAction;
+  }
 }
