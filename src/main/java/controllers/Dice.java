@@ -17,6 +17,7 @@ public class Dice {
    * @param numberOfDice how many dice to be made
    */
   public Dice(int numberOfDice){
+    dice = new ArrayList<>();
     for (int i = 0; i < numberOfDice; i++) {
       addDie(new Die());
     }
