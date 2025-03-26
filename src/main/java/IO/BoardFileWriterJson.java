@@ -15,6 +15,8 @@ import models.Tile;
 public class BoardFileWriterJson implements BoardFileWriter {
   String path = "src/main/resources/data/board/";
 
+  public BoardFileWriterJson(){}
+
   @Override
   public void writeBoard(Board board, String fileName) throws IOException{
     JsonObject boardJson = serializeBoard(board);

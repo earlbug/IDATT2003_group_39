@@ -17,6 +17,7 @@ import models.Tile;
 public class BoardFileReaderJson implements BoardFileReader {
   String folder = "src/main/resources/data/board/";
 
+  public BoardFileReaderJson() {}
 
   @Override
   public Board getBoard(String fileName) throws IOException{
@@ -46,7 +47,7 @@ public class BoardFileReaderJson implements BoardFileReader {
 
   public Tile deserializeTile(JsonObject tileJson) {
     Tile tile;
-    int tileId = tileJson.getAsJsonObject("tileId").getAsInt();
+    int tileId = tileJson.get("tileId").getAsInt();
     tile = new Tile(tileId);
 
     if (tileJson.has("type")){
@@ -64,7 +65,9 @@ public class BoardFileReaderJson implements BoardFileReader {
     TileAction tileAction;
     switch (actionType) {
       case "ladderAction": tileAction = deserializeLadderAction(actionTileJson);
-      case null, default: tileAction = null;
+      break;
+      case null: tileAction = null;
+      default: tileAction = null;
     }
 
     return tileAction;
