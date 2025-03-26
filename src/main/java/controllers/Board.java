@@ -31,6 +31,7 @@ public class Board {
     tiles.put(tiles.size(), tile);
   }
 
-
-
+  public Tile[] getTiles() {
+    return tiles.values().toArray(new Tile[0]);
+  }
 }
