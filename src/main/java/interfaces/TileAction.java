@@ -11,7 +11,7 @@ import models.Player;
  */
 public interface TileAction {
 
-  public void perform(Player player);
+  void perform(Player player);
 
 
 }

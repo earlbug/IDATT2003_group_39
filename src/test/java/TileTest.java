@@ -11,14 +11,13 @@ public class TileTest {
 
   private Tile tile1;
   private Tile tile2;
-  private Player player1;
   private BoardGame game;
 
   @BeforeEach
   public void setUp(){
     tile1 = new Tile(1);
     tile2 = new Tile(2);
-    player1 = new Player("Ola", game);
+    Player player1 = new Player("Ola", game);
   }
 
   @Test

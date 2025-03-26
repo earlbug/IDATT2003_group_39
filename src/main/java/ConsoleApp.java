@@ -1,4 +1,3 @@
-import controllers.Board;
 import controllers.BoardGame;
 import controllers.Dice;
 import java.util.Scanner;
