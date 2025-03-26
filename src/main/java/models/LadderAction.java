@@ -13,7 +13,7 @@ import interfaces.TileAction;
 public class LadderAction implements TileAction{
   private int destinationTileId;
 
-  LadderAction(int destinationTileId, String description) {
+  public LadderAction(int destinationTileId, String description) {
     setDestinationTileId(destinationTileId);
   }
 
@@ -23,7 +23,7 @@ public class LadderAction implements TileAction{
    * @param player what player the action shall be preformed on
    */
   @Override
-  public void preform(Player player) {
+  public void perform(Player player) {
     int currentTileId = player.getCurrentTile().getTileId();
     player.move(destinationTileId - currentTileId);
   }
