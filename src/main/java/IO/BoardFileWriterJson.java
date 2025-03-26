@@ -71,6 +71,8 @@ public class BoardFileWriterJson implements BoardFileWriter {
 
   public JsonObject serializeLadderAction(LadderAction ladderAction) {
     JsonObject ladderActionJson = new JsonObject();
+    ladderActionJson.addProperty("actionType", "ladderAction");
+    ladderActionJson.addProperty("description", ladderAction.getDescription());
     ladderActionJson.addProperty("destinationTileId", ladderAction.getDestinationTileId());
     return ladderActionJson;
   }
