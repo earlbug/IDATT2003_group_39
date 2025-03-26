@@ -12,14 +12,10 @@ import models.Tile;
  * @since 0.1.0
  */
 public class Board {
-  private Map<Integer, Tile> tiles;
-
-  public Board(){
-    this.tiles = new HashMap<>();
-  }
+  private final Map<Integer, Tile> tiles = new HashMap<>();
 
   public Tile getTile(int tileId) {
-    return tiles.get(tileId);
+    return tiles.get(tileId - 1);
   }
 
   /**
