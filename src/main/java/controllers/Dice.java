@@ -1,4 +1,5 @@
 package controllers;
+import java.util.List;
 import models.Die;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Dice {
   // ArrayList of Dice
-  private ArrayList<Die> dice;
+  private final List<Die> dice = new ArrayList<>();
 
   /**
    * Constructor Creates a given number of dice, and stores it in an ArrayList
@@ -18,7 +19,7 @@ public class Dice {
    */
   public Dice(int numberOfDice){
     for (int i = 0; i < numberOfDice; i++) {
-      addDie(new Die());
+      dice.add(new Die());
     }
   }
 
@@ -35,12 +36,6 @@ public class Dice {
   }
 
   public int getDieValue(int dieIndex) {
-    // validate parameter here
     return dice.get(dieIndex).getValue();
-  }
-
-  private void addDie(Die die){
-    // Add exception handling here
-    dice.add(die);
   }
 }
