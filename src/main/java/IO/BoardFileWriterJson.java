@@ -5,16 +5,29 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import controllers.Board;
+import interfaces.BoardFileWriter;
 import interfaces.TileAction;
 import java.io.FileWriter;
 import java.io.IOException;
 import models.LadderAction;
 import models.Tile;
 
-public class BoardWriter {
+public class BoardFileWriterJson implements BoardFileWriter {
   String path = "src/main/resources/data/board/";
 
-  public void serializeBoard(Board board, String fileName) throws  IOException{
+  @Override
+  public void writeBoard(Board board, String fileName) throws IOException{
+    JsonObject boardJson = serializeBoard(board);
+
+    try {
+      writeJsonToFile(boardJson, fileName);
+    } catch (IOException e) {
+      throw new IOException("Could not write board to file: " + path + fileName);
+    }
+
+  }
+
+  public JsonObject serializeBoard(Board board) throws  IOException{
     JsonObject boardJson = new JsonObject();
     JsonArray tileArrayJson = new JsonArray();
 
@@ -24,11 +37,8 @@ public class BoardWriter {
       tileArrayJson.add(tileJson);
     }
     boardJson.add("tiles", tileArrayJson);
-    try {
-      writeJsonToFile(boardJson, fileName);
-    } catch (IOException e) {
-      throw new IOException("Could not write board to file: " + path + fileName);
-    }
+
+    return boardJson;
   }
 
   private JsonObject serializeTile(Tile tile) {
