@@ -14,7 +14,7 @@ import models.Tile;
 public class BoardWriter {
   String path = "src/main/resources/data/board/";
 
-  public void serializeBoard(Board board, String fileName) {
+  public void serializeBoard(Board board, String fileName) throws  IOException{
     JsonObject boardJson = new JsonObject();
     JsonArray tileArrayJson = new JsonArray();
 
@@ -24,8 +24,11 @@ public class BoardWriter {
       tileArrayJson.add(tileJson);
     }
     boardJson.add("tiles", tileArrayJson);
-
-    // Write board
+    try {
+      writeJsonToFile(boardJson, fileName);
+    } catch (IOException e) {
+      throw new IOException("Could not write board to file: " + path + fileName);
+    }
   }
 
   private JsonObject serializeTile(Tile tile) {
