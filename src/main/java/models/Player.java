@@ -1,6 +1,7 @@
 package models;
 
 import controllers.BoardGame;
+import models.validators.ArgumentValidator;
 
 /**
  * Represents the players of the game. Contains a Tile class variable, which represents where the
@@ -12,14 +13,13 @@ import controllers.BoardGame;
  */
 public class Player {
   private String name;
-  private Tile currentTile;
-  private BoardGame currentGame;
+  private Tile currentTile = new Tile(1);
+  private final BoardGame game;
   private GamePiece gamePiece;
 
-  public Player(String name, BoardGame game, GamePiece gamePiece){
+  public Player(String name, BoardGame game){
     setName(name);
-    setCurrentGame(game);
-    setGamePiece(gamePiece);
+    this.game = game;
   }
 
   /**
@@ -28,11 +28,8 @@ public class Player {
    * @param steps how many steps the player shall move forward
    */
   public void move(int steps) {
-    Tile tileMovedTo = currentTile;
-    for (int i = 0; i < steps; i++) {
-      tileMovedTo = tileMovedTo.getNextTile();
-    }
-    placeOnTile(tileMovedTo);
+    int newTileId = currentTile.getTileId() + steps;
+    this.currentTile = game.getBoard().getTile(newTileId);
   }
 
   /**
@@ -45,10 +42,6 @@ public class Player {
   }
 
 
-  public BoardGame getCurrentGame() {
-    return currentGame;
-  }
-
   public Tile getCurrentTile() {
     return currentTile;
   }
@@ -57,23 +50,23 @@ public class Player {
     return name;
   }
 
-  public GamePiece getGamePiece() {
-    return gamePiece;
-  }
-
   public void setName(String name) {
+    ArgumentValidator.playerSetNameValidator(name);
     this.name = name;
   }
 
   public void setCurrentTile(Tile currentTile) {
+    ArgumentValidator.playerSetCurrentTileValidator(currentTile);
     this.currentTile = currentTile;
   }
 
-  public void setCurrentGame(BoardGame currentGame) {
-    this.currentGame = currentGame;
-  }
-
-  public void setGamePiece(GamePiece gamePiece) {
+  public void setGamePiece(GamePiece gamePiece){
+    ArgumentValidator.playerSetGamePieceValidator(gamePiece);
     this.gamePiece = gamePiece;
   }
+
+  public GamePiece getGamePiece(){
+    return gamePiece;
+  }
+
 }
