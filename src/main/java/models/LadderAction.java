@@ -12,9 +12,11 @@ import interfaces.TileAction;
  */
 public class LadderAction implements TileAction{
   private int destinationTileId;
+  private String description;
 
   public LadderAction(int destinationTileId, String description) {
     setDestinationTileId(destinationTileId);
+    setDescription(description);
   }
 
   /**
@@ -29,8 +31,16 @@ public class LadderAction implements TileAction{
   }
 
 
-  private int getDestinationTileId() {
+  public int getDestinationTileId() {
     return destinationTileId;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getDescription() {
+    return description;
   }
 
   public void setDestinationTileId(int destinationTileId) {

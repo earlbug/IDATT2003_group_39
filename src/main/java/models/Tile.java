@@ -54,4 +54,8 @@ public class Tile {
     ArgumentValidator.tileSetLandActionValidator(landAction);
     this.landAction = landAction;
   }
+
+  public TileAction getLandAction() {
+    return landAction;
+  }
 }
