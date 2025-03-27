@@ -2,8 +2,10 @@ package IO;
 
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonWriter;
 import controllers.Board;
 import interfaces.BoardFileWriter;
 import interfaces.TileAction;
@@ -80,9 +82,16 @@ public class BoardFileWriterJson implements BoardFileWriter {
   }
 
   public void writeJsonToFile(JsonObject jsonBoard, String fileName) throws IOException {
-    Gson gson = new Gson();
-    try (FileWriter writer = new FileWriter(path + fileName)) {
-      gson.toJson(jsonBoard, writer);
+//    try (FileWriter fileWriter = new FileWriter(path + fileName);
+//      JsonWriter jsonWriter = new JsonWriter(fileWriter)) {
+//      }
+
+    try(FileWriter writer = new FileWriter(path + fileName)) {
+      GsonBuilder gsonBuilder = new GsonBuilder();
+      gsonBuilder.setPrettyPrinting();
+      gsonBuilder.serializeNulls();
+      Gson gson = gsonBuilder.create();
+      writer.write(gson.toJson(jsonBoard));
     }
   }
 
