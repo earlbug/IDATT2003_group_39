@@ -1,1 +1,1 @@
-{"tiles":[{"tileId":0},{"tileId":1},{"tileId":2},{"tileId":3},{"tileId":4},{"tileId":5,"type":{"actionType":"ladderAction","description":"Move player to tile 5","destinationTileId":8}},{"tileId":6},{"tileId":7},{"tileId":8},{"tileId":9}]}
+{"tiles":[{"tileId":1},{"tileId":2},{"tileId":3},{"tileId":4},{"tileId":5},{"tileId":6,"type":{"actionType":"ladderAction","description":"Move player to tile 7","destinationTileId":7}},{"tileId":7},{"tileId":8},{"tileId":9},{"tileId":10}]}
