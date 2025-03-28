@@ -1,5 +1,6 @@
 package views;
 
+import controllers.BoardGame;
 import controllers.Dice;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,8 +9,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import models.Player;
-import views.container.MainView;
 
 public class HUDView extends VBox{
 
@@ -29,11 +28,11 @@ public class HUDView extends VBox{
   private final Button rollDiceButton;
   private final Text diceNumber;
 
-  private final Button testPlayerPos;
-  private Player player;
+  private final BoardGame boardGame;
 
-  public HUDView(MainView mainView, BoardView boardView) {
+  public HUDView(BoardView boardView, BoardGame boardGame) {
     this.boardView = boardView;
+    this.boardGame = boardGame;
     this.dice = new Dice(1);
     this.playerContainer = new VBox();
     this.diceContainer = new VBox();
@@ -44,8 +43,6 @@ public class HUDView extends VBox{
     this.spacer = new Region();
     this.rollDiceButton = new Button();
     this.diceNumber = new Text();
-
-    this.testPlayerPos = new Button("TestPos");
 
     initialize();
   }
@@ -68,16 +65,17 @@ public class HUDView extends VBox{
     rollDiceButton.setAlignment(Pos.CENTER);
     rollDiceButton.setOnAction(actionEvent -> {
       dice.rollAllDice();
+      boardGame.playOneTurn(dice.getSumOfAllDie());
+      diceNumber.setText(Integer.toString(dice.getSumOfAllDie()));
+      boardView.updatePlayer(boardGame.getCurrentPlayer());
     });
-
-    testPlayerPos.setOnAction(actionEvent -> boardView.movePlayerToTile(5));
 
     diceNumber.getStyleClass().add("dice-number");
 
     diceContainer.getStyleClass().add("dice-container");
     diceContainer.setAlignment(Pos.CENTER);
     diceContainer.setMaxWidth(MAX_WITH);
-    diceContainer.getChildren().setAll(diceNumber, rollDiceButton, testPlayerPos);
+    diceContainer.getChildren().setAll(diceNumber, rollDiceButton);
 
     this.setPadding(new Insets(10));
     this.getChildren().setAll(playerContainer, spacer, diceContainer);
