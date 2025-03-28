@@ -80,4 +80,12 @@ public class BoardGame {
   public Board getBoard(){
     return board;
   }
+
+  public void setCurrentPlayer(Player player){
+    this.currentPlayer = player;
+  }
+
+  public Player getCurrentPlayer(){
+    return currentPlayer;
+  }
 }
