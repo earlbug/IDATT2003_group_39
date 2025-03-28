@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import views.container.MainView;
+import views.container.GameView;
 
 /**
  * This class represents the main application.
@@ -26,8 +26,8 @@ public class MainApp extends Application {
     /*
     * Add the board view to the top of the root layout.
     */
-    MainView mainView = new MainView();
-    root.setCenter(mainView.getView());
+    GameView gameView = new GameView();
+    root.setCenter(gameView.getView());
 
     /*
     * Setting up the scene and stage.
