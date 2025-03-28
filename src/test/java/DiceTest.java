@@ -7,8 +7,8 @@ public class DiceTest {
 
   //TODO
   @Test
-  public void testGetDieValue(){
-    dice.getDieValue(0);
+  public void testGetSumOfAllDie(){
+    dice.getSumOfAllDie();
   }
 
   //TODO
