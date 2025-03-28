@@ -1,7 +1,9 @@
 package controllers;
 
+import IO.BoardFileReaderJson;
 import java.util.ArrayList;
 import java.util.List;
+import models.actions.LadderAction;
 import models.Player;
 import models.Tile;
 
@@ -14,10 +16,11 @@ import models.Tile;
  *
  */
 public class BoardGame {
-  private final Board board = new Board();
+  private Board board = new Board();
   private final List<Player> players = new ArrayList<>();
   private Player currentPlayer;
   private Dice dice;
+  private BoardFileReaderJson boardReader = new BoardFileReaderJson();
 
   /**
    * Adds a player to the game.
@@ -27,17 +30,14 @@ public class BoardGame {
     players.add(player);
   }
 
-  public void createBoard(int numberOfTiles){
-    for (int i = 1;i <= numberOfTiles;i++) {
-      board.addTile(new Tile(i));
+  public void createBoard(Board board){
+    Tile[] tiles = board.getTiles();
+    for(Tile tile : tiles){
+      this.board.addTile(tile);
+      if(tile.getLandAction() != null) {
+        this.board.getTile(tile.getTileId()).setLandAction(new LadderAction(3, "Moves the player to tile 3"));
+      }
     }
-  }
-
-  /**
-   * Sets up a board from a JSON-file
-   */
-  public void setUpBoard() {
-    // Get hard-coded board from JSON file via serializing-class
   }
 
   /**
@@ -63,8 +63,7 @@ public class BoardGame {
   /**
    * Makes the current player do its turn.
    */
-  public void playOneTurn() {
-    int stepsToMove = dice.rollAllDice();
+  public void playOneTurn(int stepsToMove) {
     currentPlayer.move(stepsToMove);
     nextPlayer();
   }
