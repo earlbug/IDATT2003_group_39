@@ -27,7 +27,7 @@ public class PlayerTest {
   @Test
   public void testPlaceOnTile(){
     player.placeOnTile(tile1);
-    assertEquals(5, player.getCurrentTile().getTileId());
+    assertEquals(1, player.getCurrentTile().getTileId());
   }
 
   @Test
