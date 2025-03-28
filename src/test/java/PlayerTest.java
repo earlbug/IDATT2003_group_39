@@ -3,25 +3,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import controllers.BoardGame;
 import models.GamePiece;
 import models.Player;
+import models.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
 
   private Player player;
-  private BoardGame boardGame;
+  private BoardGame boardGame = new BoardGame();
+  private Tile tile1;
+  private Tile tile2;
 
   @BeforeEach
   public void setUp(){
-    boardGame = new BoardGame();
+    tile1 = new Tile(1);
+    tile2 = new Tile(2);
     player = new Player("player1", boardGame);
     boardGame.addPlayer(player);
-    boardGame.createBoard(5);
+    boardGame.getBoard().addTile(tile1);
+    boardGame.getBoard().addTile(tile2);
   }
 
   @Test
   public void testPlaceOnTile(){
-    player.placeOnTile(boardGame.getBoard().getTile(5));
+    player.placeOnTile(tile1);
     assertEquals(5, player.getCurrentTile().getTileId());
   }
 
