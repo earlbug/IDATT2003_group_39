@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Dice {
   // ArrayList of Dice
-  private final List<Die> dice = new ArrayList<>();
+  private List<Die> dice;
 
   /**
    * Constructor Creates a given number of dice, and stores it in an ArrayList
@@ -36,7 +36,11 @@ public class Dice {
     return sumRolledDice;
   }
 
-  public int getDieValue(int dieIndex) {
-    return dice.get(dieIndex).getValue();
+  public int getSumOfAllDie() {
+    int sum = 0;
+    for (Die die : dice) {
+      sum += die.getValue();
+    }
+    return sum;
   }
 }
