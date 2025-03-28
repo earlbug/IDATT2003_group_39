@@ -1,7 +1,6 @@
 package models;
 
 import controllers.BoardGame;
-import models.exceptions.PlayerOutOfBoundsException;
 import models.validators.ArgumentValidator;
 
 /**
