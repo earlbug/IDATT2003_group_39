@@ -65,7 +65,6 @@ public class BoardGame {
    */
   public void playOneTurn(int stepsToMove) {
     currentPlayer.move(stepsToMove);
-    nextPlayer();
   }
 
   /**
@@ -87,5 +86,9 @@ public class BoardGame {
 
   public Player getCurrentPlayer(){
     return currentPlayer;
+  }
+
+  public Dice getDice(){
+    return dice;
   }
 }
