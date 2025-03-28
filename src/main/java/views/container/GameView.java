@@ -1,5 +1,6 @@
 package views.container;
 
+import controllers.BoardGame;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -7,19 +8,21 @@ import javafx.scene.layout.StackPane;
 import views.BoardView;
 import views.HUDView;
 
-public class MainView extends HBox{
+public class GameView extends HBox{
   private final HBox boardContainer;
   private final StackPane hudContainer;
 
   private final BoardView boardView;
   private final HUDView hudView;
 
-  public MainView(){
+  private final BoardGame boardGame = new BoardGame();
+
+  public GameView(){
     boardContainer = new HBox();
     hudContainer = new StackPane();
 
-    this.boardView = new BoardView(this);
-    this.hudView = new HUDView(this, boardView);
+    this.boardView = new BoardView(this, boardGame.getBoard());
+    this.hudView = new HUDView(boardView, boardGame);
   }
 
   public HBox getView(){
