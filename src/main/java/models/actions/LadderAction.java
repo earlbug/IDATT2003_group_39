@@ -1,6 +1,7 @@
-package models;
+package models.actions;
 
 import interfaces.TileAction;
+import models.Player;
 
 /**
  * When a LadderAction is preformed on a player, the player gets placed on a tile specified
