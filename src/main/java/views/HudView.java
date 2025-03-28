@@ -82,6 +82,20 @@ public class HudView extends VBox implements ButtonClickListener {
     this.getChildren().setAll(playerContainer, spacer, diceContainer);
   }
 
+  /**
+   * Sets the rolled dice number displayed to the user.
+   *
+   * @param diceNumber sum of all dice rolled.
+   */
+  public void setDiceNumber(int diceNumber) {
+    this.diceNumberText.setText(String.valueOf(diceNumber));
+  }
+
+  /**
+   * Gets the view of the HUD.
+   *
+   * @return a view of the HUD as a VBox.
+   */
   public VBox getView() {
     return this;
   }
