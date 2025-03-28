@@ -85,18 +85,16 @@ public class BoardView extends GridPane {
     return stack;
   }
 
-  public void movePlayerToTile(int newIndex) {
-    this.getChildren().forEach(node -> {
-      if (node instanceof StackPane stack) {
-        stack.getChildren().removeIf(child -> playerViews.stream()
-            .anyMatch(playerView -> playerView.getView().equals(child)));
-      }
-    });
+  public void updatePlayer(Player player) {
+    int currentTileId = player.getCurrentTile().getTileId();
 
     this.getChildren().forEach(node -> {
       if (node instanceof StackPane stack) {
-        if (tile.getTileId() == newIndex)
-        stack.getChildren().add(playerView.getView());
+        stack.getChildren().removeIf(child -> child instanceof PlayerView);
+        if (GridPane.getRowIndex(stack) * columns + GridPane.getColumnIndex(stack)
+            == currentTileId) {
+          stack.getChildren().add(new PlayerView(player, Color.BLUE).getView());
+        }
       }
     });
   }
