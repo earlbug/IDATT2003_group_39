@@ -30,4 +30,8 @@ public class Board {
   public Tile[] getTiles() {
     return tiles.values().toArray(new Tile[0]);
   }
+
+  public int getNumberOfTiles(){
+    return tiles.size();
+  }
 }
