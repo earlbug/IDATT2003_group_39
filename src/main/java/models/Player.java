@@ -1,6 +1,7 @@
 package models;
 
 import controllers.BoardGame;
+import models.exceptions.PlayerOutOfBoundsException;
 import models.validators.ArgumentValidator;
 
 /**
@@ -29,6 +30,11 @@ public class Player {
    */
   public void move(int steps) {
     int newTileId = currentTile.getTileId() + steps;
+    int numberOfTiles = game.getBoard().getNumberOfTiles();
+
+    if (newTileId > numberOfTiles){
+      this.currentTile = game.getBoard().getTile(numberOfTiles);
+    }
     this.currentTile = game.getBoard().getTile(newTileId);
   }
 
