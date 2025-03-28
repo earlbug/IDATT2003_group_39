@@ -3,6 +3,7 @@ package views;
 import controllers.Board;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.PointLight;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -11,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
-import views.container.MainView;
+import views.container.GameView;
 
 /**
  * This class represents the view of the game board.
@@ -20,27 +21,23 @@ import views.container.MainView;
  * @version 1.0
  * @since 1.0
  */
-public class BoardView extends GridPane{
+public class BoardView extends GridPane {
 
-  private MainView mainView;
+  private GameView gameView;
   private TileView tileView;
-  private Board board;
+  private final Board board;
   private Tile tile;
   private Player player;
   private PlayerView playerView;
 
-  private final double elementSizeX = 55;
-  private final double elementSizeY = 59;
-
-  private final int rows = 10;
   private final int columns = 9;
 
   private List<PlayerView> playerViews = new ArrayList<>();
 
-  public BoardView(MainView mainView) {
-    this.mainView = mainView;
+  public BoardView(GameView gameView, Board board) {
+    this.gameView = gameView;
     //this.player = new Player();
-    this.board = new Board();
+    this.board = board;
     this.tileView = new TileView(tile);
     initializePlayers();
   }
@@ -56,20 +53,12 @@ public class BoardView extends GridPane{
    * Creates the game board based on rows and columns.
    */
   private void createBoard() {
-    this.getChildren().clear();
-    int number = 1;
-    for (int row = rows - 1; row >= 0; row--) {
-      if (row % 2 == 0) {
-        for (int col = columns - 1; col >= 0; col--) {
-          board.addTile(new Tile(number));
-          this.add(createElement(number++), col, row);
-        }
-      } else {
-        for (int col = 0; col < columns; col++) {
-          board.addTile(new Tile(number));
-          this.add(createElement(number++), col, row);
-        }
-      }
+    Tile[] tiles = board.getTiles();
+    for (int i = 1; i < tiles.length + 1; i++) {
+      StackPane tileElement = createElement(i);
+      int row = i / columns;
+      int col = i % columns;
+      this.add(tileElement, col, row);
     }
   }
 
