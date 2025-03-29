@@ -23,39 +23,19 @@ import views.container.GameView;
  */
 public class BoardView extends GridPane {
 
-  private GameView gameView;
-  private TileView tileView;
-  private final Board board;
-  private Tile tile;
-  private Player player;
   private PlayerView playerView;
 
   private final int columns = 9;
 
   private List<PlayerView> playerViews = new ArrayList<>();
 
-  public BoardView(GameView gameView, Board board) {
-    this.gameView = gameView;
-    //this.player = new Player();
-    this.board = board;
-    this.tileView = new TileView(tile);
-    initializePlayers();
-  }
-
-  private void initializePlayers() {
-    //Player player1 = new Player();
-    //Player player2 = new Player();
-    //playerViews.add(new PlayerView(player1, Color.RED));
-    //playerViews.add(new PlayerView(player2, Color.BLUE));
-  }
-
   /**
    * Creates the game board based on rows and columns.
    */
-  private void createBoard() {
+  public void createBoard(Board board) {
     Tile[] tiles = board.getTiles();
     for (int i = 1; i < tiles.length + 1; i++) {
-      StackPane tileElement = createElement(i);
+      StackPane tileElement = createElement(board.getTile(i));
       int row = i / columns;
       int col = i % columns;
       this.add(tileElement, col, row);
@@ -67,24 +47,29 @@ public class BoardView extends GridPane {
    *
    * @return tile element
    */
-  private StackPane createElement(int index) {
-    TileView tileView = new TileView(tile);
-    Rectangle tile = tileView.getView();
+  private StackPane createElement(Tile tile) {
+    TileView tileView = new TileView();
+    Rectangle tileBlock = tileView.getView();
 
-    Text text = new Text(String.valueOf(index));
+    Text text = new Text(String.valueOf(tile.getTileId()));
     text.setFill(Color.BLACK);
 
     StackPane stack = new StackPane();
-    stack.getChildren().setAll(tile, text);
+    stack.getChildren().setAll(tileBlock, text);
 
     for (PlayerView playerView : playerViews) {
-      if (index == 1) {
+      if (tile.getTileId() == 1) {
         stack.getChildren().add(playerView.getView());
       }
     }
     return stack;
   }
 
+  /**
+   * Updates the position of the player on the board.
+   *
+   * @param player the player to get updated.
+   */
   public void updatePlayer(Player player) {
     int currentTileId = player.getCurrentTile().getTileId();
 
@@ -105,7 +90,6 @@ public class BoardView extends GridPane {
    * @return the view of the game board
    */
   public Pane getView() {
-    createBoard();
     return this;
   }
 }
