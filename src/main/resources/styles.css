@@ -26,8 +26,8 @@
   -fx-fill: white;
 }
 
-.player-number {
-  -fx-font-size: 60;
+.player-name {
+  -fx-font-size: 35;
   -fx-fill: white;
 }
 
