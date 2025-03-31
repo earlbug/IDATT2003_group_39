@@ -1,7 +1,8 @@
-package observers;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import observers.ButtonClickObserver;
 
 /**
  * <h3>Notifier for button clicks</h3>
@@ -14,24 +15,24 @@ import java.util.List;
  */
 public class ButtonClickNotifier {
 
-  List<ButtonClickListener> buttonClickListeners = new ArrayList<>();
+  List<ButtonClickObserver> buttonClickObservers = new ArrayList<>();
 
   /**
    * Adds a listener to the list of listeners.
    *
-   * @param buttonClickListener a listener for button clicks.
+   * @param buttonClickObserver a listener for button clicks.
    */
-  public void addListener(ButtonClickListener buttonClickListener) {
-    buttonClickListeners.add(buttonClickListener);
+  public void addListener(ButtonClickObserver buttonClickObserver) {
+    buttonClickObservers.add(buttonClickObserver);
   }
 
   /**
    * Removes a listener form the list of listeners.
    *
-   * @param buttonClickListener a listener for button clicks.
+   * @param buttonClickObserver a listener for button clicks.
    */
-  public void removeListener(ButtonClickListener buttonClickListener) {
-    buttonClickListeners.remove(buttonClickListener);
+  public void removeListener(ButtonClickObserver buttonClickObserver) {
+    buttonClickObservers.remove(buttonClickObserver);
   }
 
   /**
@@ -40,6 +41,6 @@ public class ButtonClickNotifier {
    * @param action from a button pressed by the user.
    */
   public void notifyListeners(String action) {
-    buttonClickListeners.forEach(buttonClickListener -> buttonClickListener.update(action));
+    buttonClickObservers.forEach(buttonClickObserver -> buttonClickObserver.update(action));
   }
 }
