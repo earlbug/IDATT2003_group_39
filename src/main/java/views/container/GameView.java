@@ -1,11 +1,16 @@
 package views.container;
 
+import controllers.BoardGame;
+import controllers.ButtonClickHandler;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import models.Player;
+import observers.BoardGameObserver;
 import views.BoardView;
 import views.HudView;
+import views.PlayerView;
 
 /**
  * <h3>Represents the view of the game</h3>
@@ -15,7 +20,7 @@ import views.HudView;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class GameView extends HBox {
+public class GameView extends HBox implements BoardGameObserver {
 
   private final HBox boardContainer;
   private final StackPane hudContainer;
@@ -70,5 +75,28 @@ public class GameView extends HBox {
    */
   public HudView getHudView() {
     return hudView;
+  }
+
+  @Override
+  public void onPlayerMoved(Player player, int steps) {
+    // Update dice display
+    hudView.setDiceNumber(steps);
+
+    // Update player position on the board
+    boardView.updatePlayer(player);
+  }
+
+  @Override
+  public void onNextPlayer(Player newPlayer) {
+    hudView.setPlayerName(newPlayer.getName());
+  }
+
+  @Override
+  public void onWinnerDetermined(Player winner) {
+    System.out.println("Winner: " + winner.getName());
+  }
+
+  @Override
+  public void onGameStateChanged(BoardGame boardGame) {
   }
 }
