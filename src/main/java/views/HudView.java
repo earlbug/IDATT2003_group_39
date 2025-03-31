@@ -7,8 +7,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import observers.ButtonClickListener;
-import observers.ButtonClickNotifier;
+import controllers.ButtonClickNotifier;
+import observers.ButtonClickObserver;
 
 /**
  * <h3>Represents the view of the HUD</h3>
@@ -19,7 +19,7 @@ import observers.ButtonClickNotifier;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class HudView extends VBox implements ButtonClickListener {
+public class HudView extends VBox {
 
   final int maxWith = 300;
 
@@ -27,7 +27,7 @@ public class HudView extends VBox implements ButtonClickListener {
   private final VBox diceContainer;
 
   private final Text playerTitle;
-  private final Text playerNumber;
+  private final Text playerName = new Text();
 
   private final Region spacer;
 
@@ -45,7 +45,6 @@ public class HudView extends VBox implements ButtonClickListener {
     this.diceContainer = new VBox();
 
     this.playerTitle = new Text("Player");
-    this.playerNumber = new Text(Integer.toString(1));
 
     this.spacer = new Region();
     this.rollDiceButton = new Button();
@@ -57,13 +56,13 @@ public class HudView extends VBox implements ButtonClickListener {
     playerTitle.getStyleClass().add("player-title");
     playerTitle.setTextAlignment(TextAlignment.CENTER);
 
-    playerNumber.getStyleClass().add("player-number");
-    playerNumber.setTextAlignment(TextAlignment.CENTER);
+    playerName.getStyleClass().add("player-name");
+    playerName.setTextAlignment(TextAlignment.CENTER);
 
     playerContainer.getStyleClass().add("player-container");
     playerContainer.setAlignment(Pos.CENTER);
     playerContainer.setMaxWidth(maxWith);
-    playerContainer.getChildren().setAll(playerTitle, playerNumber);
+    playerContainer.getChildren().setAll(playerTitle, playerName);
 
     spacer.setMinHeight(20);
 
@@ -91,6 +90,16 @@ public class HudView extends VBox implements ButtonClickListener {
     this.diceNumberText.setText(String.valueOf(diceNumber));
   }
 
+
+  /**
+   * Sets the name displayed.
+   *
+   * @param name The name to be displayed
+   */
+  public void setPlayerName(String name) {
+    this.playerName.setText(name);
+  }
+
   /**
    * Gets the view of the HUD.
    *
@@ -100,16 +109,12 @@ public class HudView extends VBox implements ButtonClickListener {
     return this;
   }
 
-  @Override
-  public void update(String action) {
-  }
-
   /**
-   * Adds the ButtonClickListener to the notifier.
+   * Adds a observer for button click events.
    *
-   * @param listener of type ButtonClickListener.
+   * @param observer The observer to add
    */
-  public void addListener(ButtonClickListener listener) {
-    buttonClickNotifier.addListener(listener);
+  public void addButtonClickObserver(ButtonClickObserver observer) {
+    buttonClickNotifier.addListener(observer);
   }
 }
