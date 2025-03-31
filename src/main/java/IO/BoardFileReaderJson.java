@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import models.LadderAction;
+import models.actions.LadderAction;
 import models.Tile;
 
 public class BoardFileReaderJson implements BoardFileReader {

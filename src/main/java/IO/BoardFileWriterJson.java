@@ -9,7 +9,7 @@ import interfaces.BoardFileWriter;
 import interfaces.TileAction;
 import java.io.FileWriter;
 import java.io.IOException;
-import models.LadderAction;
+import models.actions.LadderAction;
 import models.Tile;
 
 public class BoardFileWriterJson implements BoardFileWriter {
