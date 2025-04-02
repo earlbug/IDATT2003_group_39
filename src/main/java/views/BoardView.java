@@ -2,8 +2,9 @@ package views;
 
 import controllers.Board;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import javafx.scene.PointLight;
+import java.util.Map;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -12,7 +13,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
-import views.container.GameView;
 
 /**
  * This class represents the view of the game board.
@@ -23,11 +23,9 @@ import views.container.GameView;
  */
 public class BoardView extends GridPane {
 
-  private PlayerView playerView;
-
   private final int columns = 9;
 
-  private List<PlayerView> playerViews = new ArrayList<>();
+  private final Map<Player, PlayerView> playerViews = new HashMap<>();
 
   /**
    * Creates the game board based on rows and columns.
@@ -57,11 +55,6 @@ public class BoardView extends GridPane {
     StackPane stack = new StackPane();
     stack.getChildren().setAll(tileBlock, text);
 
-    for (PlayerView playerView : playerViews) {
-      if (tile.getTileId() == 1) {
-        stack.getChildren().add(playerView.getView());
-      }
-    }
     return stack;
   }
 
@@ -73,12 +66,14 @@ public class BoardView extends GridPane {
   public void updatePlayer(Player player) {
     int currentTileId = player.getCurrentTile().getTileId();
 
+    PlayerView playerView = playerViews.get(player);
+
     this.getChildren().forEach(node -> {
       if (node instanceof StackPane stack) {
-        stack.getChildren().removeIf(child -> child instanceof PlayerView);
+        stack.getChildren().removeIf(child -> child == playerView);
         if (GridPane.getRowIndex(stack) * columns + GridPane.getColumnIndex(stack)
             == currentTileId) {
-          stack.getChildren().add(new PlayerView(player, Color.BLUE).getView());
+          stack.getChildren().add(playerView);
         }
       }
     });
@@ -91,5 +86,10 @@ public class BoardView extends GridPane {
    */
   public Pane getView() {
     return this;
+  }
+
+  public void registerPlayer(Player player) {
+    PlayerView playerView = new PlayerView();
+    playerViews.put(player, playerView);
   }
 }

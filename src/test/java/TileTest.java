@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import controllers.BoardGame;
 import models.actions.LadderAction;
@@ -42,5 +43,29 @@ public class TileTest {
   @Test
   public void testLeavePlayer(){
 
+  }
+
+  @Test
+  public void testSetTileIdWithNegativeValue() {
+    Tile tile = new Tile(1);
+    assertThrows(IllegalArgumentException.class, () -> {
+      tile.setTileId(-1);
+    });
+  }
+
+  @Test
+  public void testSetNextTileWithNull() {
+    Tile tile = new Tile(1);
+    assertThrows(IllegalArgumentException.class, () -> {
+      tile.setNextTile(null);
+    });
+  }
+
+  @Test
+  public void testSetLandActionWithNull() {
+    Tile tile = new Tile(1);
+    assertThrows(IllegalArgumentException.class, () -> {
+      tile.setLandAction(null);
+    });
   }
 }

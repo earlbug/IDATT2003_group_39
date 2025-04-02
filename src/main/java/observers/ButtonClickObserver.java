@@ -8,7 +8,7 @@ package observers;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public interface ButtonClickListener {
+public interface ButtonClickObserver {
 
   /**
    * Updates the state based on the action performed.

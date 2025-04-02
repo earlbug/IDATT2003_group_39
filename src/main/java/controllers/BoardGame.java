@@ -16,11 +16,11 @@ import models.Tile;
  *
  */
 public class BoardGame {
-  private Board board = new Board();
+  private final Board board = new Board();
   private final List<Player> players = new ArrayList<>();
   private Player currentPlayer;
   private Dice dice;
-  private BoardFileReaderJson boardReader = new BoardFileReaderJson();
+  private final BoardFileReaderJson boardReader = new BoardFileReaderJson();
 
   /**
    * Adds a player to the game.
@@ -90,5 +90,11 @@ public class BoardGame {
 
   public Dice getDice(){
     return dice;
+  }
+
+  public void addPlayersOnStartPos() {
+    for (Player player : players) {
+      player.setCurrentTile(board.getTile(1));
+    }
   }
 }
