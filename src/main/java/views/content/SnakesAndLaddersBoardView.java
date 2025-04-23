@@ -12,8 +12,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
-import views.PlayerView;
-import views.TileView;
+import views.content.PlayerView;
+import views.content.TileView;
 
 public class SnakesAndLaddersBoardView extends GridPane implements BoardView {
 
