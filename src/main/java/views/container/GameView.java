@@ -8,7 +8,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import models.Player;
 import observers.BoardGameObserver;
-import views.content.*;
+import views.content.HudView;
 
 /**
  * <h3>Represents the view of the game</h3>

@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
 import views.PlayerView;
+import views.TileView;
 
 public class SnakesAndLaddersBoardView extends GridPane implements BoardView {
 
