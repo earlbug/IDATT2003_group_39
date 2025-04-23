@@ -4,7 +4,7 @@ package IO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import controllers.Board;
+import interfaces.Board;
 import interfaces.BoardFileWriter;
 import interfaces.TileAction;
 import java.io.FileWriter;

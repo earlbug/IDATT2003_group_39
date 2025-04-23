@@ -2,6 +2,7 @@ package models.actions;
 
 import interfaces.TileAction;
 import models.Player;
+import models.Tile;
 
 /**
  * When a LadderAction is preformed on a player, the player gets placed on a tile specified
@@ -11,7 +12,7 @@ import models.Player;
  * @author Erlend Sundsdal
  * @since 0.1.0
  */
-public class LadderAction implements TileAction{
+public class LadderAction implements TileAction {
   private int destinationTileId;
   private String description;
 
@@ -27,8 +28,7 @@ public class LadderAction implements TileAction{
    */
   @Override
   public void perform(Player player) {
-    int currentTileId = player.getCurrentTile().getTileId();
-    player.move(destinationTileId - currentTileId);
+    player.move(destinationTileId - player.getCurrentTile().getTileId());
   }
 
 
@@ -47,4 +47,5 @@ public class LadderAction implements TileAction{
   public void setDestinationTileId(int destinationTileId) {
     this.destinationTileId = destinationTileId;
   }
+
 }

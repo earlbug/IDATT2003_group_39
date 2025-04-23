@@ -2,17 +2,19 @@ package IO;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import controllers.Board;
+import interfaces.Board;
+import exception.UnknownGameException;
+import factory.BoardFactory;
+import factory.GameType;
 import interfaces.BoardFileReader;
 import interfaces.TileAction;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import models.actions.LadderAction;
 import models.Tile;
+import models.actions.WinAction;
 
 public class BoardFileReaderJson implements BoardFileReader {
   String folder = "src/main/resources/data/board/";
@@ -20,17 +22,22 @@ public class BoardFileReaderJson implements BoardFileReader {
   public BoardFileReaderJson() {}
 
   @Override
-  public Board getBoard(String fileName) throws IOException{
+  public Board getBoard(String fileName) throws IOException, UnknownGameException {
     return deserializeBoard(fileName);
   }
 
-  public Board deserializeBoard(String boardFileName) throws IOException{
+  public Board deserializeBoard(String boardFileName) throws IOException {
     JsonObject boardJson = readJsonFromFile(boardFileName);
+
+    // Find difficulty
+    GameType gameType = GameType.valueOf(boardJson.get("gameType").getAsString().toUpperCase());
+
+    // Create board based on gameType
+    Board board = BoardFactory.get(gameType);
+
+    // Deserialize tiles and add them to the board
     JsonArray tileArrayJson = boardJson.getAsJsonArray("tiles");
-
     Tile[] tiles = deserializeTiles(tileArrayJson);
-
-    Board board = new Board();
     for(Tile tile : tiles) {
       board.addTile(tile);
     }
@@ -46,9 +53,8 @@ public class BoardFileReaderJson implements BoardFileReader {
 
 
   public Tile deserializeTile(JsonObject tileJson) {
-    Tile tile;
     int tileId = tileJson.get("tileId").getAsInt();
-    tile = new Tile(tileId);
+    Tile tile = new Tile(tileId);
 
     if (tileJson.has("type")){
       JsonObject tileActionJson = tileJson.getAsJsonObject("type");
@@ -57,27 +63,22 @@ public class BoardFileReaderJson implements BoardFileReader {
     }
 
     return tile;
-
   }
 
   public TileAction deserializeActionTile(JsonObject actionTileJson) {
     String actionType = actionTileJson.get("actionType").getAsString();
-    TileAction tileAction;
-    switch (actionType) {
-      case "ladderAction": tileAction = deserializeLadderAction(actionTileJson);
-      break;
-      case null: tileAction = null;
-      default: tileAction = null;
-    }
 
-    return tileAction;
+    return switch (actionType) {
+      case "ladderAction" -> deserializeLadderAction(actionTileJson);
+      case "winAction" -> new WinAction();
+      default -> null;
+    };
   }
 
   public LadderAction deserializeLadderAction(JsonObject ladderActionJson) {
     int destinationTileId = ladderActionJson.get("destinationTileId").getAsInt();
     String description = ladderActionJson.get("description").getAsString();
-    LadderAction ladderAction = new LadderAction(destinationTileId, description);
-    return ladderAction;
+    return new LadderAction(destinationTileId, description);
   }
 
 

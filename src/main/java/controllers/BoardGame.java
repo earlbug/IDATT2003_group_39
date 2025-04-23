@@ -1,11 +1,9 @@
 package controllers;
 
-import IO.BoardFileReaderJson;
+import interfaces.Board;
 import java.util.ArrayList;
 import java.util.List;
-import models.actions.LadderAction;
 import models.Player;
-import models.Tile;
 
 /**
  * @version 0.1.0
@@ -16,11 +14,10 @@ import models.Tile;
  *
  */
 public class BoardGame {
-  private Board board = new Board();
+  private Board board;
   private final List<Player> players = new ArrayList<>();
   private Player currentPlayer;
   private Dice dice;
-  private BoardFileReaderJson boardReader = new BoardFileReaderJson();
 
   /**
    * Adds a player to the game.
@@ -28,16 +25,6 @@ public class BoardGame {
    */
   public void addPlayer(Player player) {
     players.add(player);
-  }
-
-  public void createBoard(Board board){
-    Tile[] tiles = board.getTiles();
-    for(Tile tile : tiles){
-      this.board.addTile(tile);
-      if(tile.getLandAction() != null) {
-        this.board.getTile(tile.getTileId()).setLandAction(new LadderAction(3, "Moves the player to tile 3"));
-      }
-    }
   }
 
   /**
@@ -84,11 +71,25 @@ public class BoardGame {
     this.currentPlayer = player;
   }
 
+  public void setBoard(Board board) {
+    this.board = board;
+  }
+
   public Player getCurrentPlayer(){
     return currentPlayer;
   }
 
   public Dice getDice(){
     return dice;
+  }
+
+  public void addPlayersOnStartPos() {
+    if (board == null || board.getTile(1) == null) {
+      throw new IllegalStateException("Board or starting tile is not initialized.");
+    }
+
+    for (Player player : players) {
+      player.setCurrentTile(board.getTile(1));
+    }
   }
 }

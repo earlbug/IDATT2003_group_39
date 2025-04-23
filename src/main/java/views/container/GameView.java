@@ -1,11 +1,14 @@
 package views.container;
 
+import controllers.BoardGame;
+import interfaces.BoardView;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import views.BoardView;
-import views.HudView;
+import models.Player;
+import observers.BoardGameObserver;
+import views.content.*;
 
 /**
  * <h3>Represents the view of the game</h3>
@@ -15,7 +18,7 @@ import views.HudView;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class GameView extends HBox {
+public class GameView extends HBox implements BoardGameObserver {
 
   private final HBox boardContainer;
   private final StackPane hudContainer;
@@ -26,11 +29,11 @@ public class GameView extends HBox {
   /**
    * Constructs a new view of the game. Creates containers to hold the board and HUD.
    */
-  public GameView() {
+  public GameView(BoardView boardView) {
     boardContainer = new HBox();
     hudContainer = new StackPane();
 
-    this.boardView = new BoardView();
+    this.boardView = boardView;
     this.hudView = new HudView();
 
     initialize();
@@ -70,5 +73,28 @@ public class GameView extends HBox {
    */
   public HudView getHudView() {
     return hudView;
+  }
+
+  @Override
+  public void onPlayerMoved(Player player, int steps) {
+    // Update dice display
+    hudView.setDiceNumber(steps);
+
+    // Update player position on the board
+    boardView.updatePlayerView(player);
+  }
+
+  @Override
+  public void onNextPlayer(Player newPlayer) {
+    hudView.setPlayerName(newPlayer.getName());
+  }
+
+  @Override
+  public void onWinnerDetermined(Player winner) {
+    System.out.println("Winner: " + winner.getName());
+  }
+
+  @Override
+  public void onGameStateChanged(BoardGame boardGame) {
   }
 }

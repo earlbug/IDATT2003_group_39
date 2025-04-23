@@ -1,7 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import controllers.Board;
+import interfaces.Board;
 import models.Tile;
+import models.boards.SnakesAndLaddersBoard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class BoardTest {
 
   @BeforeEach
   public void setUp(){
-    board = new Board();
+    board = new SnakesAndLaddersBoard();
   }
 
   @Test
