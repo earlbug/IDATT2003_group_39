@@ -4,6 +4,7 @@ import interfaces.TileAction;
 import models.Player;
 import models.actions.LadderAction;
 import models.actions.WinAction;
+import org.slf4j.Logger;
 
 /**
  * Handles game logic operations and delegates notifications.
@@ -16,6 +17,7 @@ public class BoardGameHandler {
 
   private final BoardGame boardGame;
   private final BoardGameNotifier notifier;
+  private final Logger logger = org.slf4j.LoggerFactory.getLogger(BoardGameHandler.class);
 
   /**
    * Constructor for BoardGameHandler.
@@ -35,6 +37,7 @@ public class BoardGameHandler {
    */
   public void handleAddPlayer(Player player) {
     boardGame.addPlayer(player);
+    logger.debug("Player added: {}", player.getName());
   }
 
   /**
@@ -45,7 +48,19 @@ public class BoardGameHandler {
   public void handlePlayerMove(int steps) {
     Player currentplayer = boardGame.getCurrentPlayer();
     currentplayer.move(steps);
+    logger.debug("Player {} moved {} steps", currentplayer.getName(), steps);
     notifier.nofifyPlayerMoved(currentplayer, steps);
+
+    TileAction tileAction = boardGame.getBoard().getTile(currentplayer.getCurrentTile().getTileId())
+        .getLandAction();
+
+    if (tileAction != null) {
+      tileAction.perform(currentplayer, notifier);
+      logger.debug("Player {} performed action: {}", currentplayer.getName(), tileAction);
+    } else {
+      logger.debug("No action for player {} on tile {}", currentplayer.getName(),
+          currentplayer.getCurrentTile().getTileId());
+    }
 
     // Check win condition
     if (isWinConditionMet(currentplayer)) {
@@ -59,6 +74,7 @@ public class BoardGameHandler {
   public void handleNextPlayer() {
     boardGame.nextPlayer();
     notifier.notifyNextPlayer(boardGame.getCurrentPlayer());
+    logger.debug("Next player: {}", boardGame.getCurrentPlayer().getName());
   }
 
   /**
@@ -70,6 +86,8 @@ public class BoardGameHandler {
   private boolean isWinConditionMet(Player player) {
     TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
         .getLandAction();
+    logger.debug("Checking win condition for player {} on tile {}",
+        player.getName(), player.getCurrentTile().getTileId());
     return winningAction instanceof WinAction;
   }
 
@@ -79,6 +97,7 @@ public class BoardGameHandler {
    * @return The result of the roll
    */
   public int handleRollDice() {
+    logger.debug("Rolling dice for player {}", boardGame.getCurrentPlayer().getName());
     return boardGame.getDice().rollAllDice();
   }
 
