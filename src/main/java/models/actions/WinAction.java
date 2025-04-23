@@ -1,12 +1,13 @@
 package models.actions;
 
+import controllers.BoardGameNotifier;
 import interfaces.TileAction;
 import models.Player;
 
 public class WinAction implements TileAction {
 
   @Override
-  public void perform(Player player) {
-    System.out.println(player.getName() + " has won the game!");
+  public void perform(Player player, BoardGameNotifier notifier) {
+    notifier.nofityWinnerDetermined(player);
   }
 }

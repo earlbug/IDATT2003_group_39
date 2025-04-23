@@ -1,5 +1,6 @@
 package models.actions;
 
+import controllers.BoardGameNotifier;
 import interfaces.TileAction;
 import models.Player;
 import models.Tile;
@@ -27,8 +28,10 @@ public class LadderAction implements TileAction {
    * @param player what player the action shall be preformed on
    */
   @Override
-  public void perform(Player player) {
-    player.move(destinationTileId - player.getCurrentTile().getTileId());
+  public void perform(Player player, BoardGameNotifier notifier) {
+    int steps = destinationTileId - player.getCurrentTile().getTileId();
+    player.move(steps);
+    notifier.nofifyPlayerMoved(player, steps);
   }
 
 

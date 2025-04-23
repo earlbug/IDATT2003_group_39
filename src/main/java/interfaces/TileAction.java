@@ -1,4 +1,5 @@
 package interfaces;
+import controllers.BoardGameNotifier;
 import models.Player;
 
 /**
@@ -11,7 +12,7 @@ import models.Player;
  */
 public interface TileAction {
 
-  void perform(Player player);
+  void perform(Player player, BoardGameNotifier notifier);
 
 
 }

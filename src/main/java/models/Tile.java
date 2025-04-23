@@ -30,19 +30,6 @@ public class Tile {
   }
 
   /**
-   * Preforms the stored <code>TileAction</code> on the player parameter.
-   *
-   * @param player the player whom the action shall be preformed on
-   */
-  public void landPlayer(Player player) {
-    landAction.perform(player);
-  }
-
-  public void leavePlayer(Player player) {
-  }
-
-
-  /**
    * Gets the ID from tile given tile.
    *
    * @return the ID of the tile.
