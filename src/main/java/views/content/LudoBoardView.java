@@ -1,9 +1,8 @@
-package views;
+package views.content;
 
-import controllers.Board;
-import java.util.ArrayList;
+import interfaces.Board;
+import interfaces.BoardView;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -13,24 +12,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
+import views.content.PlayerView;
 
-/**
- * This class represents the view of the game board.
- *
- * @author Tord Fosse
- * @version 1.0
- * @since 1.0
- */
-public class BoardView extends GridPane {
+public class LudoBoardView extends GridPane implements BoardView {
 
-  private final int columns = 9;
+  private final int columns = 5;
 
   private final Map<Player, PlayerView> playerViews = new HashMap<>();
 
-  /**
-   * Creates the game board based on rows and columns.
-   */
-  public void createBoard(Board board) {
+  @Override
+  public void createBoardView(Board board) {
     Tile[] tiles = board.getTiles();
     for (int i = 1; i < tiles.length + 1; i++) {
       StackPane tileElement = createElement(board.getTile(i));
@@ -40,22 +31,10 @@ public class BoardView extends GridPane {
     }
   }
 
-  /**
-   * Creates a single element of a tile on the game board.
-   *
-   * @return tile element
-   */
-  private StackPane createElement(Tile tile) {
-    TileView tileView = new TileView();
-    Rectangle tileBlock = tileView.getView();
-
-    Text text = new Text(String.valueOf(tile.getTileId()));
-    text.setFill(Color.BLACK);
-
-    StackPane stack = new StackPane();
-    stack.getChildren().setAll(tileBlock, text);
-
-    return stack;
+  @Override
+  public void registerPlayer(Player player) {
+    PlayerView playerView = new PlayerView();
+    playerViews.put(player, playerView);
   }
 
   /**
@@ -63,7 +42,7 @@ public class BoardView extends GridPane {
    *
    * @param player the player to get updated.
    */
-  public void updatePlayer(Player player) {
+  public void updatePlayerView(Player player) {
     int currentTileId = player.getCurrentTile().getTileId();
 
     PlayerView playerView = playerViews.get(player);
@@ -79,17 +58,16 @@ public class BoardView extends GridPane {
     });
   }
 
-  /**
-   * Returns the view of the game board.
-   *
-   * @return the view of the game board
-   */
-  public Pane getView() {
-    return this;
+  private StackPane createElement(Tile tile) {
+    Rectangle tileBlock = new Rectangle(50, 50, Color.LIGHTGREEN);
+    Text text = new Text(String.valueOf(tile.getTileId()));
+    StackPane stack = new StackPane();
+    stack.getChildren().addAll(tileBlock, text);
+    return stack;
   }
 
-  public void registerPlayer(Player player) {
-    PlayerView playerView = new PlayerView();
-    playerViews.put(player, playerView);
+  @Override
+  public Pane getView() {
+    return this;
   }
 }

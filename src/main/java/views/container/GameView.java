@@ -1,16 +1,14 @@
 package views.container;
 
 import controllers.BoardGame;
-import controllers.ButtonClickHandler;
+import interfaces.BoardView;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import models.Player;
 import observers.BoardGameObserver;
-import views.BoardView;
-import views.HudView;
-import views.PlayerView;
+import views.content.HudView;
 
 /**
  * <h3>Represents the view of the game</h3>
@@ -31,11 +29,11 @@ public class GameView extends HBox implements BoardGameObserver {
   /**
    * Constructs a new view of the game. Creates containers to hold the board and HUD.
    */
-  public GameView() {
+  public GameView(BoardView boardView) {
     boardContainer = new HBox();
     hudContainer = new StackPane();
 
-    this.boardView = new BoardView();
+    this.boardView = boardView;
     this.hudView = new HudView();
 
     initialize();
@@ -83,7 +81,7 @@ public class GameView extends HBox implements BoardGameObserver {
     hudView.setDiceNumber(steps);
 
     // Update player position on the board
-    boardView.updatePlayer(player);
+    boardView.updatePlayerView(player);
   }
 
   @Override

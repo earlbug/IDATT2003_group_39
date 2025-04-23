@@ -1,15 +1,8 @@
 import IO.BoardFileReaderJson;
-import IO.BoardFileWriterJson;
-import controllers.Board;
-import controllers.BoardGame;
-import IO.PlayerReadWrite;
+import interfaces.Board;
+import exception.UnknownGameException;
 import java.io.IOException;
-import javafx.application.Application;
-import models.GamePiece;
-import models.LadderAction;
-import models.Player;
 import models.Tile;
-import views.MainApp;
 
 public class BoardGameApp {
 
@@ -30,11 +23,9 @@ public class BoardGameApp {
 
     } catch (IOException e) {
       System.out.println("ioecxeption: " + e.getMessage());
+    } catch (UnknownGameException e) {
+      throw new RuntimeException(e);
     }
-
-
-
-
 
 //    Board board = new Board();
 //    for (int i = 0; i < 10; i++) {
