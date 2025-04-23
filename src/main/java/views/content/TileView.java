@@ -1,4 +1,4 @@
-package views;
+package views.content;
 
 
 import javafx.scene.paint.Color;

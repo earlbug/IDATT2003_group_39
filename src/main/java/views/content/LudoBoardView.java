@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
-import views.PlayerView;
+import views.content.PlayerView;
 
 public class LudoBoardView extends GridPane implements BoardView {
 
