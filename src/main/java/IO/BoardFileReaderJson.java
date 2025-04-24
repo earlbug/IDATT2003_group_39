@@ -91,10 +91,9 @@ public class BoardFileReaderJson implements BoardFileReader {
 
     // Return the Tiles as an Array
     Tile[] tileArray = tiles.keySet().toArray(new Tile[0]);
+    Arrays.sort(tileArray, Comparator.comparingInt(Tile::getTileId));
 
-    return Arrays.stream(tileArray)
-        .sorted(Comparator.comparingInt(tiles::get))
-        .toArray(Tile[]::new);
+    return tileArray;
   }
 
   /**
@@ -107,7 +106,7 @@ public class BoardFileReaderJson implements BoardFileReader {
     int tileId = tileJson.get("tileId").getAsInt();
     tile = new Tile(tileId);
 
-    if (tileJson.has("type")){
+    if (tileJson.has("type")) {
       JsonObject tileActionJson = tileJson.getAsJsonObject("type");
       TileAction tileAction = deserializeActionTile(tileActionJson);
       tile.setLandAction(tileAction);
