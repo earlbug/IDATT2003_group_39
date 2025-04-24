@@ -1,9 +1,9 @@
 import IO.BoardFileReaderJson;
 import interfaces.Board;
 import controllers.BoardGame;
-import controllers.BoardGameHandler;
+import controllers.BoardGameController;
 import controllers.BoardGameNotifier;
-import controllers.ButtonClickHandler;
+import controllers.ButtonClickController;
 import exception.UnknownGameException;
 import factory.BoardFactory;
 import factory.GameType;
@@ -43,15 +43,17 @@ public class MainApp extends Application {
     Player p2 = new Player("Per", boardGame);
 
     BoardGameNotifier boardGameNotifier = new BoardGameNotifier();
-    BoardGameHandler boardGameHandler = new BoardGameHandler(boardGame, boardGameNotifier);
-    ButtonClickHandler buttonClickHandler = new ButtonClickHandler(boardGameHandler, gameView);
-    hudView.addButtonClickObserver(buttonClickHandler);
+    BoardGameController boardGameController = new BoardGameController(boardGame, boardGameNotifier);
+    ButtonClickController buttonClickController = new ButtonClickController(boardGameController, gameView);
+    hudView.addButtonClickObserver(buttonClickController);
 
     boardGame.setBoard(board);
 
     boardView.registerPlayer(p1);
+    //boardView.registerPlayer(p2);
     boardGame.createDice(1);
     boardGame.addPlayer(p1);
+    ///boardGame.addPlayer(p2);
     boardGame.setCurrentPlayer(p1);
     boardView.createBoardView(board);
     boardView.updatePlayerView(p1);

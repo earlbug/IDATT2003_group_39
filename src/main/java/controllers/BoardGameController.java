@@ -2,7 +2,6 @@ package controllers;
 
 import interfaces.TileAction;
 import models.Player;
-import models.actions.LadderAction;
 import models.actions.WinAction;
 import org.slf4j.Logger;
 
@@ -13,11 +12,11 @@ import org.slf4j.Logger;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class BoardGameHandler {
+public class BoardGameController {
 
   private final BoardGame boardGame;
   private final BoardGameNotifier notifier;
-  private final Logger logger = org.slf4j.LoggerFactory.getLogger(BoardGameHandler.class);
+  private final Logger logger = org.slf4j.LoggerFactory.getLogger(BoardGameController.class);
 
   /**
    * Constructor for BoardGameHandler.
@@ -25,7 +24,7 @@ public class BoardGameHandler {
    * @param boardGame The board game to handle
    * @param notifier  The notifier to use for observer notifications
    */
-  public BoardGameHandler(BoardGame boardGame, BoardGameNotifier notifier) {
+  public BoardGameController(BoardGame boardGame, BoardGameNotifier notifier) {
     this.boardGame = boardGame;
     this.notifier = notifier;
   }
