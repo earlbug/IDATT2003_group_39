@@ -12,8 +12,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import models.LadderAction;
 import models.Tile;
 
@@ -74,7 +77,7 @@ public class BoardFileReaderJson implements BoardFileReader {
       });
 
     // for all tiles, set its nextTile field based on the next tile id provided in the hashmap.
-    for(Map.Entry<Tile, Integer> entry : tiles.entrySet()) {
+    for(Entry<Tile, Integer> entry : tiles.entrySet()) {
       // get the id to the next Tile
       int nextTileId = entry.getValue();
       // Get he next Tile as a Tile Object, or null if non-existent
@@ -85,8 +88,13 @@ public class BoardFileReaderJson implements BoardFileReader {
       // Set the next Tile
       entry.getKey().setNextTile(nextTile);
     }
+
     // Return the Tiles as an Array
-    return tiles.values().toArray(new Tile[0]);
+    Tile[] tileArray = tiles.keySet().toArray(new Tile[0]);
+
+    return Arrays.stream(tileArray)
+        .sorted(Comparator.comparingInt(tiles::get))
+        .toArray(Tile[]::new);
   }
 
   /**
@@ -105,12 +113,18 @@ public class BoardFileReaderJson implements BoardFileReader {
       tile.setLandAction(tileAction);
     }
     // Gets the next tile as an int
-    int nextTileId = tileJson.get("nextTileId").getAsInt();
-    Map<Tile, Integer> tileMap = Map.of(tile, nextTileId);
-
+    Map<Tile, Integer> tileMap;
+    Integer nextTileId = -1;
+    try {
+      nextTileId = tileJson.get("nextTileId").getAsInt();
+    } catch (Exception e) {
+      nextTileId = -1;
+    } finally {
+      tileMap = new HashMap<>();
+      tileMap.put(tile, nextTileId);
+    }
 
     return tileMap;
-
   }
 
   public TileAction deserializeActionTile(JsonObject actionTileJson) {
