@@ -1,8 +1,9 @@
 package interfaces;
+import controllers.BoardGameNotifier;
 import models.Player;
 
 /**
- * Interface for action classes. The preform method defines what will happen to a player when it
+ * Interface for action classes. The perform method defines what will happen to a player when it
  * lands on a tile.
  *
  * @version 0.1.0
@@ -11,7 +12,7 @@ import models.Player;
  */
 public interface TileAction {
 
-  public void preform(Player player);
+  void perform(Player player, BoardGameNotifier notifier);
 
 
 }

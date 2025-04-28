@@ -1,8 +1,9 @@
 package controllers;
 
+import interfaces.Board;
 import java.util.ArrayList;
+import java.util.List;
 import models.Player;
-import models.Tile;
 
 /**
  * @version 0.1.0
@@ -14,26 +15,16 @@ import models.Tile;
  */
 public class BoardGame {
   private Board board;
-  private ArrayList<Player> playerList;
+  private final List<Player> players = new ArrayList<>();
   private Player currentPlayer;
   private Dice dice;
 
-  public BoardGame() {
-    playerList = new ArrayList<>();
-  }
   /**
    * Adds a player to the game.
    * @param player player to be added to the game.
    */
   public void addPlayer(Player player) {
-    playerList.add(player);
-  }
-
-  /**
-   * Sets up a board from a JSON-file
-   */
-  public void setUpBoard() {
-    // Get hard-coded board from JSON file via serializing-class
+    players.add(player);
   }
 
   /**
@@ -48,21 +39,19 @@ public class BoardGame {
    * Passes the turn to the next player.
    */
   public void nextPlayer() {
-    int currentPlayerIndex = playerList.indexOf(currentPlayer);
-    if(currentPlayerIndex + 1 >= playerList.size()) {
-      currentPlayer = playerList.getFirst();
+    int currentPlayerIndex = players.indexOf(currentPlayer);
+    if(currentPlayerIndex + 1 >= players.size()) {
+      currentPlayer = players.getFirst();
     } else {
-      currentPlayer = playerList.get(currentPlayerIndex  + 1);
+      currentPlayer = players.get(currentPlayerIndex  + 1);
     }
   }
 
   /**
    * Makes the current player do its turn.
    */
-  public void playOneTurn() {
-    int stepsToMove = dice.rollAllDice();
+  public void playOneTurn(int stepsToMove) {
     currentPlayer.move(stepsToMove);
-    nextPlayer();
   }
 
   /**
@@ -73,4 +62,34 @@ public class BoardGame {
     return currentPlayer;
   }
 
+
+  public Board getBoard(){
+    return board;
+  }
+
+  public void setCurrentPlayer(Player player){
+    this.currentPlayer = player;
+  }
+
+  public void setBoard(Board board) {
+    this.board = board;
+  }
+
+  public Player getCurrentPlayer(){
+    return currentPlayer;
+  }
+
+  public Dice getDice(){
+    return dice;
+  }
+
+  public void addPlayersOnStartPos() {
+    if (board == null || board.getTile(1) == null) {
+      throw new IllegalStateException("Board or starting tile is not initialized.");
+    }
+
+    for (Player player : players) {
+      player.setCurrentTile(board.getTile(1));
+    }
+  }
 }

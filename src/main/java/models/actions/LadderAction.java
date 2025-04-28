@@ -1,6 +1,9 @@
-package models;
+package models.actions;
 
+import controllers.BoardGameNotifier;
 import interfaces.TileAction;
+import models.Player;
+import models.Tile;
 
 /**
  * When a LadderAction is preformed on a player, the player gets placed on a tile specified
@@ -10,7 +13,7 @@ import interfaces.TileAction;
  * @author Erlend Sundsdal
  * @since 0.1.0
  */
-public class LadderAction implements TileAction{
+public class LadderAction implements TileAction {
   private int destinationTileId;
   private String description;
 
@@ -25,9 +28,10 @@ public class LadderAction implements TileAction{
    * @param player what player the action shall be preformed on
    */
   @Override
-  public void preform(Player player) {
-    int currentTileId = player.getCurrentTile().getTileId();
-    player.move(destinationTileId - currentTileId);
+  public void perform(Player player, BoardGameNotifier notifier) {
+    int steps = destinationTileId - player.getCurrentTile().getTileId();
+    player.move(steps);
+    notifier.nofifyPlayerMoved(player, steps);
   }
 
 
@@ -46,4 +50,5 @@ public class LadderAction implements TileAction{
   public void setDestinationTileId(int destinationTileId) {
     this.destinationTileId = destinationTileId;
   }
+
 }
