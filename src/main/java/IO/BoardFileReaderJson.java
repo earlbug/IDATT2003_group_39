@@ -84,8 +84,10 @@ public class BoardFileReaderJson implements BoardFileReader {
               .filter(tile -> tile.getTileId() == nextTileId)
               .findFirst()
               .orElse(null);
-      // Set the next Tile
-      entry.getKey().setNextTile(nextTile);
+      // Set the next Tile, if it exists
+      if (nextTile != null) {
+        entry.getKey().setNextTile(nextTile);
+      }
     }
 
     // Return the Tiles as an Array
