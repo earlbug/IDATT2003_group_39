@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import controllers.BoardGame;
-import models.GamePiece;
+import javafx.scene.paint.Color;
+import models.BoardGame;
 import models.Player;
 import models.Tile;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,8 +40,8 @@ public class PlayerTest {
   public void testSettersAndGetters(){
     player.setCurrentTile(boardGame.getBoard().getTile(2));
     assertEquals(2, player.getCurrentTile().getTileId());
-    player.setGamePiece(GamePiece.CAR);
-    assertEquals(GamePiece.CAR, player.getGamePiece());
+    player.setColor(Color.RED);
+    assertEquals(Color.RED, player.getColor());
     player.setName("Ola");
     assertEquals("Ola", player.getName());
   }
