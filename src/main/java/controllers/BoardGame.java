@@ -92,4 +92,11 @@ public class BoardGame {
       player.setCurrentTile(board.getTile(1));
     }
   }
+
+  public void setPlayerIds() {
+    int id = 0;
+    for (Player player : players) {
+      player.setPlayerId(id++);
+    }
+  }
 }
