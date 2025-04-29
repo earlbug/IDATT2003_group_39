@@ -2,22 +2,28 @@
   "gameType": "SNAKES_AND_LADDERS",
   "tiles": [
     {
-      "tileId": 1
+      "tileId": 1,
+      "nextTileId": 2
     },
     {
-      "tileId": 2
+      "tileId": 2,
+      "nextTileId": 3
     },
     {
-      "tileId": 3
+      "tileId": 3,
+      "nextTileId": 4
     },
     {
-      "tileId": 4
+      "tileId": 4,
+      "nextTileId": 5
     },
     {
-      "tileId": 5
+      "tileId": 5,
+      "nextTileId": 6
     },
     {
       "tileId": 6,
+      "nextTileId": 7,
       "type": {
         "actionType": "ladderAction",
         "description": "Move player to tile 7",
@@ -25,331 +31,103 @@
       }
     },
     {
-      "tileId": 7
+      "tileId": 7,
+      "nextTileId": 8
     },
     {
-      "tileId": 8
+      "tileId": 8,
+      "nextTileId": 9
     },
     {
-      "tileId": 9
+      "tileId": 9,
+      "nextTileId": 10
     },
     {
-      "tileId": 10
+      "tileId": 10,
+      "nextTileId": 11
     },
     {
-      "tileId": 11
+      "tileId": 11,
+      "nextTileId": 12
     },
     {
       "tileId": 12,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 16",
-        "destinationTileId": 16
-      }
+      "nextTileId": 13
     },
     {
-      "tileId": 13
+      "tileId": 13,
+      "nextTileId": 14
     },
     {
-      "tileId": 14
+      "tileId": 14,
+      "nextTileId": 15
     },
     {
-      "tileId": 15
+      "tileId": 15,
+      "nextTileId": 16
     },
     {
-      "tileId": 16
+      "tileId": 16,
+      "nextTileId": 17
     },
     {
-      "tileId": 17
+      "tileId": 17,
+      "nextTileId": 18
     },
     {
-      "tileId": 18
+      "tileId": 18,
+      "nextTileId": 19
     },
     {
-      "tileId": 19
+      "tileId": 19,
+      "nextTileId": 20
     },
     {
-      "tileId": 20
+      "tileId": 20,
+      "nextTileId": 21
     },
     {
-      "tileId": 21
+      "tileId": 21,
+      "nextTileId": 22
     },
     {
       "tileId": 22,
+      "nextTileId": 23
+    },
+    {
+      "tileId": 23,
+      "nextTileId": 24
+    },
+    {
+      "tileId": 24,
+      "nextTileId": 25
+    },
+    {
+      "tileId": 25,
+      "nextTileId": 26
+    },
+    {
+      "tileId": 26,
+      "nextTileId": 27
+    },
+    {
+      "tileId": 27,
+      "nextTileId": 28
+    },
+    {
+      "tileId": 28,
+      "nextTileId": 29
+    },
+    {
+      "tileId": 29,
+      "nextTileId": 30
+    },
+    {
+      "tileId": 30,
+      "nextTileId": null,
       "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 25",
-        "destinationTileId": 25
+        "actionType": "winAction"
       }
-    },
-    {
-      "tileId": 23
-    },
-    {
-      "tileId": 24
-    },
-    {
-      "tileId": 25
-    },
-    {
-      "tileId": 26
-    },
-    {
-      "tileId": 27
-    },
-    {
-      "tileId": 28
-    },
-    {
-      "tileId": 29
-    },
-    {
-      "tileId": 30
-    },
-    {
-      "tileId": 31
-    },
-    {
-      "tileId": 32,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 36",
-        "destinationTileId": 36
-      }
-    },
-    {
-      "tileId": 33
-    },
-    {
-      "tileId": 34
-    },
-    {
-      "tileId": 35
-    },
-    {
-      "tileId": 36
-    },
-    {
-      "tileId": 37
-    },
-    {
-      "tileId": 38
-    },
-    {
-      "tileId": 39
-    },
-    {
-      "tileId": 40
-    },
-    {
-      "tileId": 41
-    },
-    {
-      "tileId": 42,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 48",
-        "destinationTileId": 48
-      }
-    },
-    {
-      "tileId": 43
-    },
-    {
-      "tileId": 44
-    },
-    {
-      "tileId": 45
-    },
-    {
-      "tileId": 46
-    },
-    {
-      "tileId": 47
-    },
-    {
-      "tileId": 48
-    },
-    {
-      "tileId": 49
-    },
-    {
-      "tileId": 50
-    },
-    {
-      "tileId": 51
-    },
-    {
-      "tileId": 52
-    },
-    {
-      "tileId": 53,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 58",
-        "destinationTileId": 58
-      }
-    },
-    {
-      "tileId": 54
-    },
-    {
-      "tileId": 55
-    },
-    {
-      "tileId": 56
-    },
-    {
-      "tileId": 57
-    },
-    {
-      "tileId": 58
-    },
-    {
-      "tileId": 59
-    },
-    {
-      "tileId": 60
-    },
-    {
-      "tileId": 61
-    },
-    {
-      "tileId": 62
-    },
-    {
-      "tileId": 63,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 64",
-        "destinationTileId": 64
-      }
-    },
-    {
-      "tileId": 64
-    },
-    {
-      "tileId": 65
-    },
-    {
-      "tileId": 66
-    },
-    {
-      "tileId": 67
-    },
-    {
-      "tileId": 68
-    },
-    {
-      "tileId": 69
-    },
-    {
-      "tileId": 70
-    },
-    {
-      "tileId": 71
-    },
-    {
-      "tileId": 72,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 78",
-        "destinationTileId": 78
-      }
-    },
-    {
-      "tileId": 73
-    },
-    {
-      "tileId": 74
-    },
-    {
-      "tileId": 75
-    },
-    {
-      "tileId": 76
-    },
-    {
-      "tileId": 77
-    },
-    {
-      "tileId": 78
-    },
-    {
-      "tileId": 79
-    },
-    {
-      "tileId": 80
-    },
-    {
-      "tileId": 81
-    },
-    {
-      "tileId": 82
-    },
-    {
-      "tileId": 83,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 84",
-        "destinationTileId": 84
-      }
-    },
-    {
-      "tileId": 84
-    },
-    {
-      "tileId": 85
-    },
-    {
-      "tileId": 86
-    },
-    {
-      "tileId": 87
-    },
-    {
-      "tileId": 88
-    },
-    {
-      "tileId": 89
-    },
-    {
-      "tileId": 90
-    },
-    {
-      "tileId": 91,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 96",
-        "destinationTileId": 96
-      }
-    },
-    {
-      "tileId": 92
-    },
-    {
-      "tileId": 93
-    },
-    {
-      "tileId": 94
-    },
-    {
-      "tileId": 95
-    },
-    {
-      "tileId": 96
-    },
-    {
-      "tileId": 97
-    },
-    {
-      "tileId": 98
-    },
-    {
-      "tileId": 99
-    },
-    {
-      "tileId": 100
     }
   ]
 }
