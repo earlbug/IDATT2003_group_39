@@ -68,12 +68,6 @@ public class SnakesAndLaddersBoardView extends GridPane implements BoardView {
     tileView.addPlayerView(playerView, player.getPlayerId());
   }
 
-  @Override
-  public void registerPlayer(Player player) {
-    PlayerView playerView = new PlayerView();
-    playerViews.put(player, playerView);
-  }
-
 
   @Override
   public Pane getView() {

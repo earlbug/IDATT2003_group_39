@@ -31,12 +31,6 @@ public class LudoBoardView extends GridPane implements BoardView {
     }
   }
 
-  @Override
-  public void registerPlayer(Player player) {
-    PlayerView playerView = new PlayerView();
-    playerViews.put(player, playerView);
-  }
-
   /**
    * Updates the position of the player on the board.
    *
