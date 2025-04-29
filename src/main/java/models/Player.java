@@ -1,6 +1,7 @@
 package models;
 
 import controllers.BoardGame;
+import javax.xml.validation.Validator;
 import models.validators.ArgumentValidator;
 
 /**
@@ -9,9 +10,12 @@ import models.validators.ArgumentValidator;
  *
  * @version 0.1.0
  * @author Erlend Sundsdal
+ * @author Tord Fosse
  * @since 0.1.0
  */
 public class Player {
+
+  private int playerId;
   private String name;
   private Tile currentTile = new Tile(1);
   private final BoardGame game;
@@ -20,6 +24,12 @@ public class Player {
   public Player(String name, BoardGame game){
     setName(name);
     this.game = game;
+    setPlayerId(playerId);
+  }
+
+  public void setPlayerId(int playerId) {
+    ArgumentValidator.playerSetId(playerId);
+    this.playerId = playerId;
   }
 
   /**
@@ -28,13 +38,15 @@ public class Player {
    * @param steps how many steps the player shall move forward
    */
   public void move(int steps) {
-    int newTileId = currentTile.getTileId() + steps;
-    int numberOfTiles = game.getBoard().getNumberOfTiles();
-
-    if (newTileId > numberOfTiles){
-      this.currentTile = game.getBoard().getTile(numberOfTiles);
+    Tile targetTile = currentTile;
+    for (int i = 0; i < steps; i++) {
+      if (targetTile.getNextTile() != null) {
+        targetTile = targetTile.getNextTile();
+      } else {
+        break;
+      }
     }
-    this.currentTile = game.getBoard().getTile(newTileId);
+    this.currentTile = targetTile;
   }
 
   /**
@@ -72,6 +84,10 @@ public class Player {
 
   public GamePiece getGamePiece(){
     return gamePiece;
+  }
+
+  public int getPlayerId() {
+    return playerId;
   }
 
 }
