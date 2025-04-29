@@ -48,24 +48,18 @@ public class TileTest {
   @Test
   public void testSetTileIdWithNegativeValue() {
     Tile tile = new Tile(1);
-    assertThrows(IllegalArgumentException.class, () -> {
-      tile.setTileId(-1);
-    });
+    assertThrows(IllegalArgumentException.class, () -> tile.setTileId(-1));
   }
 
   @Test
   public void testSetNextTileWithNull() {
     Tile tile = new Tile(1);
-    assertThrows(IllegalArgumentException.class, () -> {
-      tile.setNextTile(null);
-    });
+    assertThrows(IllegalArgumentException.class, () -> tile.setNextTile(null));
   }
 
   @Test
   public void testSetLandActionWithNull() {
     Tile tile = new Tile(1);
-    assertThrows(IllegalArgumentException.class, () -> {
-      tile.setLandAction(null);
-    });
+    assertThrows(IllegalArgumentException.class, () -> tile.setLandAction(null));
   }
 }

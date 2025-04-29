@@ -2,7 +2,6 @@ package models.validators;
 
 import interfaces.TileAction;
 import javafx.scene.paint.Color;
-import models.GamePiece;
 import models.Tile;
 
 /**

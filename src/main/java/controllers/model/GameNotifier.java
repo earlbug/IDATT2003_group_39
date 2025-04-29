@@ -16,7 +16,7 @@ public abstract class GameNotifier {
 
   public void removeObserver(BoardGameObserver observer) {
     observers.remove(observer);
-  };
+  }
 
   public void notifyPlayerMoved(Player player, int steps) {
     observers.forEach(observer -> observer.onPlayerMoved(player, steps));

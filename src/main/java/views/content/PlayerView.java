@@ -2,7 +2,6 @@ package views.content;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import models.Player;
 
 /**
  * <h3>Represents the view of a player</h3>
@@ -13,8 +12,6 @@ import models.Player;
  * @since 0.1.0
  */
 public class PlayerView extends Rectangle {
-
-  private Color playerColor;
 
   /**
    * Constructs a new view of the player.
@@ -46,7 +43,6 @@ public class PlayerView extends Rectangle {
    * @param color The color to set
    */
   public void setPlayerColor(Color color) {
-    this.playerColor = color;
     this.setFill(color);
   }
 }

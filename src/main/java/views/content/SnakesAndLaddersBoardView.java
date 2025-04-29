@@ -14,8 +14,6 @@ import models.Tile;
 
 public class SnakesAndLaddersBoardView extends GridPane implements BoardView {
 
-  private final int columns = 10;
-
   private final Map<Player, PlayerView> playerViews = new HashMap<>();
 
   public void addPlayerView(Player player, PlayerView playerView) {
@@ -25,6 +23,7 @@ public class SnakesAndLaddersBoardView extends GridPane implements BoardView {
   @Override
   public void createBoardView(Board board) {
     Tile[] tiles = board.getTiles();
+    int columns = 10;
     int rows = (int) Math.ceil((double) tiles.length / columns);
 
     for (Tile tile : tiles) {
