@@ -1,6 +1,5 @@
-package controllers;
+package models;
 import java.util.List;
-import models.Die;
 
 import java.util.ArrayList;
 

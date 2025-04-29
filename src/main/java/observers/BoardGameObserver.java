@@ -1,6 +1,6 @@
 package observers;
 
-import controllers.BoardGame;
+import models.BoardGame;
 import models.Player;
 
 /**

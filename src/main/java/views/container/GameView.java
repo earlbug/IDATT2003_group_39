@@ -1,6 +1,6 @@
 package views.container;
 
-import controllers.BoardGame;
+import models.BoardGame;
 import interfaces.BoardView;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;

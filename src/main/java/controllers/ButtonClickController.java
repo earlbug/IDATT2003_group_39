@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.model.BoardGameController;
 import observers.ButtonClickObserver;
 import views.container.GameView;
 
@@ -23,7 +24,7 @@ public class ButtonClickController implements ButtonClickObserver {
    */
   public ButtonClickController(BoardGameController boardGameController, GameView gameView) {
     this.boardGameController = boardGameController;
-    boardGameController.getNotifier().addObserver(gameView);
+    boardGameController.addObserver(gameView);
   }
 
   @Override

@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import controllers.BoardGame;
+import models.BoardGame;
 import models.actions.LadderAction;
 import models.Player;
 import models.Tile;
