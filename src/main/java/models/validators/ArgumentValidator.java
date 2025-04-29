@@ -52,4 +52,10 @@ public class ArgumentValidator {
     }
   }
 
+  public static void playerSetId(int playerId){
+    if (playerId < 0 || playerId > 3){
+      throw new IllegalArgumentException("Player id cannot be a negative number and must be less than 4");
+    }
+  }
+
 }
