@@ -14,7 +14,7 @@ import models.Player;
  */
 public class PlayerView extends Rectangle {
 
-  private Color playerColor = Color.BLACK;
+  private Color playerColor;
 
   /**
    * Constructs a new view of the player.
@@ -25,10 +25,9 @@ public class PlayerView extends Rectangle {
   }
 
   private void initialize() {
-    double playerSize = 40;
+    double playerSize = 20;
     this.setHeight(playerSize);
     this.setWidth(playerSize);
-    this.setFill(playerColor);
     this.getStyleClass().add("player-avatar");
   }
 
@@ -48,5 +47,6 @@ public class PlayerView extends Rectangle {
    */
   public void setPlayerColor(Color color) {
     this.playerColor = color;
+    this.setFill(color);
   }
 }
