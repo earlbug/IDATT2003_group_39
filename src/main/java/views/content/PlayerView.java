@@ -2,7 +2,6 @@ package views.content;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import models.Player;
 
 /**
  * <h3>Represents the view of a player</h3>
@@ -14,8 +13,6 @@ import models.Player;
  */
 public class PlayerView extends Rectangle {
 
-  private Color playerColor = Color.BLACK;
-
   /**
    * Constructs a new view of the player.
    *
@@ -25,10 +22,9 @@ public class PlayerView extends Rectangle {
   }
 
   private void initialize() {
-    double playerSize = 40;
+    double playerSize = 20;
     this.setHeight(playerSize);
     this.setWidth(playerSize);
-    this.setFill(playerColor);
     this.getStyleClass().add("player-avatar");
   }
 
@@ -47,6 +43,6 @@ public class PlayerView extends Rectangle {
    * @param color The color to set
    */
   public void setPlayerColor(Color color) {
-    this.playerColor = color;
+    this.setFill(color);
   }
 }

@@ -1,9 +1,8 @@
-package controllers;
+package models;
 
 import interfaces.Board;
 import java.util.ArrayList;
 import java.util.List;
-import models.Player;
 
 /**
  * @version 0.1.0
@@ -47,22 +46,6 @@ public class BoardGame {
     }
   }
 
-  /**
-   * Makes the current player do its turn.
-   */
-  public void playOneTurn(int stepsToMove) {
-    currentPlayer.move(stepsToMove);
-  }
-
-  /**
-   * Gets the player which are currently playing.
-   * @return current Player
-   */
-  public Player getWinner() {
-    return currentPlayer;
-  }
-
-
   public Board getBoard(){
     return board;
   }
@@ -98,5 +81,9 @@ public class BoardGame {
     for (Player player : players) {
       player.setPlayerId(id++);
     }
+  }
+
+  public List<Player> getPlayers() {
+    return players;
   }
 }

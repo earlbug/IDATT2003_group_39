@@ -1,7 +1,6 @@
 package models;
 
-import controllers.BoardGame;
-import javax.xml.validation.Validator;
+import javafx.scene.paint.Color;
 import models.validators.ArgumentValidator;
 
 /**
@@ -19,7 +18,7 @@ public class Player {
   private String name;
   private Tile currentTile = new Tile(1);
   private final BoardGame game;
-  private GamePiece gamePiece;
+  private Color color;
 
   public Player(String name, BoardGame game){
     setName(name);
@@ -77,13 +76,13 @@ public class Player {
     this.currentTile = currentTile;
   }
 
-  public void setGamePiece(GamePiece gamePiece){
-    ArgumentValidator.playerSetGamePieceValidator(gamePiece);
-    this.gamePiece = gamePiece;
+  public void setColor(Color color){
+    ArgumentValidator.playerSetColorValidator(color);
+    this.color = color;
   }
 
-  public GamePiece getGamePiece(){
-    return gamePiece;
+  public Color getColor(){
+    return color;
   }
 
   public int getPlayerId() {

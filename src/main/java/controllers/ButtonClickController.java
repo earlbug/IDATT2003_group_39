@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.model.GameController;
 import observers.ButtonClickObserver;
 import views.container.GameView;
 
@@ -13,17 +14,17 @@ import views.container.GameView;
  */
 public class ButtonClickController implements ButtonClickObserver {
 
-  private final BoardGameController boardGameController;
+  private final GameController gameController;
 
   /**
    * Constructs a new handler to handle button clicks.
    *
-   * @param boardGameController the handler handling boardGame changes.
+   * @param gameController the handler handling boardGame changes.
    * @param gameView  the current gameView of the boardGame.
    */
-  public ButtonClickController(BoardGameController boardGameController, GameView gameView) {
-    this.boardGameController = boardGameController;
-    boardGameController.getNotifier().addObserver(gameView);
+  public ButtonClickController(GameController gameController, GameView gameView) {
+    this.gameController = gameController;
+    gameController.addObserver(gameView);
   }
 
   @Override
@@ -32,9 +33,9 @@ public class ButtonClickController implements ButtonClickObserver {
 
     switch (action) {
       case "play":
-        int sum = boardGameController.handleRollDice();
-        boardGameController.handlePlayerMove(sum);
-        boardGameController.handleNextPlayer();
+        int sum = gameController.handleRollDice();
+        gameController.handlePlayerMove(sum);
+        gameController.handleNextPlayer();
         break;
       default:
         System.out.println("Unknown action" + action);

@@ -33,7 +33,7 @@ public class PlayerReadWrite {
 
     String stringToWrite = player.getName()
         + delimiter
-        + player.getGamePiece()
+        + player.getColor()
         + "\n";
     char[] playerAsChar = stringToWrite.toCharArray();
 

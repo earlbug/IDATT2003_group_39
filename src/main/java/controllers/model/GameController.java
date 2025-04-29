@@ -1,6 +1,7 @@
-package controllers;
+package controllers.model;
 
 import interfaces.TileAction;
+import models.BoardGame;
 import models.Player;
 import models.actions.WinAction;
 import org.slf4j.Logger;
@@ -12,21 +13,18 @@ import org.slf4j.Logger;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class BoardGameController {
+public class GameController extends GameNotifier {
 
-  private final BoardGame boardGame;
-  private final BoardGameNotifier notifier;
-  private final Logger logger = org.slf4j.LoggerFactory.getLogger(BoardGameController.class);
+  final BoardGame boardGame;
+  private final Logger logger = org.slf4j.LoggerFactory.getLogger(GameController.class);
 
   /**
    * Constructor for BoardGameHandler.
    *
    * @param boardGame The board game to handle
-   * @param notifier  The notifier to use for observer notifications
    */
-  public BoardGameController(BoardGame boardGame, BoardGameNotifier notifier) {
+  public GameController(BoardGame boardGame) {
     this.boardGame = boardGame;
-    this.notifier = notifier;
   }
 
   /**
@@ -39,31 +37,38 @@ public class BoardGameController {
     logger.debug("Player added: {}", player.getName());
   }
 
+  public void handlePlayerIds() {
+    boardGame.setPlayerIds();
+    logger.debug("Player IDs set");
+  }
+
   /**
    * Handles player movement.
    *
    * @param steps Number of steps to move
    */
   public void handlePlayerMove(int steps) {
-    Player currentplayer = boardGame.getCurrentPlayer();
-    currentplayer.move(steps);
-    logger.debug("Player {} moved {} steps", currentplayer.getName(), steps);
-    notifier.nofifyPlayerMoved(currentplayer, steps);
+    Player currentPlayer = boardGame.getCurrentPlayer();
+    currentPlayer.move(steps);
+    logger.debug("Player {} moved {} steps", currentPlayer.getName(), steps);
 
-    TileAction tileAction = boardGame.getBoard().getTile(currentplayer.getCurrentTile().getTileId())
+    // Notify observers about the move
+    notifyPlayerMoved(currentPlayer, steps);
+
+    TileAction tileAction = boardGame.getBoard().getTile(currentPlayer.getCurrentTile().getTileId())
         .getLandAction();
 
     if (tileAction != null) {
-      tileAction.perform(currentplayer, notifier);
-      logger.debug("Player {} performed action: {}", currentplayer.getName(), tileAction);
+      tileAction.perform(currentPlayer);
+      logger.debug("Player {} performed action: {}", currentPlayer.getName(), tileAction);
     } else {
-      logger.debug("No action for player {} on tile {}", currentplayer.getName(),
-          currentplayer.getCurrentTile().getTileId());
+      logger.debug("No action for player {} on tile {}", currentPlayer.getName(),
+          currentPlayer.getCurrentTile().getTileId());
     }
 
     // Check win condition
-    if (isWinConditionMet(currentplayer)) {
-      notifier.nofityWinnerDetermined(currentplayer);
+    if (isWinConditionMet(currentPlayer)) {
+      notifyWinnerDetermined(currentPlayer);
     }
   }
 
@@ -72,7 +77,7 @@ public class BoardGameController {
    */
   public void handleNextPlayer() {
     boardGame.nextPlayer();
-    notifier.notifyNextPlayer(boardGame.getCurrentPlayer());
+    notifyNextPlayer(boardGame.getCurrentPlayer());
     logger.debug("Next player: {}", boardGame.getCurrentPlayer().getName());
   }
 
@@ -82,7 +87,7 @@ public class BoardGameController {
    * @param player Player to check
    * @return True if player has won
    */
-  private boolean isWinConditionMet(Player player) {
+  public boolean isWinConditionMet(Player player) {
     TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
         .getLandAction();
     logger.debug("Checking win condition for player {} on tile {}",
@@ -100,8 +105,5 @@ public class BoardGameController {
     return boardGame.getDice().rollAllDice();
   }
 
-  public BoardGameNotifier getNotifier() {
-    return notifier;
-  }
-
 }
+

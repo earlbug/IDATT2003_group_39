@@ -1,4 +1,4 @@
-import controllers.Dice;
+import models.Dice;
 import org.junit.jupiter.api.Test;
 
 public class DiceTest {

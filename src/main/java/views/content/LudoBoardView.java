@@ -12,7 +12,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
-import views.content.PlayerView;
 
 public class LudoBoardView extends GridPane implements BoardView {
 
@@ -29,12 +28,6 @@ public class LudoBoardView extends GridPane implements BoardView {
       int col = i % columns;
       this.add(tileElement, col, row);
     }
-  }
-
-  @Override
-  public void registerPlayer(Player player) {
-    PlayerView playerView = new PlayerView();
-    playerViews.put(player, playerView);
   }
 
   /**

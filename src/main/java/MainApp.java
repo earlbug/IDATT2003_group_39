@@ -1,8 +1,10 @@
 import IO.BoardFileReaderJson;
+import controllers.model.SnakesAndLaddersController;
+import controllers.view.SnakesAndLaddersViewController;
 import interfaces.Board;
-import controllers.BoardGame;
-import controllers.BoardGameController;
-import controllers.BoardGameNotifier;
+import javafx.scene.paint.Color;
+import models.BoardGame;
+import controllers.model.GameController;
 import controllers.ButtonClickController;
 import exception.UnknownGameException;
 import factory.BoardFactory;
@@ -40,23 +42,28 @@ public class MainApp extends Application {
     HudView hudView = gameView.getHudView();
 
     Player p1 = new Player("Ola", boardGame);
+    p1.setColor(Color.RED);
     Player p2 = new Player("Per", boardGame);
+    p2.setColor(Color.BLUE);
 
-    BoardGameNotifier boardGameNotifier = new BoardGameNotifier();
-    BoardGameController boardGameController = new BoardGameController(boardGame, boardGameNotifier);
-    ButtonClickController buttonClickController = new ButtonClickController(boardGameController, gameView);
+    GameController gameController = new SnakesAndLaddersController(boardGame);
+    SnakesAndLaddersViewController boardGameViewController = new SnakesAndLaddersViewController(gameView);
+    ButtonClickController buttonClickController = new ButtonClickController(gameController, gameView);
     hudView.addButtonClickObserver(buttonClickController);
 
     boardGame.setBoard(board);
 
-    boardView.registerPlayer(p1);
+    gameController.handleAddPlayer(p1);
+    gameController.handleAddPlayer(p2);
+    gameController.handlePlayerIds();
+
+    boardGameViewController.addPlayerViews(boardGame.getPlayers());
     //boardView.registerPlayer(p2);
     boardGame.createDice(1);
-    boardGame.addPlayer(p1);
-    ///boardGame.addPlayer(p2);
     boardGame.setCurrentPlayer(p1);
     boardView.createBoardView(board);
     boardView.updatePlayerView(p1);
+    boardView.updatePlayerView(p2);
     boardGame.addPlayersOnStartPos();
 
     Scene scene = new Scene(gameView, 1280, 720);

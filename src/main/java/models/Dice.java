@@ -1,6 +1,5 @@
-package controllers;
+package models;
 import java.util.List;
-import models.Die;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Dice {
   // ArrayList of Dice
-  private List<Die> dice;
+  private final List<Die> dice;
 
   /**
    * Constructor Creates a given number of dice, and stores it in an ArrayList
