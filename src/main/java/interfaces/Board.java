@@ -1,18 +1,16 @@
 package interfaces;
 
-import factory.GameType;
-import models.boards.SnakesAndLaddersBoard;
-import models.boards.LudoBoard;
 import models.Tile;
 
 /**
  * Represents a board in ladder game. It has the responsibility of managing the tiles of the game.
  *
- * @version 0.1.0
  * @author Erlend Sundsdal
+ * @version 0.1.0
  * @since 0.1.0
  */
 public interface Board {
+
   /**
    * Gets a tile from the board.
    *

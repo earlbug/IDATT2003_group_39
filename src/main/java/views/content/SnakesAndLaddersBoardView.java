@@ -12,6 +12,13 @@ import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
 
+/**
+ * Represents the view of the Snakes and Ladders board.
+ *
+ * @author Tord Fosse
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class SnakesAndLaddersBoardView extends GridPane implements BoardView {
 
   private final Map<Player, PlayerView> playerViews = new HashMap<>();

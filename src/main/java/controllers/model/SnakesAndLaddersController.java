@@ -3,7 +3,15 @@ package controllers.model;
 import models.BoardGame;
 import org.slf4j.Logger;
 
+/**
+ * Handles game logic operations and delegates notifications.
+ *
+ * @author Tord Fosse
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class SnakesAndLaddersController extends GameController {
+
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersController.class);
 
   /**
@@ -14,7 +22,6 @@ public class SnakesAndLaddersController extends GameController {
   public SnakesAndLaddersController(BoardGame boardGame) {
     super(boardGame);
   }
-
 
 
 }

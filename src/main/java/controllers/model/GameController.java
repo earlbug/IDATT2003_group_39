@@ -37,6 +37,9 @@ public class GameController extends GameNotifier {
     logger.debug("Player added: {}", player.getName());
   }
 
+  /**
+   * Handles setting player IDs.
+   */
   public void handlePlayerIds() {
     boardGame.setPlayerIds();
     logger.debug("Player IDs set");
@@ -90,8 +93,8 @@ public class GameController extends GameNotifier {
   public boolean isWinConditionMet(Player player) {
     TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
         .getLandAction();
-    logger.debug("Checking win condition for player {} on tile {}",
-        player.getName(), player.getCurrentTile().getTileId());
+    logger.debug("Checking win condition for player {} on tile {}", player.getName(),
+        player.getCurrentTile().getTileId());
     return winningAction instanceof WinAction;
   }
 

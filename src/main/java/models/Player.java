@@ -7,9 +7,9 @@ import models.validators.ArgumentValidator;
  * Represents the players of the game. Contains a Tile class variable, which represents where the
  * player is standing on the board.
  *
- * @version 0.1.0
  * @author Erlend Sundsdal
  * @author Tord Fosse
+ * @version 0.1.0
  * @since 0.1.0
  */
 public class Player {
@@ -20,12 +20,23 @@ public class Player {
   private final BoardGame game;
   private Color color;
 
-  public Player(String name, BoardGame game){
+  /**
+   * Constructor for Player.
+   *
+   * @param name the name of the player
+   * @param game the game the player is playing
+   */
+  public Player(String name, BoardGame game) {
     setName(name);
     this.game = game;
     setPlayerId(playerId);
   }
 
+  /**
+   * Sets the player ID.
+   *
+   * @param playerId the ID to set
+   */
   public void setPlayerId(int playerId) {
     ArgumentValidator.playerSetId(playerId);
     this.playerId = playerId;
@@ -57,34 +68,68 @@ public class Player {
     setCurrentTile(tile);
   }
 
-
+  /**
+   * Returns the current tile of the player.
+   *
+   * @return the current tile of the player
+   */
   public Tile getCurrentTile() {
     return currentTile;
   }
 
+  /**
+   * Returns the name of the player.
+   *
+   * @return the name of the player
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Sets the name of the player.
+   *
+   * @param name the name to set
+   */
   public void setName(String name) {
     ArgumentValidator.playerSetNameValidator(name);
     this.name = name;
   }
 
+  /**
+   * Sets the current tile of the player.
+   *
+   * @param currentTile the tile to set as current
+   */
   public void setCurrentTile(Tile currentTile) {
     ArgumentValidator.playerSetCurrentTileValidator(currentTile);
     this.currentTile = currentTile;
   }
 
-  public void setColor(Color color){
+  /**
+   * Sets the color of the player.
+   *
+   * @param color the color to set
+   */
+  public void setColor(Color color) {
     ArgumentValidator.playerSetColorValidator(color);
     this.color = color;
   }
 
-  public Color getColor(){
+  /**
+   * Returns the color of the player.
+   *
+   * @return the color of the player
+   */
+  public Color getColor() {
     return color;
   }
 
+  /**
+   * Returns the game the player is playing.
+   *
+   * @return the game the player is playing
+   */
   public int getPlayerId() {
     return playerId;
   }
