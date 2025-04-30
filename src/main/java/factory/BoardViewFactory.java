@@ -2,7 +2,7 @@ package factory;
 
 import interfaces.Board;
 import interfaces.BoardView;
-import views.content.LudoBoardView;
+import views.content.MonopolyBoardView;
 import views.content.SnakesAndLaddersBoardView;
 
 /**
@@ -28,8 +28,8 @@ public class BoardViewFactory {
         view.createBoardView(board);
         yield view;
       }
-      case LUDO -> {
-        BoardView view = new LudoBoardView();
+      case MONOPOLY -> {
+        BoardView view = new MonopolyBoardView();
         view.createBoardView(board);
         yield view;
       }

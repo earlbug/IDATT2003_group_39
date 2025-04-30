@@ -8,5 +8,5 @@ package factory;
  * @since 1.0.0
  */
 public enum GameType {
-  SNAKES_AND_LADDERS, LUDO
+  SNAKES_AND_LADDERS, MONOPOLY
 }

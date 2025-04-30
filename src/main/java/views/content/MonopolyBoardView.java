@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
 
-public class LudoBoardView extends GridPane implements BoardView {
+public class MonopolyBoardView extends GridPane implements BoardView {
 
   private final int columns = 5;
 

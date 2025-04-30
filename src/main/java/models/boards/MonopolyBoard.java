@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import models.Tile;
 
-public class LudoBoard implements Board {
+public class MonopolyBoard implements Board {
   private final Map<Integer, Tile> tiles = new HashMap<>();
 
   public Tile getTile(int tileId) {

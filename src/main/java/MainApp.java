@@ -29,9 +29,6 @@ import views.container.MainMenuView;
  */
 public class MainApp extends Application {
 
-  private final BoardFileReaderJson boardFileReaderJson = new BoardFileReaderJson();
-  private MainMenuView mainMenuView = new MainMenuView();
-
   @Override
   public void start(Stage primaryStage) throws IOException, UnknownGameException {
 
