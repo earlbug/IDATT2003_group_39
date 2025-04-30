@@ -1,9 +1,11 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import controllers.BoardGame;
+import interfaces.Board;
 import models.GamePiece;
 import models.Player;
 import models.Tile;
+import models.boards.SnakesAndLaddersBoard;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +21,8 @@ public class PlayerTest {
     tile1 = new Tile(1);
     tile2 = new Tile(2);
     player = new Player("player1", boardGame);
+    Board board = new SnakesAndLaddersBoard();
+    boardGame.setBoard(board);
     boardGame.addPlayer(player);
     boardGame.getBoard().addTile(tile1);
     boardGame.getBoard().addTile(tile2);
