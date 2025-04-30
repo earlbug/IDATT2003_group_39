@@ -13,7 +13,7 @@ import observers.ButtonClickObserver;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class ButtonClickNotifier {
+public abstract class ButtonClickNotifier {
 
   List<ButtonClickObserver> buttonClickObservers = new ArrayList<>();
 
@@ -22,7 +22,7 @@ public class ButtonClickNotifier {
    *
    * @param buttonClickObserver a listener for button clicks.
    */
-  public void addListener(ButtonClickObserver buttonClickObserver) {
+  public void addObserver(ButtonClickObserver buttonClickObserver) {
     buttonClickObservers.add(buttonClickObserver);
   }
 
@@ -31,7 +31,7 @@ public class ButtonClickNotifier {
    *
    * @param buttonClickObserver a listener for button clicks.
    */
-  public void removeListener(ButtonClickObserver buttonClickObserver) {
+  public void removeObserver(ButtonClickObserver buttonClickObserver) {
     buttonClickObservers.remove(buttonClickObserver);
   }
 
@@ -40,7 +40,7 @@ public class ButtonClickNotifier {
    *
    * @param action from a button pressed by the user.
    */
-  public void notifyListeners(String action) {
+  public void notifyObservers(String action) {
     buttonClickObservers.forEach(buttonClickObserver -> buttonClickObserver.update(action));
   }
 }

@@ -108,5 +108,10 @@ public class GameController extends GameNotifier {
     return boardGame.getDice().rollAllDice();
   }
 
+  public void handleOneTurn() {
+    int sum = handleRollDice();
+    handlePlayerMove(sum);
+    handleNextPlayer();
+  }
 }
 

@@ -1,6 +1,7 @@
 import IO.BoardFileReaderJson;
 import controllers.model.SnakesAndLaddersController;
 import controllers.view.SnakesAndLaddersViewController;
+import controllers.view.ViewController;
 import interfaces.Board;
 import javafx.scene.paint.Color;
 import models.BoardGame;
@@ -18,7 +19,6 @@ import factory.BoardViewFactory;
 import interfaces.BoardView;
 import views.content.HudView;
 import views.container.GameView;
-import views.container.MainMenuView;
 
 /**
  * This class represents the main application.
@@ -43,10 +43,10 @@ public class MainApp extends Application {
     Player p2 = new Player("Per", boardGame);
     p2.setColor(Color.BLUE);
 
-    GameController gameController = new SnakesAndLaddersController(boardGame);
-    SnakesAndLaddersViewController boardGameViewController = new SnakesAndLaddersViewController(gameView);
-    ButtonClickController buttonClickController = new ButtonClickController(gameController, gameView);
-    hudView.addButtonClickObserver(buttonClickController);
+    GameController gameController = new GameController(boardGame);
+    SnakesAndLaddersViewController viewController = new SnakesAndLaddersViewController(gameView);
+    ButtonClickController buttonClickController = new ButtonClickController(gameController, viewController);
+    viewController.setNotifiers(buttonClickController);
 
     boardGame.setBoard(board);
 
@@ -54,7 +54,7 @@ public class MainApp extends Application {
     gameController.handleAddPlayer(p2);
     gameController.handlePlayerIds();
 
-    boardGameViewController.addPlayerViews(boardGame.getPlayers());
+    viewController.addPlayerViews(boardGame.getPlayers());
     //boardView.registerPlayer(p2);
     boardGame.createDice(1);
     boardGame.setCurrentPlayer(p1);
