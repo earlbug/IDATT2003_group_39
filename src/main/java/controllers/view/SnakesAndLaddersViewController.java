@@ -10,6 +10,7 @@ import views.container.GameView;
 import views.content.HudView;
 import views.content.PlayerView;
 import views.content.SnakesAndLaddersBoardView;
+import views.content.WinnerView;
 
 /**
  * Handles the view logic for the Snakes and Ladders game.
@@ -86,7 +87,7 @@ public class SnakesAndLaddersViewController extends ViewController{
    */
   @Override
   public void onWinnerDetermined(Player winner) {
-    System.out.println("Winner: " + winner.getName());
+    gameView.getChildren().setAll(new WinnerView(winner));
   }
 
   /**

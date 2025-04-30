@@ -55,7 +55,6 @@ public class MainApp extends Application {
     gameController.handlePlayerIds();
 
     viewController.addPlayerViews(boardGame.getPlayers());
-    //boardView.registerPlayer(p2);
     boardGame.createDice(1);
     boardGame.setCurrentPlayer(p1);
     boardView.createBoardView(board);
