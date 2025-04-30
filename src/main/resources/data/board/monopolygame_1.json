@@ -43,6 +43,10 @@
     },
     {
       "tileId": 11,
+      "nextTileId": 12
+    },
+    {
+      "tileId": 12,
       "nextTileId": 1
     }
   ]

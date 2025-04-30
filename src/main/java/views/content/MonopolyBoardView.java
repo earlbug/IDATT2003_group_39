@@ -22,10 +22,26 @@ public class MonopolyBoardView extends GridPane implements BoardView {
   @Override
   public void createBoardView(Board board) {
     Tile[] tiles = board.getTiles();
+    int boardLength = tiles.length / 4;
+
     for (int i = 1; i < tiles.length + 1; i++) {
       StackPane tileElement = createElement(board.getTile(i));
-      int row = i / columns;
-      int col = i % columns;
+      int row, col;
+
+      if (i <= boardLength) { // Top edge
+        row = 0;
+        col = i - 1;
+      } else if (i <= boardLength * 2) { // Right edge
+        row = i - boardLength - 1;
+        col = columns - 1;
+      } else if (i <= boardLength * 3) { // Bottom edge
+        row = boardLength - 1;
+        col = boardLength * 3 - i;
+      } else { // Left edge
+        row = boardLength * 4 - i;
+        col = 0;
+      }
+
       this.add(tileElement, col, row);
     }
   }
