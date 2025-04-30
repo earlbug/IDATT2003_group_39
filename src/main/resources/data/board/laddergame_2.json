@@ -43,7 +43,6 @@
     },
     {
       "tileId": 11,
-      "nextTileId": 1,
       "type": {
         "actionType": "winAction"
       }
