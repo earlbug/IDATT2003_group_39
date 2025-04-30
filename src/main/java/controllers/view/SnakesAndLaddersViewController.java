@@ -1,12 +1,16 @@
 package controllers.view;
 
+import controllers.ButtonClickNotifier;
+import controllers.model.GameController;
 import java.util.List;
 import models.BoardGame;
 import models.Player;
+import org.slf4j.Logger;
 import views.container.GameView;
+import views.content.HudView;
 import views.content.PlayerView;
 import views.content.SnakesAndLaddersBoardView;
-import observers.BoardGameObserver;
+import views.content.WinnerView;
 
 /**
  * Handles the view logic for the Snakes and Ladders game.
@@ -15,9 +19,12 @@ import observers.BoardGameObserver;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class SnakesAndLaddersViewController implements BoardGameObserver {
+public class SnakesAndLaddersViewController extends ViewController{
 
   private final GameView gameView;
+  private final HudView hudView;
+  private final SnakesAndLaddersBoardView boardView;
+  private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersViewController.class);
 
   /**
    * Constructor for SnakesAndLaddersViewController.
@@ -26,6 +33,12 @@ public class SnakesAndLaddersViewController implements BoardGameObserver {
    */
   public SnakesAndLaddersViewController(GameView gameView) {
     this.gameView = gameView;
+    this.hudView = gameView.getHudView();
+    this.boardView = (SnakesAndLaddersBoardView)  gameView.getBoardView();
+  }
+
+  public void setNotifiers(ButtonClickNotifier notifier) {
+    hudView.setButtonClickNotifier(notifier);
   }
 
   /**
@@ -50,7 +63,11 @@ public class SnakesAndLaddersViewController implements BoardGameObserver {
    */
   @Override
   public void onPlayerMoved(Player player, int steps) {
-
+    // Update dice display
+    hudView.setDiceNumber(steps);
+    // Update player position on the board
+    boardView.updatePlayerView(player);
+    logger.debug("PlayerView updated for {} ", player);
   }
 
   /**
@@ -60,7 +77,7 @@ public class SnakesAndLaddersViewController implements BoardGameObserver {
    */
   @Override
   public void onNextPlayer(Player newPlayer) {
-
+    hudView.setPlayerName(newPlayer.getName());
   }
 
   /**
@@ -70,7 +87,7 @@ public class SnakesAndLaddersViewController implements BoardGameObserver {
    */
   @Override
   public void onWinnerDetermined(Player winner) {
-
+    gameView.getChildren().setAll(new WinnerView(winner));
   }
 
   /**

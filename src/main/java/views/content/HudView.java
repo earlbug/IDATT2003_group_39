@@ -34,7 +34,7 @@ public class HudView extends VBox {
   private final Button rollDiceButton;
   private final Text diceNumberText = new Text();
 
-  private final ButtonClickNotifier buttonClickNotifier = new ButtonClickNotifier();
+  private ButtonClickNotifier buttonClickNotifier;
 
   /**
    * Constructs containers to give the user a simple view of the info. Initializes the view to add
@@ -68,7 +68,7 @@ public class HudView extends VBox {
 
     rollDiceButton.getStyleClass().add("roll-dice-button");
     rollDiceButton.setAlignment(Pos.CENTER);
-    rollDiceButton.setOnAction(actionEvent -> buttonClickNotifier.notifyListeners("play"));
+    rollDiceButton.setOnAction(actionEvent -> buttonClickNotifier.notifyObservers("play"));
 
     diceNumberText.getStyleClass().add("dice-number");
 
@@ -110,11 +110,11 @@ public class HudView extends VBox {
   }
 
   /**
-   * Adds a observer for button click events.
+   * Sets the button click notifier that will handle button clicks
    *
-   * @param observer The observer to add
+   * @param notifier The notifier to handle button clicks
    */
-  public void addButtonClickObserver(ButtonClickObserver observer) {
-    buttonClickNotifier.addListener(observer);
+  public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    this.buttonClickNotifier = notifier;
   }
 }

@@ -18,7 +18,7 @@ import views.content.HudView;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class GameView extends HBox implements BoardGameObserver {
+public class GameView extends HBox {
 
   private final HBox boardContainer;
   private final StackPane hudContainer;
@@ -73,28 +73,5 @@ public class GameView extends HBox implements BoardGameObserver {
    */
   public HudView getHudView() {
     return hudView;
-  }
-
-  @Override
-  public void onPlayerMoved(Player player, int steps) {
-    // Update dice display
-    hudView.setDiceNumber(steps);
-
-    // Update player position on the board
-    boardView.updatePlayerView(player);
-  }
-
-  @Override
-  public void onNextPlayer(Player newPlayer) {
-    hudView.setPlayerName(newPlayer.getName());
-  }
-
-  @Override
-  public void onWinnerDetermined(Player winner) {
-    System.out.println("Winner: " + winner.getName());
-  }
-
-  @Override
-  public void onGameStateChanged(BoardGame boardGame) {
   }
 }
