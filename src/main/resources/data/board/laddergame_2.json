@@ -1,5 +1,5 @@
 {
-  "gameType": "MONOPOLY",
+  "gameType": "SNAKES_AND_LADDERS",
   "tiles": [
     {
       "tileId": 1,
