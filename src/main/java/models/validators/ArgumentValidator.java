@@ -41,9 +41,9 @@ public class ArgumentValidator {
   }
 
   public static void tileSetNextTileValidator(Tile nextTile){
-    if (nextTile == null){
-      throw new IllegalArgumentException("Next tile cannot be null");
-    }
+//    if (nextTile == null){
+//      throw new IllegalArgumentException("Next tile cannot be null");
+//    }
   }
 
   public static void tileSetLandActionValidator(TileAction tileAction){
