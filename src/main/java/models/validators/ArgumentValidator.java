@@ -58,4 +58,10 @@ public class ArgumentValidator {
     }
   }
 
+  public static void positiveIntValidator(int value) {
+    if (value < 0) {
+      throw new IllegalArgumentException("Value cannot be a negative number");
+    }
+  }
+
 }

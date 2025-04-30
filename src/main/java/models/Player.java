@@ -19,6 +19,7 @@ public class Player {
   private Tile currentTile = new Tile(1);
   private final BoardGame game;
   private Color color;
+  private int money;
 
   /**
    * Constructor for Player.
@@ -30,6 +31,7 @@ public class Player {
     setName(name);
     this.game = game;
     setPlayerId(playerId);
+
   }
 
   /**
@@ -86,6 +88,8 @@ public class Player {
     return name;
   }
 
+  public int getMoney() {return money;}
+
   /**
    * Sets the name of the player.
    *
@@ -132,6 +136,15 @@ public class Player {
    */
   public int getPlayerId() {
     return playerId;
+  }
+
+  public void setMoney(int money) {
+    ArgumentValidator.positiveIntValidator(money);
+    this.money = money;
+  }
+
+  public void changeMoney(int amount) {
+    money += amount;
   }
 
 }
