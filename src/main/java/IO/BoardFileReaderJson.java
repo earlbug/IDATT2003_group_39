@@ -16,7 +16,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.ArrayList;
 import models.actions.LadderAction;
 import models.Tile;
 import models.actions.WinAction;
@@ -74,35 +73,35 @@ public class BoardFileReaderJson implements BoardFileReader {
    * Deserializes a JsonArray containing tiles into an array of Tile objects.
    * This method handles both the creation of individual tiles and establishes
    * the connections between them based on the next tile identifiers.
+   * Tiles with no nextTile will have its nextTile set to null.
    *
    * @param tilesJson The JsonArray containing all tile information to be deserialized
    * @return An array of Tile objects sorted by their tile ID
    */
   public Tile[] deserializeTiles(JsonArray tilesJson) {
     //Creates a map with all Tiles and its next tile id
-    Map<Tile, Integer> tiles = new HashMap<>();
+    // Tile are the key, and an int is the value
+    Map<Tile, Integer> tilesMap = new HashMap<>();
     tilesJson.forEach(tileJson -> {
       Map<Tile, Integer> tileAndNextId = deserializeTile((JsonObject) tileJson);
-      tiles.putAll(tileAndNextId);
+      tilesMap.putAll(tileAndNextId);
       });
 
     // for all tiles, set its nextTile field based on the next tile id provided in the hashmap.
-    for(Entry<Tile, Integer> entry : tiles.entrySet()) {
+    for(Entry<Tile, Integer> entry : tilesMap.entrySet()) {
       // get the id to the next Tile
       int nextTileId = entry.getValue();
-      // Get he next Tile as a Tile Object, or null if non-existent
-      Tile nextTile = tiles.keySet().stream()
+      // Get the next Tile as a Tile Object, or null if non-existent
+      Tile nextTile = tilesMap.keySet().stream()
               .filter(tile -> tile.getTileId() == nextTileId)
               .findFirst()
               .orElse(null);
-      // Set the next Tile, if it exists
-      if (nextTile != null) {
-        entry.getKey().setNextTile(nextTile);
-      }
+      // Set the next Tile. Set it to null if it does not exist.
+      entry.getKey().setNextTile(nextTile);
     }
 
     // Return the Tiles as an Array
-    Tile[] tileArray = tiles.keySet().toArray(new Tile[0]);
+    Tile[] tileArray = tilesMap.keySet().toArray(new Tile[0]);
     Arrays.sort(tileArray, Comparator.comparingInt(Tile::getTileId));
 
     return tileArray;
@@ -127,15 +126,15 @@ public class BoardFileReaderJson implements BoardFileReader {
     }
     // Gets the next tile as an int
     Map<Tile, Integer> tileMap;
-    int nextTileId = -1;
-    try {
+    int nextTileId;
+    if (tileJson.has("nextTileId")) {
       nextTileId = tileJson.get("nextTileId").getAsInt();
-    } catch (Exception e) {
+    } else {
+      // If the Tile has no nextTile, then set nextTileId to -1
       nextTileId = -1;
-    } finally {
-      tileMap = new HashMap<>();
-      tileMap.put(tile, nextTileId);
     }
+    tileMap = new HashMap<>();
+    tileMap.put(tile, nextTileId);
 
     return tileMap;
   }
