@@ -1,5 +1,15 @@
 package models.actions;
 
-public class ReturnToStartAction {
+import controllers.BoardGameNotifier;
+import interfaces.TileAction;
+import models.Player;
+
+public class ReturnToStartAction implements TileAction {
+
+  @Override
+  public void perform(Player player, BoardGameNotifier notifier) {
+  }
+
+
 
 }
