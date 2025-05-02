@@ -60,7 +60,6 @@ public class GameController extends GameNotifier {
 
     TileAction tileAction = boardGame.getBoard().getTile(currentPlayer.getCurrentTile().getTileId())
         .getLandAction();
-
     if (tileAction != null) {
       tileAction.perform(currentPlayer);
       logger.debug("Player {} performed action: {}", currentPlayer.getName(), tileAction);
@@ -69,7 +68,15 @@ public class GameController extends GameNotifier {
           currentPlayer.getCurrentTile().getTileId());
     }
 
-    // Check win condition
+    handlePlayerWinCheck();
+  }
+
+  /**
+   * Handles what happens if a player has won by checking if there are only one player left,
+   * and then notifies observers that a winner is determined.
+   */
+  public void handlePlayerWinCheck() {
+    Player currentPlayer = boardGame.getCurrentPlayer();
     if (isWinConditionMet(currentPlayer)) {
       notifyWinnerDetermined(currentPlayer);
     }
