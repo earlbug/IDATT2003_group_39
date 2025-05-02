@@ -3,7 +3,12 @@
   "tiles": [
     {
       "tileId": 1,
-      "nextTileId": 2
+      "nextTileId": 2,
+      "type": {
+        "actionType": "taxAction",
+        "moneyDeducted": 50,
+        "description": "Deducts 50 money from the player."
+      }
     },
     {
       "tileId": 2,
@@ -23,7 +28,12 @@
     },
     {
       "tileId": 6,
-      "nextTileId": 7
+      "nextTileId": 7,
+      "type": {
+        "actionType": "taxAction",
+        "moneyDeducted": 60,
+        "description": "Deducts 60 money from the player."
+      }
     },
     {
       "tileId": 7,
@@ -39,7 +49,12 @@
     },
     {
       "tileId": 10,
-      "nextTileId": 11
+      "nextTileId": 11,
+      "type": {
+        "actionType": "taxAction",
+        "moneyDeducted": 100,
+        "description": "Deducts 100 money from the player."
+      }
     },
     {
       "tileId": 11,
