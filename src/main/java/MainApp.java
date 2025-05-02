@@ -1,4 +1,5 @@
 import IO.BoardFileReaderJson;
+import controllers.model.MonopolyController;
 import controllers.model.SnakesAndLaddersController;
 import controllers.view.MonopolyViewController;
 import controllers.view.SnakesAndLaddersViewController;
@@ -44,7 +45,7 @@ public class MainApp extends Application {
     BoardGame boardGame = new BoardGame();
     Board board = null;
     try {
-    board = BoardFactory.getFromFile("monopolygame_2.json");
+    board = BoardFactory.getFromFile("monopolygame_1.json");
     } catch (Exception e) {
       log.error(e.getMessage());
     }
@@ -57,16 +58,16 @@ public class MainApp extends Application {
     Player p2 = new Player("Per", boardGame);
     p2.setColor(Color.BLUE);
 
-    GameController gameController = new GameController(boardGame);
+    MonopolyController monopolyController = new MonopolyController(boardGame);
     MonopolyViewController viewController = new MonopolyViewController(gameView);
-    ButtonClickController buttonClickController = new ButtonClickController(gameController, viewController);
+    ButtonClickController buttonClickController = new ButtonClickController(monopolyController, viewController);
     viewController.setNotifiers(buttonClickController);
 
     boardGame.setBoard(board);
 
-    gameController.handleAddPlayer(p1);
-    gameController.handleAddPlayer(p2);
-    gameController.handlePlayerIds();
+    monopolyController.handleAddPlayer(p1);
+    monopolyController.handleAddPlayer(p2);
+    monopolyController.handlePlayerIds();
 
     viewController.addPlayerViews(boardGame.getPlayers());
     boardGame.createDice(1);
@@ -101,16 +102,16 @@ public class MainApp extends Application {
     Player p2 = new Player("Per", boardGame);
     p2.setColor(Color.BLUE);
 
-    GameController gameController = new GameController(boardGame);
+    SnakesAndLaddersController snakesAndLaddersController = new SnakesAndLaddersController(boardGame);
     SnakesAndLaddersViewController viewController = new SnakesAndLaddersViewController(gameView);
-    ButtonClickController buttonClickController = new ButtonClickController(gameController, viewController);
+    ButtonClickController buttonClickController = new ButtonClickController(snakesAndLaddersController, viewController);
     viewController.setNotifiers(buttonClickController);
 
     boardGame.setBoard(board);
 
-    gameController.handleAddPlayer(p1);
-    gameController.handleAddPlayer(p2);
-    gameController.handlePlayerIds();
+    snakesAndLaddersController.handleAddPlayer(p1);
+    snakesAndLaddersController.handleAddPlayer(p2);
+    snakesAndLaddersController.handlePlayerIds();
 
     viewController.addPlayerViews(boardGame.getPlayers());
     boardGame.createDice(1);
