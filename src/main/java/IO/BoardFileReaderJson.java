@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import models.actions.LadderAction;
 import models.Tile;
+import models.actions.SnakeAction;
+import models.actions.TaxAction;
 import models.actions.WinAction;
 
 /**
@@ -153,6 +155,8 @@ public class BoardFileReaderJson implements BoardFileReader {
 
     return switch (actionType) {
       case "ladderAction" -> deserializeLadderAction(actionTileJson);
+      case "snakeAction" -> deserializeSnakeAction(actionTileJson);
+      case "taxAction" -> deserializeTaxAction(actionTileJson);
       case "winAction" -> new WinAction();
       default -> null;
     };
@@ -171,6 +175,30 @@ public class BoardFileReaderJson implements BoardFileReader {
 
     return ladderAction;
   }
+
+  /**
+   * Deserializes a JsonObject into a LadderAction object.
+   * The returned LadderAction has a destinationTileId variable and a description variable.
+   * @param snakeActionJson the Json to be deserialized.
+   * @return a LadderAction object.
+   */
+  public SnakeAction deserializeSnakeAction(JsonObject snakeActionJson) {
+    int moneyDeducted = snakeActionJson.get("moneyDeducted").getAsInt();
+    String description = snakeActionJson.get("description").getAsString();
+    SnakeAction snakeAction = new SnakeAction(moneyDeducted, description);
+
+    return snakeAction;
+  }
+
+  public TaxAction deserializeTaxAction(JsonObject taxActionJson) {
+    int moneyDeducted = taxActionJson.get("moneyDeducted").getAsInt();
+    String description = taxActionJson.get("description").getAsString();
+    TaxAction taxAction = new TaxAction(moneyDeducted, description);
+
+    return taxAction;
+  }
+
+
 
   /**
    * Reads a Json file using a FileReader.
