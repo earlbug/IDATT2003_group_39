@@ -83,6 +83,14 @@ public class BoardGame {
     }
   }
 
+  /**
+   * Removes a player from the game. The player will then no longer exist in the game, and wil have no information about it.
+   * @param player Player to remove.
+   */
+  public void removePlayer(Player player) {
+    players.remove(player);
+  }
+
   public List<Player> getPlayers() {
     return players;
   }
