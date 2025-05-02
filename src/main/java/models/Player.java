@@ -20,6 +20,7 @@ public class Player {
   private final BoardGame game;
   private Color color;
   private int money;
+  private int turnsToSkip;
 
   /**
    * Constructor for Player.
@@ -90,6 +91,8 @@ public class Player {
 
   public int getMoney() {return money;}
 
+  public int getTurnsToSkip() {return turnsToSkip;}
+
   /**
    * Sets the name of the player.
    *
@@ -143,8 +146,16 @@ public class Player {
     this.money = money;
   }
 
+  private void setTurnsToSkip(int turnsToSkip) {
+    ArgumentValidator.positiveIntValidator(turnsToSkip);
+  }
+
   public void changeMoney(int amount) {
     money += amount;
+  }
+
+  public void changeTurnsToSkip(int amount) {
+    turnsToSkip += amount;
   }
 
 }
