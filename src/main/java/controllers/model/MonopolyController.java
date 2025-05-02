@@ -14,8 +14,14 @@ public class MonopolyController extends GameController {
     super(boardGame);
   }
 
-  public void handleBancruptPlayerCheck(Player player) {
-    boardGame.removePlayer(player);
+  @Override
+  public void handlePlayerLooseCheck() {
+    Player currentPlayer = boardGame.getCurrentPlayer();
+    logger.debug("Player {} has a balance of {}$.", currentPlayer.getName(), currentPlayer.getMoney());
+    if (boardGame.getCurrentPlayer().getMoney() < 0) {
+      boardGame.removePlayer(currentPlayer);
+      logger.debug("Player " + currentPlayer.getName() + " has gone bankrupt and has been removed from the game.");
+    }
   }
 
   @Override

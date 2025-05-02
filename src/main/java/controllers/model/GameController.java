@@ -68,7 +68,6 @@ public class GameController extends GameNotifier {
           currentPlayer.getCurrentTile().getTileId());
     }
 
-    handlePlayerWinCheck();
   }
 
   /**
@@ -80,6 +79,10 @@ public class GameController extends GameNotifier {
     if (isWinConditionMet(currentPlayer)) {
       notifyWinnerDetermined(currentPlayer);
     }
+  }
+
+  public void handlePlayerLooseCheck() {
+
   }
 
   /**
@@ -118,6 +121,8 @@ public class GameController extends GameNotifier {
   public void handleOneTurn() {
     int sum = handleRollDice();
     handlePlayerMove(sum);
+    handlePlayerLooseCheck();
+    handlePlayerWinCheck();
     handleNextPlayer();
   }
 }
