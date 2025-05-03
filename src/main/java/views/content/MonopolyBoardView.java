@@ -13,20 +13,33 @@ import javafx.scene.text.Text;
 import models.Player;
 import models.Tile;
 
+/**
+ * MonopolyBoardView is an implementation of the BoardView.
+ * Creates the view of the Monopoly board. The Tiles in the board has to be an amount which can be
+ * divided by four to create a proper board.
+ * The first Tile is in the upper left corner and follows the edge with the direction of the clock.
+ *
+ */
 public class MonopolyBoardView extends GridPane implements BoardView {
 
   private final Map<Player, PlayerView> playerViews = new HashMap<>();
 
+  /**
+   * Creates the layout of the Monopoly board.
+   * The first Tile is in the upper left corner and follows the edge with the direction of the
+   * clock.
+   *
+   * @param board The board instance to create the view for.
+   */
   @Override
   public void createBoardView(Board board) {
     Tile[] tiles = board.getTiles();
     int rowLength = tiles.length / 4;
-
     for (int i = 1; i < tiles.length + 1; i++) {
-      StackPane tileElement = createElement(board.getTile(i));
+      StackPane tileElement = createElement(board.getTile(i)); // Create the element
+      // Put the element in the right colum and row according to its id.
       int row, col;
-
-      if (i <= rowLength) { // Top edge
+      if (i <= rowLength) {            // Top edge
         row = 0;
         col = i - 1;
       } else if (i <= rowLength * 2) { // Right edge
@@ -35,7 +48,7 @@ public class MonopolyBoardView extends GridPane implements BoardView {
       } else if (i <= rowLength * 3) { // Bottom edge
         row = rowLength;
         col = rowLength * 3 + 1 - i;
-      } else { // Left edge
+      } else {                        // Left edge
         row = rowLength * 4 + 1 - i;
         col = 0;
       }
@@ -44,11 +57,21 @@ public class MonopolyBoardView extends GridPane implements BoardView {
     }
   }
 
+  /**
+   * Add a player to a Playerview
+   *
+   * @param player The player to add
+   * @param playerView the playerview to add the player.
+   */
   public void addPlayerView(Player player, PlayerView playerView) {
     this.playerViews.put(player, playerView);
   }
 
-
+  /**
+   * Updates the PlayerView by removing the playerView, and then add the player to the playerView.
+   *
+   * @param player The player instance to update.
+   */
   @Override
   public void updatePlayerView(Player player) {
     PlayerView playerView = playerViews.get(player);
@@ -66,6 +89,12 @@ public class MonopolyBoardView extends GridPane implements BoardView {
     tileView.addPlayerView(playerView, player.getPlayerId());
   }
 
+  /**
+   * Creates a Tile Element.
+   *
+   * @param tile The Tile to be created into a Tile Element.
+   * @return a TileView.
+   */
   private StackPane createElement(Tile tile) {
     TileView tileView = new TileView();
 
@@ -76,8 +105,6 @@ public class MonopolyBoardView extends GridPane implements BoardView {
 
     return tileView;
   }
-
-
 
   @Override
   public Pane getView() {
