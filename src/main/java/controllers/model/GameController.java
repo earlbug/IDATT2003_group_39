@@ -46,7 +46,9 @@ public class GameController extends GameNotifier {
   }
 
   /**
-   * Handles player movement.
+   * Handles player movement by moving the player,
+   * notifying observers that the player has been moved,
+   * and preforming the TileAction, if any.
    *
    * @param steps Number of steps to move
    */
@@ -67,12 +69,10 @@ public class GameController extends GameNotifier {
       logger.debug("No action for player {} on tile {}", currentPlayer.getName(),
           currentPlayer.getCurrentTile().getTileId());
     }
-
   }
 
   /**
-   * Handles what happens if a player has won by checking if there are only one player left,
-   * and then notifies observers that a winner is determined.
+   * Notifies observers that a player has won, if the winning conditions is met.
    */
   public void handlePlayerWinCheck() {
     Player currentPlayer = boardGame.getCurrentPlayer();
@@ -81,6 +81,9 @@ public class GameController extends GameNotifier {
     }
   }
 
+  /**
+   * checks if a player has lost.
+   */
   public void handlePlayerLooseCheck() {
 
   }
@@ -118,6 +121,10 @@ public class GameController extends GameNotifier {
     return boardGame.getDice().rollAllDice();
   }
 
+  /**
+   * Handles the methods needed to take one turn in the game, like moving, and checking if anyone has
+   * lost or won, and skipping to next player.
+   */
   public void handleOneTurn() {
     int sum = handleRollDice();
     handlePlayerMove(sum);

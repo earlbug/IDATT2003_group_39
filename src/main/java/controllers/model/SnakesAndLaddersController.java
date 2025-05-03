@@ -4,7 +4,7 @@ import models.BoardGame;
 import org.slf4j.Logger;
 
 /**
- * Handles game logic operations and delegates notifications.
+ * Handles game logic operations and delegates notifications related to the Snakes and ladders game.
  *
  * @author Tord Fosse
  * @version 1.0.0
