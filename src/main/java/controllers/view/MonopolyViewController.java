@@ -13,6 +13,13 @@ import views.content.PlayerView;
 import views.content.SnakesAndLaddersBoardView;
 import views.content.WinnerView;
 
+/**
+ * Controller class responsible for managing the visual representation of a Monopoly game.
+ * Acts as a bridge between the game model and its visual components, updating the UI
+ * in response to game state changes.
+ * This class extends ViewController and implements the observer pattern to react to
+ * game events such as player movements, player turns, and game completion.
+ */
 public class MonopolyViewController extends ViewController {
 
   private final GameView gameView;
@@ -25,6 +32,7 @@ public class MonopolyViewController extends ViewController {
     this.hudView = gameView.getHudView();
     this.boardView = (MonopolyBoardView)  gameView.getBoardView();
   }
+
 
   public void setNotifiers(ButtonClickNotifier notifier) {
     hudView.setButtonClickNotifier(notifier);
