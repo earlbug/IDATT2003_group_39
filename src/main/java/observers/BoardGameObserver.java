@@ -35,6 +35,13 @@ public interface BoardGameObserver {
   void onWinnerDetermined(Player winner);
 
   /**
+   * Called when a Player has lost.
+   *
+   * @param lostPlayer The Player which has lost.
+   */
+  void onPlayerLost(Player lostPlayer);
+
+  /**
    * Called when the game state changes in any other way.
    *
    * @param boardGame The updated BoardGame instance

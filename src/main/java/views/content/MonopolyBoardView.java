@@ -58,7 +58,7 @@ public class MonopolyBoardView extends GridPane implements BoardView {
   }
 
   /**
-   * Add a player to a Playerview
+   * Add a player to a Playerview.
    *
    * @param player The player to add
    * @param playerView the playerview to add the player.

@@ -70,6 +70,11 @@ public class MonopolyViewController extends ViewController {
   }
 
   @Override
+  public void onPlayerLost(Player lostPlayer) {
+    boardView.updatePlayerView(lostPlayer);
+  }
+
+  @Override
   public void onGameStateChanged(BoardGame boardGame) {
 
   }

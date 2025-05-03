@@ -64,6 +64,15 @@ public abstract class GameNotifier {
   }
 
   /**
+   * Notifies all observers that a Player has lost.
+   *
+   * @param lostPlayer The Player which has lost.
+   */
+  public void notifyPlayerLost(Player lostPlayer) {
+    observers.forEach(observer -> observer.onPlayerLost(lostPlayer));
+  }
+
+  /**
    * Notifies all observers that the game state has changed.
    *
    * @param boardGame The current state of the board game
