@@ -154,11 +154,21 @@ public class Player {
     return playerId;
   }
 
+  /**
+   * Sets the amount of money the player should have.
+   *
+   * @param money the amount of money the player should have.
+   */
   private void setMoney(int money) {
     ArgumentValidator.positiveIntValidator(money);
     this.money = money;
   }
 
+  /**
+   * Sets how many turns the player have to skip.
+   *
+   * @param turnsToSkip number of turns to skip.
+   */
   private void setTurnsToSkip(int turnsToSkip) {
     ArgumentValidator.positiveIntValidator(turnsToSkip);
   }
@@ -168,7 +178,7 @@ public class Player {
    *
    * @param amount the amount of money to add to the player.
    */
-  public void addMoney(int amount) {
+  public void deductMoney(int amount) {
     money += amount;
   }
 
