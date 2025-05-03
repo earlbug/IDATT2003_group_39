@@ -89,9 +89,22 @@ public class Player {
     return name;
   }
 
-  public int getMoney() {return money;}
+  /**
+   * Gets the amount of money the player currently has.
+   *
+   * @return the amount of mot\ney the player has.
+   */
+  public int getMoney() {
+    return money;
+  }
 
-  public int getTurnsToSkip() {return turnsToSkip;}
+  /**
+   * Gets how many rounds the player has to skip.
+   * @return amount of rounds the player has to skip.
+   */
+  public int getTurnsToSkip() {
+    return turnsToSkip;
+  }
 
   /**
    * Sets the name of the player.
@@ -141,7 +154,7 @@ public class Player {
     return playerId;
   }
 
-  public void setMoney(int money) {
+  private void setMoney(int money) {
     ArgumentValidator.positiveIntValidator(money);
     this.money = money;
   }
@@ -150,11 +163,21 @@ public class Player {
     ArgumentValidator.positiveIntValidator(turnsToSkip);
   }
 
-  public void changeMoney(int amount) {
+  /**
+   * Increases the amount of money the player has. Use a negative number to subtract money.
+   *
+   * @param amount the amount of money to add to the player.
+   */
+  public void addMoney(int amount) {
     money += amount;
   }
 
-  public void changeTurnsToSkip(int amount) {
+  /**
+   * Adds an amount of turns that the player has to skip.
+   *
+   * @param amount number of turns to be skipped. Adds to the already amount of turns if there are some.
+   */
+  public void addTurnsToSkip(int amount) {
     turnsToSkip += amount;
   }
 
