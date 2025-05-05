@@ -46,6 +46,18 @@ public class GameController extends GameNotifier {
   }
 
   /**
+   * Handles the methods needed to take one turn in the game, like moving, and checking if anyone has
+   * lost or won, and skipping to next player.
+   */
+  public void handleOneTurn() {
+    int sum = handleRollDice();
+    handlePlayerMove(sum);
+    handleLooseCheck();
+    handleWinCheck();
+    handleNextPlayer();
+  }
+
+  /**
    * Handles player movement by moving the player,
    * notifying observers that the player has been moved,
    * and preforming the TileAction, if any.
@@ -74,17 +86,17 @@ public class GameController extends GameNotifier {
   /**
    * Notifies observers that a player has won, if the winning conditions is met.
    */
-  public void handlePlayerWinCheck() {
+  public void handleWinCheck() {
     Player currentPlayer = boardGame.getCurrentPlayer();
-    if (isWinConditionMet(currentPlayer)) {
-      notifyWinnerDetermined(currentPlayer);
+    if (isWinConditionMet()) {
+      notifyWinnerDetermined(getWinner());
     }
   }
 
   /**
-   * checks if a player has lost.
+   * checks if any players has lost.
    */
-  public void handlePlayerLooseCheck() {
+  public void handleLooseCheck() {
 
   }
 
@@ -92,23 +104,41 @@ public class GameController extends GameNotifier {
    * Handles changing to next player.
    */
   public void handleNextPlayer() {
+    logger.debug("Current player: {}", boardGame.getCurrentPlayer().getName());
     boardGame.nextPlayer();
     notifyNextPlayer(boardGame.getCurrentPlayer());
     logger.debug("Next player: {}", boardGame.getCurrentPlayer().getName());
   }
 
   /**
-   * Checks if win condition is met.
+   * Checks if win condition is met by checking if any players are standing on a winning Tile.
    *
-   * @param player Player to check
    * @return True if player has won
    */
-  public boolean isWinConditionMet(Player player) {
-    TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
-        .getLandAction();
-    logger.debug("Checking win condition for player {} on tile {}", player.getName(),
-        player.getCurrentTile().getTileId());
-    return winningAction instanceof WinAction;
+  public boolean isWinConditionMet() {
+    boolean isWinConditionMet = false;
+    logger.debug("Checking win condition for every player.");
+    for(Player player : boardGame.getPlayers()) {
+      TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
+          .getLandAction();
+      if (winningAction instanceof WinAction) {
+        isWinConditionMet = true;
+      }
+    }
+    return isWinConditionMet ;
+  }
+
+  public Player getWinner() {
+    Player victoriousPlayer = null;
+    for(Player player : boardGame.getPlayers()) {
+      TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
+          .getLandAction();
+      if (winningAction instanceof WinAction) {
+        logger.debug("Player won: {}", player.getName());
+        victoriousPlayer = player;
+      }
+    }
+    return victoriousPlayer;
   }
 
   /**
@@ -119,18 +149,6 @@ public class GameController extends GameNotifier {
   public int handleRollDice() {
     logger.debug("Rolling dice for player {}", boardGame.getCurrentPlayer().getName());
     return boardGame.getDice().rollAllDice();
-  }
-
-  /**
-   * Handles the methods needed to take one turn in the game, like moving, and checking if anyone has
-   * lost or won, and skipping to next player.
-   */
-  public void handleOneTurn() {
-    int sum = handleRollDice();
-    handlePlayerMove(sum);
-    handlePlayerLooseCheck();
-    handlePlayerWinCheck();
-    handleNextPlayer();
   }
 }
 

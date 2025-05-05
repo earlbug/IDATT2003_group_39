@@ -1,6 +1,8 @@
 package controllers.model;
 
 import interfaces.TileAction;
+import java.util.ArrayList;
+import java.util.List;
 import models.BoardGame;
 import models.Player;
 import models.actions.WinAction;
@@ -24,16 +26,20 @@ public class MonopolyController extends GameController {
   }
 
   /**
-   * checks if the current player has lost by being in debt,
+   * checks if any players has lost by being in debt,
    * and if so removes the player form the boardgame.
    */
   @Override
-  public void handlePlayerLooseCheck() {
-    Player currentPlayer = boardGame.getCurrentPlayer();
-    logger.debug("Player {} has a balance of {}$.", currentPlayer.getName(), currentPlayer.getMoney());
-    if (boardGame.getCurrentPlayer().getMoney() < 0) {
-      boardGame.removePlayer(currentPlayer);
-      logger.debug("Player " + currentPlayer.getName() + " has gone bankrupt and has been removed from the game.");
+  public void handleLooseCheck() {
+    logger.debug("Checking balance of each Player");
+
+    List<Player> playersToCheck = new ArrayList<>(boardGame.getPlayers());
+    for(Player player : playersToCheck) {
+      if (player.getMoney() < 0) {
+        boardGame.removePlayer(player);
+        notifyPlayerLost(player);
+        logger.debug("Player " + player.getName() + " has gone bankrupt and has been removed from the game.");
+      }
     }
   }
 
@@ -42,14 +48,17 @@ public class MonopolyController extends GameController {
    * player to be considered victorious.
    * Specific conditions for monopoly is if there are only one player left.
    *
-   * @param player Current player
    * @return true if a winning condition is met, and false otherwise
    */
   @Override
-  public boolean isWinConditionMet(Player player) {
-    logger.debug("Checking win condition for player {} on tile {}", player.getName(),
-        player.getCurrentTile().getTileId());
+  public boolean isWinConditionMet() {
+    logger.debug("Checking win condition for Monopoly board");
     return boardGame.getPlayers().size() == 1;
+  }
+
+  @Override
+  public Player getWinner() {
+    return boardGame.getPlayers().getFirst();
   }
 
 }
