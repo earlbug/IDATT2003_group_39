@@ -53,10 +53,14 @@ public class MainApp extends Application {
     GameView gameView = new GameView(boardView);
     HudView hudView = gameView.getHudView();
 
-    Player p1 = new Player("Ola", boardGame);
+    Player p1 = new Player("Are", boardGame);
     p1.setColor(Color.RED);
-    Player p2 = new Player("Per", boardGame);
+    Player p2 = new Player("Beathe", boardGame);
     p2.setColor(Color.BLUE);
+    Player p3 = new Player("Carl", boardGame);
+    p3.setColor(Color.YELLOW);
+    Player p4 = new Player("Daniel", boardGame);
+    p4.setColor(Color.GREEN);
 
     MonopolyController monopolyController = new MonopolyController(boardGame);
     MonopolyViewController viewController = new MonopolyViewController(gameView);
@@ -67,6 +71,8 @@ public class MainApp extends Application {
 
     monopolyController.handleAddPlayer(p1);
     monopolyController.handleAddPlayer(p2);
+    monopolyController.handleAddPlayer(p3);
+    monopolyController.handleAddPlayer(p4);
     monopolyController.handlePlayerIds();
 
     viewController.addPlayerViews(boardGame.getPlayers());
@@ -75,6 +81,8 @@ public class MainApp extends Application {
     boardView.createBoardView(board);
     boardView.updatePlayerView(p1);
     boardView.updatePlayerView(p2);
+    boardView.updatePlayerView(p3);
+    boardView.updatePlayerView(p4);
     boardGame.addPlayersOnStartPos();
 
     Scene scene = new Scene(gameView, 1280, 720);

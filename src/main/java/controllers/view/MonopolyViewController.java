@@ -39,7 +39,7 @@ public class MonopolyViewController extends ViewController {
   }
 
   public void addPlayerViews(List<Player> players) {
-    MonopolyBoardView boardView = (MonopolyBoardView) gameView.getBoardView();
+    // MonopolyBoardView boardView = (MonopolyBoardView) gameView.getBoardView();
     for (Player player : players) {
       PlayerView playerView = new PlayerView();
       playerView.setPlayerColor(player.getColor());
@@ -54,7 +54,7 @@ public class MonopolyViewController extends ViewController {
     hudView.setDiceNumber(steps);
     // Update player position on the board
     boardView.updatePlayerView(player);
-    logger.debug("PlayerView updated for {} ", player);
+    logger.debug("PlayerView updated for {} ", player.getName());
 
   }
 

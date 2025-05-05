@@ -55,7 +55,8 @@ public class TileView extends StackPane {
    * Adds a PlayerView to the tile in one of the 4 sections.
    *
    * @param playerView the PlayerView to add
-   * @param playerId   the ID of the player
+   * @param playerId   the ID of the player.
+   *                   Used to determine where in the Tile the PlayerView shall be placed.
    */
   public void addPlayerView(PlayerView playerView, int playerId) {
     if (playerView == null) {
