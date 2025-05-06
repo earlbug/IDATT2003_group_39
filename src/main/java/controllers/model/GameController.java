@@ -139,9 +139,7 @@ public class GameController extends GameNotifier {
    * @return True if player has won
    */
   public boolean isWinConditionMet(Player player) {
-    TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
-        .getLandAction();
-    return winningAction instanceof WinAction;
+    return false;
   }
 
   /**
