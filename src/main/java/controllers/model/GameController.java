@@ -72,43 +72,15 @@ public class GameController extends GameNotifier {
   }
 
   /**
-   * Notifies observers that a player has won, if the winning conditions is met.
+   * Handles the methods needed to take one turn in the game, like moving,
+   * and checking if anyone has lost or won, and skipping to next player.
    */
-  public void handlePlayerWinCheck() {
-    Player currentPlayer = boardGame.getCurrentPlayer();
-    if (isWinConditionMet(currentPlayer)) {
-      notifyWinnerDetermined(currentPlayer);
-    }
-  }
-
-  /**
-   * checks if a player has lost.
-   */
-  public void handlePlayerLooseCheck() {
-
-  }
-
-  /**
-   * Handles changing to next player.
-   */
-  public void handleNextPlayer() {
-    boardGame.nextPlayer();
-    notifyNextPlayer(boardGame.getCurrentPlayer());
-    logger.debug("Next player: {}", boardGame.getCurrentPlayer().getName());
-  }
-
-  /**
-   * Checks if win condition is met.
-   *
-   * @param player Player to check
-   * @return True if player has won
-   */
-  public boolean isWinConditionMet(Player player) {
-    TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
-        .getLandAction();
-    logger.debug("Checking win condition for player {} on tile {}", player.getName(),
-        player.getCurrentTile().getTileId());
-    return winningAction instanceof WinAction;
+  public void handleOneTurn() {
+    int sum = handleRollDice();
+    handlePlayerMove(sum);
+    handlePlayerLooseCheck();
+    handlePlayerWinCheck();
+    handleNextPlayer();
   }
 
   /**
@@ -122,15 +94,74 @@ public class GameController extends GameNotifier {
   }
 
   /**
-   * Handles the methods needed to take one turn in the game, like moving, and checking if anyone has
-   * lost or won, and skipping to next player.
+   * Checks if a new player has lost, and notifies observers if so.
+   *
    */
-  public void handleOneTurn() {
-    int sum = handleRollDice();
-    handlePlayerMove(sum);
-    handlePlayerLooseCheck();
-    handlePlayerWinCheck();
-    handleNextPlayer();
+  public void handlePlayerLooseCheck() {
+    for (Player player : boardGame.getPlayers()) {
+      if (isLooseConditionMet(player) && !player.hasLost()) {
+        player.setHasLost(true);
+        notifyPlayerLost(player);
+        logger.debug("Player lost: {}", player.getName());
+      }
+    }
+  }
+
+  /**
+   * checks if the loose condition is met.
+   *
+   * @param player The player to check if the loose condition is met for.
+   * @return if lose condition is met.
+   */
+  public boolean isLooseConditionMet(Player player) {
+    return false;
+  }
+
+  /**
+   * Notifies observers that a player has won,
+   * if the winning conditions is met and the player has not already lost.
+   * Observers are notified if conditions are met.
+   */
+  public void handlePlayerWinCheck() {
+    for (Player player : boardGame.getPlayers()) {
+      if (isWinConditionMet(player) && !player.hasLost()) {
+        player.setHasWon(true);
+        notifyWinnerDetermined(player);
+        logger.debug("Player won: {}", player.getName());
+      }
+    }
+  }
+
+  /**
+   * Checks if win condition is met.
+   *
+   * @param player Player to check
+   * @return True if player has won
+   */
+  public boolean isWinConditionMet(Player player) {
+    TileAction winningAction = boardGame.getBoard().getTile(player.getCurrentTile().getTileId())
+        .getLandAction();
+    return winningAction instanceof WinAction;
+  }
+
+  /**
+   * Handles changing to next player.
+   * If the next Player has lost or have to skip a round, then the player is skipped.
+   * If the player had turns to skip, then the amount of turns to skip s reduced by one round.
+   */
+  public void handleNextPlayer() {
+    boardGame.nextPlayer();
+    Player currentPlayer = boardGame.getCurrentPlayer();
+    while (currentPlayer.hasLost() || currentPlayer.getTurnsToSkip() > 0) {
+      if (currentPlayer.getTurnsToSkip() > 0) {
+        currentPlayer.addTurnsToSkip(-1);
+      }
+      boardGame.nextPlayer();
+      currentPlayer = boardGame.getCurrentPlayer();
+    }
+
+    notifyNextPlayer(currentPlayer);
+    logger.debug("Next player: {}", currentPlayer.getName());
   }
 }
 
