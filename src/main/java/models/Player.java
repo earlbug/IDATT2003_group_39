@@ -21,6 +21,8 @@ public class Player {
   private Color color;
   private int money;
   private int turnsToSkip;
+  private boolean hasLost;
+  private boolean hasWon;
 
   /**
    * Constructor for Player.
@@ -32,7 +34,6 @@ public class Player {
     setName(name);
     this.game = game;
     setPlayerId(playerId);
-
   }
 
   /**
@@ -100,11 +101,31 @@ public class Player {
 
   /**
    * Gets how many rounds the player has to skip.
+   *
    * @return amount of rounds the player has to skip.
    */
   public int getTurnsToSkip() {
     return turnsToSkip;
   }
+
+  /**
+   * Returns if the player has lost.
+   *
+   * @return a boolean of if the player has lost.
+   */
+  public boolean hasLost() {
+    return hasLost;
+  }
+
+  /**
+   * returns true or false depending on if the player has won.
+   *
+   * @return boolean on if the player has won.
+   */
+  public boolean hasWon() {
+    return hasWon;
+  }
+
 
   /**
    * Sets the name of the player.
@@ -174,6 +195,24 @@ public class Player {
   }
 
   /**
+   * Sets the has lost state of the Player.
+   *
+   * @param hasLost The state of lost the Player shall be set to.
+   */
+  public void setHasLost(boolean hasLost) {
+    this.hasLost = hasLost;
+  }
+
+  /**
+   * Sets if the player has lost or won.
+   *
+   * @param hasWon the booean of if the player ha won which the player shall be set to.
+   */
+  public void setHasWon(boolean hasWon) {
+    this.hasWon = hasWon;
+  }
+
+  /**
    * Increases the amount of money the player has. Use a negative number to subtract money.
    *
    * @param amount the amount of money to add to the player.
@@ -185,7 +224,8 @@ public class Player {
   /**
    * Adds an amount of turns that the player has to skip.
    *
-   * @param amount number of turns to be skipped. Adds to the already amount of turns if there are some.
+   * @param amount number of turns to be skipped.
+   *               Adds to the already amount of turns if there are some.
    */
   public void addTurnsToSkip(int amount) {
     turnsToSkip += amount;
