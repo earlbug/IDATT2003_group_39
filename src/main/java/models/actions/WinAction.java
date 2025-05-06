@@ -7,5 +7,6 @@ public class WinAction implements TileAction {
 
   @Override
   public void perform(Player player) {
+    player.setHasWon(true);
   }
 }
