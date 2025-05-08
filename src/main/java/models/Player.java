@@ -218,7 +218,7 @@ public class Player {
    * @param amount the amount of money to increase by.
    */
   public void addMoney(int amount) {
-    setMoney(getMoney() + amount);
+    this.money += amount;
   }
 
   /**
@@ -227,7 +227,7 @@ public class Player {
    * @param amount the amount of money to decrease by.
    */
   public void deductMoney(int amount) {
-    setMoney(getMoney() - amount);
+    this.money -= amount;
   }
 
   /**
