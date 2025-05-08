@@ -34,7 +34,7 @@ public class PropertyAction implements TileAction {
    * @param player The player who landed on the tile and either looses money or becomes the owner.
    */
   @Override
-  public void perform (Player player) {
+  public void perform(Player player) {
     if (owner == null) {
       setOwner(player);
     } else if (!owner.equals(player)) {
@@ -48,7 +48,7 @@ public class PropertyAction implements TileAction {
    *
    * @param description The description of the property action.
    */
-  private void setDescription(String description) {
+  public void setDescription(String description) {
     this.description = description;
   }
 

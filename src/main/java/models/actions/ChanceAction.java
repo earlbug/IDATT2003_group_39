@@ -7,7 +7,7 @@ import models.Player;
 /**
  * ActionTile which either adds or deducts money from the Player landing on it.
  */
-public class ChanseAction implements TileAction {
+public class ChanceAction implements TileAction {
 
   Random rand = new Random();
   String description;
@@ -18,7 +18,7 @@ public class ChanseAction implements TileAction {
    * Constructor sets default min and max value of what the Player can gain/loose in terms of money.
    * Set default description.
    */
-  public ChanseAction() {
+  public ChanceAction() {
     setDescription("Removes or adds a random amount of money.");
     setFloor(-50);
     setRoof(50);
