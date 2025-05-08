@@ -213,12 +213,21 @@ public class Player {
   }
 
   /**
-   * Increases the amount of money the player has. Use a negative number to subtract money.
+   * Increases the amount of money the player has.
    *
-   * @param amount the amount of money to add to the player.
+   * @param amount the amount of money to increase by.
+   */
+  public void addMoney(int amount) {
+    setMoney(getMoney() + amount);
+  }
+
+  /**
+   * Decrease the amount of money the player has.
+   *
+   * @param amount the amount of money to decrease by.
    */
   public void deductMoney(int amount) {
-    money += amount;
+    setMoney(getMoney() - amount);
   }
 
   /**
