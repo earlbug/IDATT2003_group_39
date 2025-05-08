@@ -17,7 +17,12 @@ public class PropertyAction implements TileAction {
   private int buyPrice;
   private int landPrice;
 
-  public PropertyAction(int buyPrice) {
+  /**
+   * Constructor which sets the default description and land price.
+   *
+   * @param landPrice the price which the player landing on the tile has to pay to the owner.
+   */
+  public PropertyAction(int landPrice) {
     setDescription("Removes money and adds it to the property's owner.");
     setLandPrice(landPrice);
   }
@@ -38,34 +43,74 @@ public class PropertyAction implements TileAction {
     }
   }
 
+  /**
+   * Sets the description of the property action.
+   *
+   * @param description The description of the property action.
+   */
   private void setDescription(String description) {
     this.description = description;
   }
 
+  /**
+   * Sets the owner of the property.
+   *
+   * @param owner The player who becomes the owner of the property.
+   */
   public void setOwner(Player owner) {
     this.owner = owner;
   }
 
+  /**
+   * Sets the buy price of the property.
+   *
+   * @param buyPrice The price to buy the property.
+   */
   private void setBuyPrice(int buyPrice) {
     this.buyPrice = buyPrice;
   }
 
+  /**
+   * Sets the land price of the property.
+   *
+   * @param landPrice The price a player must pay when landing on the property.
+   */
   public void setLandPrice(int landPrice) {
     this.landPrice = landPrice;
   }
 
+  /**
+   * Gets the description of the property action.
+   *
+   * @return The description of the property action.
+   */
   public String getDescription() {
     return description;
   }
 
+  /**
+   * Gets the owner of the property.
+   *
+   * @return The player who owns the property.
+   */
   public Player getOwner() {
     return owner;
   }
 
+  /**
+   * Gets the buy price of the property.
+   *
+   * @return The price to buy the property.
+   */
   private int getBuyPrice() {
     return buyPrice;
   }
 
+  /**
+   * Gets the land price of the property.
+   *
+   * @return The price a player must pay when landing on the property.
+   */
   public int getLandPrice() {
     return landPrice;
   }
