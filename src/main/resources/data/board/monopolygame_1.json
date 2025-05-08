@@ -6,8 +6,7 @@
       "nextTileId": 2,
       "type": {
         "actionType": "taxAction",
-        "moneyDeducted": 50,
-        "description": "Deducts 50 money from the player."
+        "moneyDeducted": 50
       }
     },
     {
@@ -31,8 +30,7 @@
       "nextTileId": 7,
       "type": {
         "actionType": "taxAction",
-        "moneyDeducted": 60,
-        "description": "Deducts 60 money from the player."
+        "moneyDeducted": 60
       }
     },
     {
@@ -52,8 +50,7 @@
       "nextTileId": 11,
       "type": {
         "actionType": "taxAction",
-        "moneyDeducted": 100,
-        "description": "Deducts 100 money from the player."
+        "moneyDeducted": 100
       }
     },
     {

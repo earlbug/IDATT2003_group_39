@@ -17,11 +17,10 @@ public class TaxAction implements TileAction {
    * Constructor which sets how much money shall be deducted and a description.
    *
    * @param moneyDeducted How much money to deduct from the player.
-   * @param description What the TileAction does.
    */
-  public TaxAction(int moneyDeducted, String description) {
+  public TaxAction(int moneyDeducted) {
     setMoneyDeducted(moneyDeducted);
-    setDescription(description);
+    setDescription("Player looses money.");
   }
 
   /**

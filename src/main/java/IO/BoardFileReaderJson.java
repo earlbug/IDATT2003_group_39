@@ -170,8 +170,7 @@ public class BoardFileReaderJson implements BoardFileReader {
    */
   public LadderAction deserializeLadderAction(JsonObject ladderActionJson) {
     int destinationTileId = ladderActionJson.get("destinationTileId").getAsInt();
-    String description = ladderActionJson.get("description").getAsString();
-    LadderAction ladderAction = new LadderAction(destinationTileId, description);
+    LadderAction ladderAction = new LadderAction(destinationTileId);
 
     return ladderAction;
   }
@@ -184,16 +183,14 @@ public class BoardFileReaderJson implements BoardFileReader {
    */
   public SnakeAction deserializeSnakeAction(JsonObject snakeActionJson) {
     int moneyDeducted = snakeActionJson.get("moneyDeducted").getAsInt();
-    String description = snakeActionJson.get("description").getAsString();
-    SnakeAction snakeAction = new SnakeAction(moneyDeducted, description);
+    SnakeAction snakeAction = new SnakeAction(moneyDeducted);
 
     return snakeAction;
   }
 
   public TaxAction deserializeTaxAction(JsonObject taxActionJson) {
     int moneyDeducted = taxActionJson.get("moneyDeducted").getAsInt();
-    String description = taxActionJson.get("description").getAsString();
-    TaxAction taxAction = new TaxAction(moneyDeducted, description);
+    TaxAction taxAction = new TaxAction(moneyDeducted);
 
     return taxAction;
   }

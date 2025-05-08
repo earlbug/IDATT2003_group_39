@@ -26,7 +26,6 @@
       "nextTileId": 7,
       "type": {
         "actionType": "ladderAction",
-        "description": "Move player to tile 7",
         "destinationTileId": 7
       }
     },

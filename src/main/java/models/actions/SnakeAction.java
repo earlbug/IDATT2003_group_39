@@ -8,9 +8,9 @@ public class SnakeAction implements TileAction {
   private int destinationTileId;
   private String description;
 
-  public SnakeAction(int destinationTileId, String description) {
+  public SnakeAction(int destinationTileId) {
     setDestinationTileId(destinationTileId);
-    setDescription(description);
+    setDescription("Player gets moved backwards on the board.");
   }
 
 
