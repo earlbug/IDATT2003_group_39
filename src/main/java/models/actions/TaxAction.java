@@ -30,7 +30,7 @@ public class TaxAction implements TileAction {
    */
   @Override
   public void perform(Player player) {
-    player.deductMoney(- moneyDeducted);
+    player.deductMoney(moneyDeducted);
   }
 
   /**
