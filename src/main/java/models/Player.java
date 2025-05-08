@@ -34,6 +34,9 @@ public class Player {
     setName(name);
     this.game = game;
     setPlayerId(playerId);
+    setHasLost(false);
+    setHasWon(false);
+    setMoney(0);
   }
 
   /**
