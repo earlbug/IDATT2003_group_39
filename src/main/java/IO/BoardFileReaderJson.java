@@ -20,6 +20,7 @@ import models.Tile;
 import models.actions.ChanceAction;
 import models.actions.LadderAction;
 import models.actions.PropertyAction;
+import models.actions.SkipTurnAction;
 import models.actions.SnakeAction;
 import models.actions.TaxAction;
 import models.actions.WinAction;
@@ -164,6 +165,7 @@ public class BoardFileReaderJson implements BoardFileReader {
       case "chanceAction" -> deserializeChanceAction(actionTileJson);
       case "ladderAction" -> deserializeLadderAction(actionTileJson);
       case "propertyAction" -> deserializePropertyAction(actionTileJson);
+      case "skipTurnAction" -> deserializeSkipTurnAction(actionTileJson);
       case "snakeAction" -> deserializeSnakeAction(actionTileJson);
       case "taxAction" -> deserializeTaxAction(actionTileJson);
       case "winAction" -> deserializeWinAction(actionTileJson);
@@ -233,6 +235,27 @@ public class BoardFileReaderJson implements BoardFileReader {
     }
 
     return propertyAction;
+  }
+
+  /**
+   * Deserializes a JsonObject into a SkipTurnAction object.
+   * The returned SkipTurnAction has a description and number of rounds to skip ,
+   * which is set if the Json has these fields.
+   *
+   * @param skipTurnActionJson the Json to be deserialized.
+   * @return a SkipTurnAction object.
+   */
+  public SkipTurnAction deserializeSkipTurnAction(JsonObject skipTurnActionJson) {
+    SkipTurnAction skipTurnAction = new SkipTurnAction();
+
+    if (skipTurnActionJson.has("description")) {
+      skipTurnAction.setDescription(skipTurnActionJson.get("description").getAsString());
+    }
+    if (skipTurnActionJson.has("turnsToSkip")) {
+      skipTurnAction.setTurnsToSkip(skipTurnActionJson.get("turnsToSkip").getAsInt());
+    }
+
+    return skipTurnAction;
   }
 
   /**
