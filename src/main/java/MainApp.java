@@ -38,8 +38,8 @@ public class MainApp extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException, UnknownGameException {
 
-    playSnakesAndLadders(primaryStage);
-    //playMonopoly(primaryStage);
+    //playSnakesAndLadders(primaryStage);
+    playMonopoly(primaryStage);
   }
 
   public void playMonopoly(Stage primaryStage) {
@@ -56,12 +56,16 @@ public class MainApp extends Application {
 
     Player p1 = new Player("Are", boardGame);
     p1.setColor(Color.RED);
+    p1.setMoney(200);
     Player p2 = new Player("Beathe", boardGame);
     p2.setColor(Color.BLUE);
+    p2.setMoney(200);
     Player p3 = new Player("Carl", boardGame);
     p3.setColor(Color.YELLOW);
+    p3.setMoney(200);
     Player p4 = new Player("Daniel", boardGame);
     p4.setColor(Color.GREEN);
+    p4.setMoney(200);
 
     MonopolyController monopolyController = new MonopolyController(boardGame);
     MonopolyViewController viewController = new MonopolyViewController(gameView);
