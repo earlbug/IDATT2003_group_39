@@ -7,12 +7,14 @@ import models.Player;
  * A TileAction where the player who lands on it has to skip a number of turns.
  */
 public class SkipTurnAction implements TileAction {
+  private String description;
   private int turnsToSkip;
 
   /**
    * Constructor which sets default amount of turns to skip, which is 1.
    */
   public SkipTurnAction() {
+    setDescription("Skip the player next turn.");
     setTurnsToSkip(1);
   }
 
@@ -24,6 +26,24 @@ public class SkipTurnAction implements TileAction {
   @Override
   public void perform(Player player) {
     player.addTurnsToSkip(turnsToSkip);
+  }
+
+  /**
+   * Sets the description for the SkipTurnAction.
+   *
+   * @param description describes what the Tile do.
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  /**
+   * Gets the description for the SkipTurnAction.
+   *
+   * @return description of what the Tile does.
+   */
+  public String getDescription() {
+    return description;
   }
 
   /**
