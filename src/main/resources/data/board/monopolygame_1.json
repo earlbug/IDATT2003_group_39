@@ -3,27 +3,39 @@
   "tiles": [
     {
       "tileId": 1,
-      "nextTileId": 2,
-      "type": {
-        "actionType": "taxAction",
-        "moneyDeducted": 50
-      }
+      "nextTileId": 2
     },
     {
       "tileId": 2,
-      "nextTileId": 3
+      "nextTileId": 3,
+      "type": {
+        "actionType": "propertyAction",
+        "landPrice": 10
+      }
     },
     {
       "tileId": 3,
-      "nextTileId": 4
+      "nextTileId": 4,
+      "type": {
+        "actionType": "chanceAction",
+        "floor": -100,
+        "roof": 10
+      }
     },
     {
       "tileId": 4,
-      "nextTileId": 5
+      "nextTileId": 5,
+      "type": {
+        "actionType": "propertyAction",
+        "landPrice": 30
+      }
     },
     {
       "tileId": 5,
-      "nextTileId": 6
+      "nextTileId": 6,
+      "type": {
+        "actionType": "skipTurnAction"
+      }
     },
     {
       "tileId": 6,
@@ -39,7 +51,10 @@
     },
     {
       "tileId": 8,
-      "nextTileId": 9
+      "nextTileId": 9,
+      "type": {
+        "actionType": "chanceAction"
+      }
     },
     {
       "tileId": 9,
@@ -55,11 +70,20 @@
     },
     {
       "tileId": 11,
-      "nextTileId": 12
+      "nextTileId": 12,
+      "type": {
+        "description": "Player has to skip 3 turns.",
+        "actionType": "skipTurnAction",
+        "turnsToSkip": 3
+      }
     },
     {
       "tileId": 12,
-      "nextTileId": 1
+      "nextTileId": 1,
+      "type": {
+        "actionType": "propertyAction",
+        "landPrice": 200
+      }
     }
   ]
 }
