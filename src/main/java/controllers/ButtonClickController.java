@@ -16,7 +16,6 @@ import views.container.GameView;
 public class ButtonClickController extends ButtonClickNotifier implements ButtonClickObserver {
 
   private final GameController gameController;
-  private final ViewController viewController;
 
   /**
    * Constructs a new handler to handle button clicks.
@@ -26,7 +25,6 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
    */
   public ButtonClickController(GameController gameController, ViewController viewController) {
     this.gameController = gameController;
-    this.viewController = viewController;
     gameController.addObserver(viewController);
     this.addObserver(this);
   }

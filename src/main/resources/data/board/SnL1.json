@@ -23,12 +23,7 @@
     },
     {
       "tileId": 6,
-      "nextTileId": 37,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 37",
-        "destinationTileId": 37
-      }
+      "nextTileId": 7
     },
     {
       "tileId": 7,
@@ -52,12 +47,7 @@
     },
     {
       "tileId": 12,
-      "nextTileId": 13,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 31",
-        "destinationTileId": 31
-      }
+      "nextTileId": 13
     },
     {
       "tileId": 13,
@@ -65,7 +55,12 @@
     },
     {
       "tileId": 14,
-      "nextTileId": 15
+      "nextTileId": 15,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 46",
+        "destinationTileId": 46
+      }
     },
     {
       "tileId": 15,
@@ -105,7 +100,12 @@
     },
     {
       "tileId": 24,
-      "nextTileId": 25
+      "nextTileId": 25,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 6",
+        "destinationTileId": 6
+      }
     },
     {
       "tileId": 25,
@@ -129,16 +129,16 @@
     },
     {
       "tileId": 30,
-      "nextTileId": 31,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 42",
-        "destinationTileId": 42
-      }
+      "nextTileId": 31
     },
     {
       "tileId": 31,
-      "nextTileId": 32
+      "nextTileId": 32,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 2",
+        "destinationTileId": 2
+      }
     },
     {
       "tileId": 32,
@@ -150,7 +150,12 @@
     },
     {
       "tileId": 34,
-      "nextTileId": 35
+      "nextTileId": 35,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 72",
+        "destinationTileId": 72
+      }
     },
     {
       "tileId": 35,
@@ -246,7 +251,12 @@
     },
     {
       "tileId": 58,
-      "nextTileId": 59
+      "nextTileId": 59,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 76",
+        "destinationTileId": 76
+      }
     },
     {
       "tileId": 59,
@@ -286,7 +296,12 @@
     },
     {
       "tileId": 68,
-      "nextTileId": 69
+      "nextTileId": 69,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 39",
+        "destinationTileId": 39
+      }
     },
     {
       "tileId": 69,
@@ -326,7 +341,12 @@
     },
     {
       "tileId": 78,
-      "nextTileId": 79
+      "nextTileId": 79,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 48",
+        "destinationTileId": 48
+      }
     },
     {
       "tileId": 79,
@@ -390,7 +410,12 @@
     },
     {
       "tileId": 94,
-      "nextTileId": 95
+      "nextTileId": 95,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 23",
+        "destinationTileId": 23
+      }
     },
     {
       "tileId": 95,
