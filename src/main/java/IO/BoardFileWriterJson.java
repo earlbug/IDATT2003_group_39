@@ -75,7 +75,9 @@ public class BoardFileWriterJson implements BoardFileWriter {
   private JsonObject serializeTile(Tile tile) {
     JsonObject tileJson = new JsonObject();
     tileJson.addProperty("tileId", tile.getTileId());
-    tileJson.addProperty("nextTileId", tile.getNextTile().getTileId());
+    if (tile.getNextTile() != null) {
+      tileJson.addProperty("nextTileId", tile.getNextTile().getTileId());
+    }
 
     JsonObject tileActionJson = serializeTileAction(tile.getLandAction());
     if (tileActionJson != null) {

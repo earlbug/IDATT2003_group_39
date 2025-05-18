@@ -1,35 +1,45 @@
 {
-  "gameType": "LUDO",
+  "gameType": "SNAKES_AND_LADDERS",
   "tiles": [
     {
-      "tileId": 1
+      "tileId": 1,
+      "nextTileId": 2
     },
     {
-      "tileId": 2
+      "tileId": 2,
+      "nextTileId": 3
     },
     {
-      "tileId": 3
+      "tileId": 3,
+      "nextTileId": 4
     },
     {
-      "tileId": 4
+      "tileId": 4,
+      "nextTileId": 5
     },
     {
-      "tileId": 5
+      "tileId": 5,
+      "nextTileId": 6
     },
     {
-      "tileId": 6
+      "tileId": 6,
+      "nextTileId": 7
     },
     {
-      "tileId": 7
+      "tileId": 7,
+      "nextTileId": 8
     },
     {
-      "tileId": 8
+      "tileId": 8,
+      "nextTileId": 9
     },
     {
-      "tileId": 9
+      "tileId": 9,
+      "nextTileId": 10
     },
     {
-      "tileId": 10
+      "tileId": 10,
+      "nextTileId": 11
     },
     {
       "tileId": 11,

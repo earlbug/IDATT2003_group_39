@@ -19,6 +19,10 @@ public class Player {
   private Tile currentTile = new Tile(1);
   private final BoardGame game;
   private Color color;
+  private int money;
+  private int turnsToSkip;
+  private boolean hasLost;
+  private boolean hasWon;
 
   /**
    * Constructor for Player.
@@ -30,6 +34,9 @@ public class Player {
     setName(name);
     this.game = game;
     setPlayerId(playerId);
+    setHasLost(false);
+    setHasWon(false);
+    setMoney(0);
   }
 
   /**
@@ -87,6 +94,43 @@ public class Player {
   }
 
   /**
+   * Gets the amount of money the player currently has.
+   *
+   * @return the amount of mot\ney the player has.
+   */
+  public int getMoney() {
+    return money;
+  }
+
+  /**
+   * Gets how many rounds the player has to skip.
+   *
+   * @return amount of rounds the player has to skip.
+   */
+  public int getTurnsToSkip() {
+    return turnsToSkip;
+  }
+
+  /**
+   * Returns if the player has lost.
+   *
+   * @return a boolean of if the player has lost.
+   */
+  public boolean hasLost() {
+    return hasLost;
+  }
+
+  /**
+   * returns true or false depending on if the player has won.
+   *
+   * @return boolean on if the player has won.
+   */
+  public boolean hasWon() {
+    return hasWon;
+  }
+
+
+  /**
    * Sets the name of the player.
    *
    * @param name the name to set
@@ -132,6 +176,71 @@ public class Player {
    */
   public int getPlayerId() {
     return playerId;
+  }
+
+  /**
+   * Sets the amount of money the player should have.
+   *
+   * @param money the amount of money the player should have.
+   */
+  private void setMoney(int money) {
+    ArgumentValidator.positiveIntValidator(money);
+    this.money = money;
+  }
+
+  /**
+   * Sets how many turns the player have to skip.
+   *
+   * @param turnsToSkip number of turns to skip.
+   */
+  private void setTurnsToSkip(int turnsToSkip) {
+    ArgumentValidator.positiveIntValidator(turnsToSkip);
+  }
+
+  /**
+   * Sets the has lost state of the Player.
+   *
+   * @param hasLost The state of lost the Player shall be set to.
+   */
+  public void setHasLost(boolean hasLost) {
+    this.hasLost = hasLost;
+  }
+
+  /**
+   * Sets if the player has lost or won.
+   *
+   * @param hasWon the booean of if the player ha won which the player shall be set to.
+   */
+  public void setHasWon(boolean hasWon) {
+    this.hasWon = hasWon;
+  }
+
+  /**
+   * Increases the amount of money the player has.
+   *
+   * @param amount the amount of money to increase by.
+   */
+  public void addMoney(int amount) {
+    this.money += amount;
+  }
+
+  /**
+   * Decrease the amount of money the player has.
+   *
+   * @param amount the amount of money to decrease by.
+   */
+  public void deductMoney(int amount) {
+    this.money -= amount;
+  }
+
+  /**
+   * Adds an amount of turns that the player has to skip.
+   *
+   * @param amount number of turns to be skipped.
+   *               Adds to the already amount of turns if there are some.
+   */
+  public void addTurnsToSkip(int amount) {
+    turnsToSkip += amount;
   }
 
 }

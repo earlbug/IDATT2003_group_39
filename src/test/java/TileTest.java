@@ -29,7 +29,7 @@ public class TileTest {
     tile1.setNextTile(tile2);
     assertEquals(tile1.getNextTile(), tile2);
 
-    LadderAction ladderAction = new LadderAction(3,"Test");
+    LadderAction ladderAction = new LadderAction(3);
     tile2.setLandAction(ladderAction);
   }
 

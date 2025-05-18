@@ -15,13 +15,18 @@ public class LadderAction implements TileAction {
   private int destinationTileId;
   private String description;
 
-  public LadderAction(int destinationTileId, String description) {
+  /**
+   * Constructor sets the destination tile and a default description.
+   *
+   * @param destinationTileId the tile the player shall be moved to.
+   */
+  public LadderAction(int destinationTileId)  {
     setDestinationTileId(destinationTileId);
-    setDescription(description);
+    setDescription("Player gets moved forward on the board.");
   }
 
   /**
-   * Moves the player to the destination Tile stored as class variable
+   * Moves the player to the destination Tile stored as class variable.
    *
    * @param player what player the action shall be preformed on
    */
@@ -31,21 +36,39 @@ public class LadderAction implements TileAction {
     player.move(steps);
   }
 
-
-  public int getDestinationTileId() {
-    return destinationTileId;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
+  /**
+   * Sets the destination the player gets moved to when the action is preformed.
+   *
+   * @param destinationTileId the id of the destination tile.
+   */
   public void setDestinationTileId(int destinationTileId) {
     this.destinationTileId = destinationTileId;
   }
 
+  /**
+   * Sets the description for the LadderAction.
+   *
+   * @param description the description of the action
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  /**
+   * Gets the description of the LadderAction.
+   *
+   * @return the description of the action
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  /**
+   * Gets the destination tile ID where the player will be moved.
+   *
+   * @return the destination tile ID
+   */
+  public int getDestinationTileId() {
+    return destinationTileId;
+  }
 }

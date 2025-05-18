@@ -23,6 +23,11 @@ public class ViewController extends GameNotifier implements BoardGameObserver {
   }
 
   @Override
+  public void onPlayerLost(Player lostPlayer) {
+
+  }
+
+  @Override
   public void onGameStateChanged(BoardGame boardGame) {
 
   }

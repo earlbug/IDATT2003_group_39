@@ -1,0 +1,165 @@
+{
+  "gameType": "MONOPOLY",
+  "tiles": [
+    {
+      "tileId": 1,
+      "nextTileId": 2
+    },
+    {
+      "tileId": 2,
+      "nextTileId": 3
+    },
+    {
+      "tileId": 3,
+      "nextTileId": 4
+    },
+    {
+      "tileId": 4,
+      "nextTileId": 5
+    },
+    {
+      "tileId": 5,
+      "nextTileId": 6
+    },
+    {
+      "tileId": 6,
+      "nextTileId": 7
+    },
+    {
+      "tileId": 7,
+      "nextTileId": 8
+    },
+    {
+      "tileId": 8,
+      "nextTileId": 9
+    },
+    {
+      "tileId": 9,
+      "nextTileId": 10
+    },
+    {
+      "tileId": 10,
+      "nextTileId": 11
+    },
+    {
+      "tileId": 11,
+      "nextTileId": 12
+    },
+    {
+      "tileId": 12,
+      "nextTileId": 13
+    },
+    {
+      "tileId": 13,
+      "nextTileId": 14
+    },
+    {
+      "tileId": 14,
+      "nextTileId": 15
+    },
+    {
+      "tileId": 15,
+      "nextTileId": 16
+    },
+    {
+      "tileId": 16,
+      "nextTileId": 17
+    },
+    {
+      "tileId": 17,
+      "nextTileId": 18
+    },
+    {
+      "tileId": 18,
+      "nextTileId": 19
+    },
+    {
+      "tileId": 19,
+      "nextTileId": 20
+    },
+    {
+      "tileId": 20,
+      "nextTileId": 21
+    },
+    {
+      "tileId": 21,
+      "nextTileId": 22
+    },
+    {
+      "tileId": 22,
+      "nextTileId": 23
+    },
+    {
+      "tileId": 23,
+      "nextTileId": 24
+    },
+    {
+      "tileId": 24,
+      "nextTileId": 25
+    },
+    {
+      "tileId": 25,
+      "nextTileId": 26
+    },
+    {
+      "tileId": 26,
+      "nextTileId": 27
+    },
+    {
+      "tileId": 27,
+      "nextTileId": 28
+    },
+    {
+      "tileId": 28,
+      "nextTileId": 29
+    },
+    {
+      "tileId": 29,
+      "nextTileId": 30
+    },
+    {
+      "tileId": 30,
+      "nextTileId": 31
+    },
+    {
+      "tileId": 31,
+      "nextTileId": 32
+    },
+    {
+      "tileId": 32,
+      "nextTileId": 33
+    },
+    {
+      "tileId": 33,
+      "nextTileId": 34
+    },
+    {
+      "tileId": 34,
+      "nextTileId": 35
+    },
+    {
+      "tileId": 35,
+      "nextTileId": 36
+    },
+    {
+      "tileId": 36,
+      "nextTileId": 37
+    },
+    {
+      "tileId": 37,
+      "nextTileId": 38
+    },
+    {
+      "tileId": 38,
+      "nextTileId": 39
+    },
+    {
+      "tileId": 39,
+      "nextTileId": 40
+    },
+    {
+      "tileId": 40,
+      "nextTileId": 1
+    }
+  ]
+}

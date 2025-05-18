@@ -41,9 +41,9 @@ public class ArgumentValidator {
   }
 
   public static void tileSetNextTileValidator(Tile nextTile){
-    if (nextTile == null){
-      throw new IllegalArgumentException("Next tile cannot be null");
-    }
+//    if (nextTile == null){
+//      throw new IllegalArgumentException("Next tile cannot be null");
+//    }
   }
 
   public static void tileSetLandActionValidator(TileAction tileAction){
@@ -55,6 +55,12 @@ public class ArgumentValidator {
   public static void playerSetId(int playerId){
     if (playerId < 0 || playerId > 3){
       throw new IllegalArgumentException("Player id cannot be a negative number and must be less than 4");
+    }
+  }
+
+  public static void positiveIntValidator(int value) {
+    if (value < 0) {
+      throw new IllegalArgumentException("Value cannot be a negative number");
     }
   }
 
