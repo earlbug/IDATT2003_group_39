@@ -42,8 +42,6 @@ public class GameView extends HBox {
   private void initialize() {
     boardContainer.getChildren().add(boardView.getView());
     hudContainer.getChildren().add(hudView.getView());
-    StackPane.setAlignment(hudView.getView(), Pos.CENTER);
-    HBox.setHgrow(hudContainer, Priority.ALWAYS);
 
     this.getChildren().setAll(boardContainer, hudContainer);
   }
