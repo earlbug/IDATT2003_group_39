@@ -60,15 +60,16 @@ public class GameController extends GameNotifier {
     // Notify observers about the move
     notifyPlayerMoved(currentPlayer, steps);
 
-    TileAction tileAction = boardGame.getBoard().getTile(currentPlayer.getCurrentTile().getTileId())
+    TileAction tileAction = currentPlayer.getCurrentTile()
         .getLandAction();
     if (tileAction != null) {
-      tileAction.perform(currentPlayer);
+      tileAction.perform(currentPlayer, boardGame);
       logger.debug("Player {} performed action: {}", currentPlayer.getName(), tileAction);
     } else {
       logger.debug("No action for player {} on tile {}", currentPlayer.getName(),
           currentPlayer.getCurrentTile().getTileId());
     }
+    notifyTileActionPerformed(currentPlayer);
   }
 
   /**
@@ -139,7 +140,7 @@ public class GameController extends GameNotifier {
    * @return True if player has won
    */
   public boolean isWinConditionMet(Player player) {
-    return false;
+    return player.hasWon();
   }
 
   /**

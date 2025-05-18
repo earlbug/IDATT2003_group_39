@@ -41,6 +41,8 @@ public interface BoardGameObserver {
    */
   void onPlayerLost(Player lostPlayer);
 
+  void onTileActionPerformed(Player player);
+
   /**
    * Called when the game state changes in any other way.
    *

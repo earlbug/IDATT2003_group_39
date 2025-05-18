@@ -2,7 +2,9 @@ package models.actions;
 
 import interfaces.TileAction;
 import java.util.Random;
+import models.BoardGame;
 import models.Player;
+import models.Tile;
 
 /**
  * ActionTile which either adds or deducts money from the Player landing on it.
@@ -34,6 +36,11 @@ public class ChanceAction implements TileAction {
   public void perform(Player player) {
     int moneyToAdd = rand.nextInt(floor, roof + 1);
     player.addMoney(moneyToAdd);
+  }
+
+  @Override
+  public void perform(Player player, BoardGame boardGame) {
+    // Not used
   }
 
   /**

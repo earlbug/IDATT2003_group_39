@@ -1,6 +1,7 @@
 package models.actions;
 
 import interfaces.TileAction;
+import models.BoardGame;
 import models.Player;
 
 /**
@@ -26,6 +27,11 @@ public class SkipTurnAction implements TileAction {
   @Override
   public void perform(Player player) {
     player.addTurnsToSkip(turnsToSkip);
+  }
+
+  @Override
+  public void perform(Player player, BoardGame boardGame) {
+    // Not used
   }
 
   /**

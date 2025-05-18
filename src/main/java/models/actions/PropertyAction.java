@@ -1,6 +1,7 @@
 package models.actions;
 
 import interfaces.TileAction;
+import models.BoardGame;
 import models.Player;
 
 /**
@@ -41,6 +42,11 @@ public class PropertyAction implements TileAction {
       player.deductMoney(landPrice);
       owner.deductMoney(-landPrice);
     }
+  }
+
+  @Override
+  public void perform(Player player, BoardGame boardGame) {
+    // Not used
   }
 
   /**

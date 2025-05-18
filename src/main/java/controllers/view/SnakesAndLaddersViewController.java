@@ -90,6 +90,11 @@ public class SnakesAndLaddersViewController extends ViewController{
     gameView.getChildren().setAll(new WinnerView(winner));
   }
 
+  @Override
+  public void onTileActionPerformed(Player player) {
+    boardView.drawPlayerView(player);
+  }
+
   /**
    * Handles the event when the game state changes.
    *
@@ -97,6 +102,5 @@ public class SnakesAndLaddersViewController extends ViewController{
    */
   @Override
   public void onGameStateChanged(BoardGame boardGame) {
-
   }
 }
