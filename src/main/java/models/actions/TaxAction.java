@@ -34,10 +34,6 @@ public class TaxAction implements TileAction {
     player.deductMoney(moneyDeducted);
   }
 
-  @Override
-  public void perform(Player player, BoardGame boardGame) {
-    // Not used
-  }
 
   /**
    * Gets how much money gets deducted.

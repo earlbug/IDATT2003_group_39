@@ -38,11 +38,6 @@ public class ChanceAction implements TileAction {
     player.addMoney(moneyToAdd);
   }
 
-  @Override
-  public void perform(Player player, BoardGame boardGame) {
-    // Not used
-  }
-
   /**
    * Gets the description of the ChanseAction.
    *

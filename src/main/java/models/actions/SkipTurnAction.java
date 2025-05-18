@@ -29,11 +29,6 @@ public class SkipTurnAction implements TileAction {
     player.addTurnsToSkip(turnsToSkip);
   }
 
-  @Override
-  public void perform(Player player, BoardGame boardGame) {
-    // Not used
-  }
-
   /**
    * Sets the description for the SkipTurnAction.
    *

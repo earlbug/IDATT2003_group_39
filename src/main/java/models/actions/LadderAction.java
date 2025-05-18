@@ -28,24 +28,13 @@ public class LadderAction implements TileAction {
   }
 
   /**
-   * Moves the player to the destination Tile stored as class variable.
-   *
-   * @param player what player the action shall be preformed on
-   */
-  @Override
-  public void perform(Player player) {
-
-  }
-
-  /**
    * Sets the player on a specified tile.
    *
    * @param player the player who landed on the tile
-   * @param boardGame the board game instance
    */
   @Override
-  public void perform(Player player, BoardGame boardGame) {
-    Tile destinationTile = boardGame.getBoard().getTile(destinationTileId);
+  public void perform(Player player) {
+    Tile destinationTile = player.getGame().getBoard().getTile(destinationTileId);
     player.setCurrentTile(destinationTile);
   }
 

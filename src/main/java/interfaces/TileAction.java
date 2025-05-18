@@ -20,6 +20,4 @@ public interface TileAction {
    * @param player The player who landed on the tile
    */
   void perform(Player player);
-
-  void perform(Player player, BoardGame boardGame);
 }

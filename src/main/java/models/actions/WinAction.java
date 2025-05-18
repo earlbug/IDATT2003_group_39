@@ -12,11 +12,6 @@ public class WinAction implements TileAction {
     player.setHasWon(true);
   }
 
-  @Override
-  public void perform(Player player, BoardGame boardGame) {
-    // Not used
-  }
-
   public String getDescription() {
     return description;
   }

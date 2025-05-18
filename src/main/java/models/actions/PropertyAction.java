@@ -44,11 +44,6 @@ public class PropertyAction implements TileAction {
     }
   }
 
-  @Override
-  public void perform(Player player, BoardGame boardGame) {
-    // Not used
-  }
-
   /**
    * Sets the description of the property action.
    *

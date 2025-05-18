@@ -63,7 +63,7 @@ public class GameController extends GameNotifier {
     TileAction tileAction = currentPlayer.getCurrentTile()
         .getLandAction();
     if (tileAction != null) {
-      tileAction.perform(currentPlayer, boardGame);
+      tileAction.perform(currentPlayer);
       logger.debug("Player {} performed action: {}", currentPlayer.getName(), tileAction);
     } else {
       logger.debug("No action for player {} on tile {}", currentPlayer.getName(),

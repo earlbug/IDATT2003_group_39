@@ -94,6 +94,15 @@ public class Player {
   }
 
   /**
+   * Returns the game the player is playing.
+   *
+   * @return the game the player is playing
+   */
+  public BoardGame getGame() {
+    return game;
+  }
+
+  /**
    * Gets the amount of money the player currently has.
    *
    * @return the amount of mot\ney the player has.
@@ -236,8 +245,8 @@ public class Player {
   /**
    * Adds an amount of turns that the player has to skip.
    *
-   * @param amount number of turns to be skipped.
-   *               Adds to the already amount of turns if there are some.
+   * @param amount number of turns to be skipped. Adds to the already amount of turns if there are
+   *               some.
    */
   public void addTurnsToSkip(int amount) {
     turnsToSkip += amount;
