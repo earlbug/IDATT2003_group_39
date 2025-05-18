@@ -1,7 +1,9 @@
 package models.actions;
 
 import interfaces.TileAction;
+import models.BoardGame;
 import models.Player;
+import models.Tile;
 
 /**
  * When a LadderAction is preformed on a player, the player gets placed on a tile specified
@@ -32,8 +34,19 @@ public class LadderAction implements TileAction {
    */
   @Override
   public void perform(Player player) {
-    int steps = destinationTileId - player.getCurrentTile().getTileId();
-    player.move(steps);
+
+  }
+
+  /**
+   * Sets the player on a specified tile.
+   *
+   * @param player the player who landed on the tile
+   * @param boardGame the board game instance
+   */
+  @Override
+  public void perform(Player player, BoardGame boardGame) {
+    Tile destinationTile = boardGame.getBoard().getTile(destinationTileId);
+    player.setCurrentTile(destinationTile);
   }
 
   /**
