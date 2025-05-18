@@ -4,6 +4,9 @@ import interfaces.Board;
 import interfaces.BoardView;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -20,9 +23,22 @@ import models.Tile;
  * The first Tile is in the upper left corner and follows the edge with the direction of the clock.
  *
  */
-public class MonopolyBoardView extends GridPane implements BoardView {
+public class MonopolyBoardView extends StackPane implements BoardView {
+
+  private final GridPane gridPane = new GridPane();
+  private final Pane imagePane = new Pane();
+  private final Pane playersPane = new Pane();
 
   private final Map<Player, PlayerView> playerViews = new HashMap<>();
+
+
+  public MonopolyBoardView() {
+    this.getChildren().addAll(gridPane, imagePane, playersPane);
+  }
+
+  public void addPlayerView(Player player, PlayerView playerView) {
+    this.playerViews.put(player, playerView);
+  }
 
   /**
    * Creates the layout of the Monopoly board.
@@ -32,7 +48,7 @@ public class MonopolyBoardView extends GridPane implements BoardView {
    * @param board The board instance to create the view for.
    */
   @Override
-  public void createBoardView(Board board) {
+  public void drawBoardView(Board board) {
     Tile[] tiles = board.getTiles();
     int rowLength = tiles.length / 4;
     for (int i = 1; i < tiles.length + 1; i++) {
@@ -53,40 +69,99 @@ public class MonopolyBoardView extends GridPane implements BoardView {
         col = 0;
       }
 
-      this.add(tileElement, col, row);
+      gridPane.add(tileElement, col, row);
     }
   }
 
   /**
-   * Add a player to a Playerview.
+   * Draws the board image.
    *
-   * @param player The player to add
-   * @param playerView the playerview to add the player.
    */
-  public void addPlayerView(Player player, PlayerView playerView) {
-    this.playerViews.put(player, playerView);
+  private void drawBoardImage() {
+    Image image = new Image(""); // TODO: Endre denne for bilde!!!!
+    ImageView imageView = new ImageView(image);
+
+    imageView.setFitWidth(800);
+    imageView.setFitHeight(800);
+    imageView.setOpacity(0.5);
+    imageView.setPreserveRatio(true);
+    imageView.setEffect(new DropShadow(10, Color.BLACK));
+    imagePane.getChildren().add(imageView);
   }
 
   /**
-   * Updates the PlayerView by removing the playerView, and then add the player to the playerView.
+   * Gets the pixel coordinates of a TileView in the GridPane based on its tileId
    *
-   * @param player The player instance to update.
+   * @param tileView The TileView to get the position of
+   * @return Double array where [0] is x-coordinate and [1] is y-coordinate, or null if not found
    */
+  private double[] getTileViewPosition(TileView tileView) {
+    if (tileView == null) {
+      return null;
+    }
+
+    // Make sure layout is complete
+    gridPane.applyCss();
+    gridPane.layout();
+
+    // Get bounds relative to the imagePane
+    javafx.geometry.Bounds boundsInScene = tileView.localToScene(tileView.getBoundsInLocal());
+    javafx.geometry.Bounds boundsInImagePane = imagePane.sceneToLocal(boundsInScene);
+
+    double tileX = boundsInImagePane.getMinX();
+    double tileY = boundsInImagePane.getMinY();
+
+    return new double[]{tileX, tileY};
+  }
+
+
+  private TileView findTileViewById(int tileId) {
+    for (TileView tileView : gridPane.getChildren().stream()
+        .filter(node -> node instanceof TileView).map(node -> (TileView) node).toList()) {
+      if (tileView.getTileId() == tileId) {
+        return tileView;
+      }
+    }
+    return null;
+  }
+
   @Override
-  public void updatePlayerView(Player player) {
+  public void drawPlayerView(Player player) {
     PlayerView playerView = playerViews.get(player);
     Tile currentTile = player.getCurrentTile();
 
-    // Remove the player view from all tiles
-    this.getChildren().forEach(node -> {
-      if (node instanceof TileView tileView) {
-        tileView.removePlayerView(playerView);
-      }
-    });
+    // Find the TileView for the current tile
+    TileView tileView = findTileViewById(currentTile.getTileId());
 
-    // Add the player view to the new tile
-    TileView tileView = (TileView) this.getChildren().get(currentTile.getTileId() - 1);
-    tileView.addPlayerView(playerView, player.getPlayerId());
+    // Get the position of the TileView
+    double[] tilePosition = getTileViewPosition(tileView);
+
+    int playerIndex = 0;
+    int totalPlayers = playerViews.size();
+
+    int i = 0;
+    for (Player p : playerViews.keySet()) {
+      if (p.equals(player)) {
+        playerIndex = i;
+        break;
+      }
+      i++;
+    }
+
+    // Calculate offset based on player index
+    double offsetX = (playerIndex % 2) * 20 - 7.5; // Alternating left-right
+    double offsetY =
+        ((double) playerIndex / 2) * 20 - (totalPlayers > 2 ? 7.5 : 0); // Rows of 2 players
+
+    // Position the PlayerView on the TileView with offset
+    double tileX = tilePosition[0];
+    double tileY = tilePosition[1];
+    playerView.setLayoutX(tileX + tileView.getWidth() / 2 - playerView.getWidth() / 2 + offsetX);
+    playerView.setLayoutY(tileY + tileView.getHeight() / 2 - playerView.getHeight() / 2 + offsetY);
+
+    if (!playersPane.getChildren().contains(playerView)) {
+      playersPane.getChildren().add(playerView);
+    }
   }
 
   /**
@@ -96,14 +171,7 @@ public class MonopolyBoardView extends GridPane implements BoardView {
    * @return a TileView.
    */
   private StackPane createElement(Tile tile) {
-    TileView tileView = new TileView();
-
-    Text text = new Text(String.valueOf(tile.getTileId()));
-    text.setFill(Color.BLACK);
-
-    tileView.getChildren().add(text);
-
-    return tileView;
+    return new TileView(tile.getTileId());
   }
 
   @Override
