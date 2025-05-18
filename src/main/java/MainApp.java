@@ -33,7 +33,7 @@ public class MainApp extends Application {
   public void start(Stage primaryStage) throws IOException, UnknownGameException {
 
     BoardGame boardGame = new BoardGame();
-    Board board = BoardFactory.getFromFile("SnL3.json");
+    Board board = BoardFactory.getFromFile("SnL2.json");
     BoardView boardView = BoardViewFactory.createBoardView(GameType.SNAKES_AND_LADDERS, board);
     GameView gameView = new GameView(boardView);
 

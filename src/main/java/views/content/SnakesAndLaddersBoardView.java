@@ -64,7 +64,7 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
   }
 
   private void drawBoardImage() {
-    Image image = new Image("images/SnL3.png");
+    Image image = new Image("images/SnL2.png"); // TODO: Make this dynamic
     ImageView imageView = new ImageView(image);
 
     imageView.setFitWidth(800);
