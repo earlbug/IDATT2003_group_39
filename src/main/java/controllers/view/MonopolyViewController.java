@@ -53,7 +53,7 @@ public class MonopolyViewController extends ViewController {
     // Update dice display
     hudView.setDiceNumber(steps);
     // Update player position on the board
-    boardView.updatePlayerView(player);
+    boardView.drawPlayerView(player);
     logger.debug("PlayerView updated for {} ", player.getName());
 
   }
@@ -71,7 +71,7 @@ public class MonopolyViewController extends ViewController {
 
   @Override
   public void onPlayerLost(Player lostPlayer) {
-    boardView.updatePlayerView(lostPlayer);
+    boardView.drawPlayerView(lostPlayer);
   }
 
   @Override
