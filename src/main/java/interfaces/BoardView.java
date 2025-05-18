@@ -17,14 +17,14 @@ public interface BoardView {
    *
    * @param board The board instance to create the view for
    */
-  void createBoardView(Board board);
+  void drawBoardView(Board board);
 
   /**
    * Updates the player view on the board.
    *
    * @param player The player instance to update the view for
    */
-  void updatePlayerView(Player player);
+  void drawPlayerView(Player player);
 
   /**
    * Gets the view of the board.
