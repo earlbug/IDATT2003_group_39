@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import exception.UnknownGameException;
+import exception.UnknownTileActionException;
 import factory.BoardFactory;
 import factory.GameType;
 import interfaces.Board;
@@ -167,7 +168,7 @@ public class BoardFileReaderJson implements BoardFileReader {
       case "snakeAction" -> deserializeSnakeAction(actionTileJson);
       case "taxAction" -> deserializeTaxAction(actionTileJson);
       case "winAction" -> deserializeWinAction(actionTileJson);
-      default -> null;
+      default -> throw new UnknownTileActionException("Unknown action type: " + actionType);
     };
   }
 
