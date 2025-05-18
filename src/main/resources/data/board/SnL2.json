@@ -23,12 +23,7 @@
     },
     {
       "tileId": 6,
-      "nextTileId": 37,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 37",
-        "destinationTileId": 37
-      }
+      "nextTileId": 7
     },
     {
       "tileId": 7,
@@ -52,16 +47,16 @@
     },
     {
       "tileId": 12,
-      "nextTileId": 13,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 31",
-        "destinationTileId": 31
-      }
+      "nextTileId": 13
     },
     {
       "tileId": 13,
-      "nextTileId": 14
+      "nextTileId": 14,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 50",
+        "destinationTileId": 50
+      }
     },
     {
       "tileId": 14,
@@ -69,7 +64,12 @@
     },
     {
       "tileId": 15,
-      "nextTileId": 16
+      "nextTileId": 16,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 46",
+        "destinationTileId": 46
+      }
     },
     {
       "tileId": 16,
@@ -85,7 +85,12 @@
     },
     {
       "tileId": 19,
-      "nextTileId": 20
+      "nextTileId": 20,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 23",
+        "destinationTileId": 23
+      }
     },
     {
       "tileId": 20,
@@ -109,7 +114,12 @@
     },
     {
       "tileId": 25,
-      "nextTileId": 26
+      "nextTileId": 26,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 63",
+        "destinationTileId": 63
+      }
     },
     {
       "tileId": 26,
@@ -129,12 +139,7 @@
     },
     {
       "tileId": 30,
-      "nextTileId": 31,
-      "type": {
-        "actionType": "ladderAction",
-        "description": "Move player to tile 42",
-        "destinationTileId": 42
-      }
+      "nextTileId": 31
     },
     {
       "tileId": 31,
@@ -202,11 +207,21 @@
     },
     {
       "tileId": 47,
-      "nextTileId": 48
+      "nextTileId": 48,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 74",
+        "destinationTileId": 74
+      }
     },
     {
       "tileId": 48,
-      "nextTileId": 49
+      "nextTileId": 49,
+      "type": {
+        "actionType": "snakeAction",
+        "description": "Move player to tile 10",
+        "destinationTileId": 10
+      }
     },
     {
       "tileId": 49,
@@ -238,7 +253,12 @@
     },
     {
       "tileId": 56,
-      "nextTileId": 57
+      "nextTileId": 57,
+      "type": {
+        "actionType": "snakeAction",
+        "description": "Move player to tile 17",
+        "destinationTileId": 17
+      }
     },
     {
       "tileId": 57,
@@ -306,7 +326,12 @@
     },
     {
       "tileId": 73,
-      "nextTileId": 74
+      "nextTileId": 74,
+      "type": {
+        "actionType": "snakeAction",
+        "description": "Move player to tile 55",
+        "destinationTileId": 55
+      }
     },
     {
       "tileId": 74,
@@ -326,7 +351,12 @@
     },
     {
       "tileId": 78,
-      "nextTileId": 79
+      "nextTileId": 79,
+      "type": {
+        "actionType": "snakeAction",
+        "description": "Move player to tile 40",
+        "destinationTileId": 40
+      }
     },
     {
       "tileId": 79,
@@ -342,7 +372,12 @@
     },
     {
       "tileId": 82,
-      "nextTileId": 83
+      "nextTileId": 83,
+      "type": {
+        "actionType": "snakeAction",
+        "description": "Move player to tile 39",
+        "destinationTileId": 39
+      }
     },
     {
       "tileId": 83,
@@ -370,7 +405,12 @@
     },
     {
       "tileId": 89,
-      "nextTileId": 90
+      "nextTileId": 90,
+      "type": {
+        "actionType": "ladderAction",
+        "description": "Move player to tile 93",
+        "destinationTileId": 93
+      }
     },
     {
       "tileId": 90,
@@ -402,7 +442,12 @@
     },
     {
       "tileId": 97,
-      "nextTileId": 98
+      "nextTileId": 98,
+      "type": {
+        "actionType": "snakeAction",
+        "description": "Move player to tile 75",
+        "destinationTileId": 75
+      }
     },
     {
       "tileId": 98,
