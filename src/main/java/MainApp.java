@@ -17,8 +17,6 @@ import javafx.stage.Stage;
 import models.Player;
 import factory.BoardViewFactory;
 import interfaces.BoardView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import views.content.HudView;
 import views.container.GameView;
 
@@ -31,32 +29,24 @@ import views.container.GameView;
  */
 public class MainApp extends Application {
 
-  private static final Logger log = LoggerFactory.getLogger(MainApp.class);
-
   @Override
   public void start(Stage primaryStage) throws IOException, UnknownGameException {
 
-    playSnakesAndLadders(primaryStage);
-    //playMonopoly(primaryStage);
-  }
-
-  public void playMonopoly(Stage primaryStage) {
     BoardGame boardGame = new BoardGame();
     Board board = BoardFactory.getFromFile("SnL3.json");
     BoardView boardView = BoardViewFactory.createBoardView(GameType.SNAKES_AND_LADDERS, board);
     GameView gameView = new GameView(boardView);
 
-    Player p1 = new Player("Are", boardGame);
+    Player p1 = new Player("Ola", boardGame);
     p1.setColor(Color.RED);
-    Player p2 = new Player("Beathe", boardGame);
+    Player p2 = new Player("Per", boardGame);
     p2.setColor(Color.BLUE);
     Player p3 = new Player("Kari", boardGame);
     p3.setColor(Color.GREEN);
 
-
-    SnakesAndLaddersController snakesAndLaddersController = new SnakesAndLaddersController(boardGame);
+    GameController gameController = new GameController(boardGame);
     SnakesAndLaddersViewController viewController = new SnakesAndLaddersViewController(gameView);
-    ButtonClickController buttonClickController = new ButtonClickController(snakesAndLaddersController, viewController);
+    ButtonClickController buttonClickController = new ButtonClickController(gameController, viewController);
     viewController.setNotifiers(buttonClickController);
 
     boardGame.setBoard(board);
@@ -87,6 +77,5 @@ public class MainApp extends Application {
     primaryStage.setMinWidth(1000);
     primaryStage.show();
   }
+
 }
-
-
