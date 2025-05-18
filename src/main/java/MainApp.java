@@ -1,8 +1,8 @@
-import IO.BoardFileReaderJson;
-import controllers.model.SnakesAndLaddersController;
 import controllers.view.SnakesAndLaddersViewController;
-import controllers.view.ViewController;
 import interfaces.Board;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import models.BoardGame;
 import controllers.model.GameController;
@@ -33,15 +33,16 @@ public class MainApp extends Application {
   public void start(Stage primaryStage) throws IOException, UnknownGameException {
 
     BoardGame boardGame = new BoardGame();
-    Board board = BoardFactory.getFromFile("laddergame_1.json");
+    Board board = BoardFactory.getFromFile("SnL3.json");
     BoardView boardView = BoardViewFactory.createBoardView(GameType.SNAKES_AND_LADDERS, board);
     GameView gameView = new GameView(boardView);
-    HudView hudView = gameView.getHudView();
 
     Player p1 = new Player("Ola", boardGame);
     p1.setColor(Color.RED);
     Player p2 = new Player("Per", boardGame);
     p2.setColor(Color.BLUE);
+    Player p3 = new Player("Kari", boardGame);
+    p3.setColor(Color.GREEN);
 
     GameController gameController = new GameController(boardGame);
     SnakesAndLaddersViewController viewController = new SnakesAndLaddersViewController(gameView);
@@ -52,20 +53,28 @@ public class MainApp extends Application {
 
     gameController.handleAddPlayer(p1);
     gameController.handleAddPlayer(p2);
+    gameController.handleAddPlayer(p3);
     gameController.handlePlayerIds();
 
     viewController.addPlayerViews(boardGame.getPlayers());
     boardGame.createDice(1);
     boardGame.setCurrentPlayer(p1);
-    boardView.createBoardView(board);
-    boardView.updatePlayerView(p1);
-    boardView.updatePlayerView(p2);
+    boardView.drawPlayerView(p1);
+    boardView.drawPlayerView(p2);
+    boardView.drawPlayerView(p3);
     boardGame.addPlayersOnStartPos();
 
-    Scene scene = new Scene(gameView, 1280, 720);
+    // Wrap gameView in a StackPane and center it
+    StackPane root = new StackPane(gameView);
+    gameView.setAlignment(Pos.CENTER);
+    root.setPadding(new Insets(50));
+
+    Scene scene = new Scene(root, 1000, 800);
     scene.getStylesheets().add("styles.css");
     primaryStage.setTitle("Game");
     primaryStage.setScene(scene);
+    primaryStage.setMinHeight(800);
+    primaryStage.setMinWidth(1000);
     primaryStage.show();
   }
 
