@@ -102,7 +102,7 @@
       "tileId": 24,
       "nextTileId": 25,
       "type": {
-        "actionType": "ladderAction",
+        "actionType": "snakeAction",
         "description": "Move player to tile 6",
         "destinationTileId": 6
       }
@@ -135,7 +135,7 @@
       "tileId": 31,
       "nextTileId": 32,
       "type": {
-        "actionType": "ladderAction",
+        "actionType": "snakeAction",
         "description": "Move player to tile 2",
         "destinationTileId": 2
       }
@@ -298,7 +298,7 @@
       "tileId": 68,
       "nextTileId": 69,
       "type": {
-        "actionType": "ladderAction",
+        "actionType": "snakeAction",
         "description": "Move player to tile 39",
         "destinationTileId": 39
       }
@@ -343,7 +343,7 @@
       "tileId": 78,
       "nextTileId": 79,
       "type": {
-        "actionType": "ladderAction",
+        "actionType": "snakeAction",
         "description": "Move player to tile 48",
         "destinationTileId": 48
       }
@@ -412,7 +412,7 @@
       "tileId": 94,
       "nextTileId": 95,
       "type": {
-        "actionType": "ladderAction",
+        "actionType": "snakeAction",
         "description": "Move player to tile 23",
         "destinationTileId": 23
       }
