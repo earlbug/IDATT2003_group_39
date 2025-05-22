@@ -20,6 +20,13 @@ public interface BoardView {
   void drawBoardView(Board board);
 
   /**
+   * Draws the image of the board.
+   *
+   * @param boardNumber The number of the board to draw
+   */
+  void drawBoardImage(int boardNumber);
+
+  /**
    * Updates the player view on the board.
    *
    * @param player The player instance to update the view for
