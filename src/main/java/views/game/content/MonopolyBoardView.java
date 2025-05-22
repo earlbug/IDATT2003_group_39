@@ -73,23 +73,18 @@ public class MonopolyBoardView extends StackPane implements BoardView {
 
   @Override
   public void drawBoardImage(int boardNumber) {
-    // TODO: ADD IMGAE FOR MONOPOLY BOARD
-  }
+    if (boardNumber == 4) {
+      Image image = new Image("file:src/main/resources/images/monopoly.png");
+      ImageView imageView = new ImageView(image);
 
-  /**
-   * Draws the board image.
-   *
-   */
-  private void drawBoardImage() {
-    Image image = new Image(""); // TODO: Endre denne for bilde!!!!
-    ImageView imageView = new ImageView(image);
-
-    imageView.setFitWidth(800);
-    imageView.setFitHeight(800);
-    imageView.setOpacity(0.5);
-    imageView.setPreserveRatio(true);
-    imageView.setEffect(new DropShadow(10, Color.BLACK));
-    imagePane.getChildren().add(imageView);
+      imageView.setFitWidth(810);
+      imageView.setFitHeight(810);
+      imageView.setOpacity(0.5);
+      imageView.setPreserveRatio(true);
+      imageView.setEffect(new DropShadow(10, Color.BLACK));
+      imagePane.getChildren().clear();
+      imagePane.getChildren().add(imageView);
+    }
   }
 
   /**
@@ -174,7 +169,7 @@ public class MonopolyBoardView extends StackPane implements BoardView {
    * @return a TileView.
    */
   private StackPane createElement(Tile tile) {
-    return new TileView(tile.getTileId());
+    return new TileView(tile.getTileId(), 90);
   }
 
   @Override

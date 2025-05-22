@@ -1,14 +1,23 @@
 package controllers.view;
 
 import controllers.ButtonClickNotifier;
+import exception.UnknownGameException;
+import factory.BoardFactory;
+import factory.BoardViewFactory;
+import factory.GameType;
+import interfaces.Board;
+import interfaces.BoardView;
+import java.io.IOException;
 import java.util.List;
+import javafx.geometry.Pos;
 import models.BoardGame;
 import models.Player;
 import observers.BoardGameObserver;
 import org.slf4j.Logger;
 import views.game.container.GameView;
-import views.game.content.HudView;
+import views.game.content.DiceView;
 import views.game.content.MonopolyBoardView;
+import views.game.content.PlayerInfoView;
 import views.game.content.PlayerView;
 import views.game.content.WinnerView;
 
@@ -22,7 +31,8 @@ import views.game.content.WinnerView;
 public class MonopolyViewController extends ViewController implements BoardGameObserver {
 
   private GameView gameView;
-  private HudView hudView;
+  private PlayerInfoView playerInfoView;
+  private DiceView diceView;
   private MonopolyBoardView boardView;
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(MonopolyViewController.class);
 
@@ -31,14 +41,38 @@ public class MonopolyViewController extends ViewController implements BoardGameO
 
   public void setGameView(GameView gameView) {
     this.gameView = gameView;
-    this.hudView = gameView.getHudView();
+    this.diceView = gameView.getDiceView();
+    this.playerInfoView = gameView.getPlayerInfoView();
     this.boardView = (MonopolyBoardView) gameView.getBoardView();
+    this.gameView.setAlignment(Pos.CENTER);
     this.getRootPane().getChildren().add(gameView);
+  }
+
+  @Override
+  public void setUpView(String boardFileName) {
+    try {
+      Board board = BoardFactory.getFromFile(boardFileName);
+      BoardView boardView = BoardViewFactory.createBoardView(GameType.MONOPOLY, board);
+      GameView gameView = new GameView(boardView);
+
+      setGameView(gameView);
+      boardView.drawBoardImage(4);
+      logger.debug("View set up for board file {}", boardFileName);
+    } catch (UnknownGameException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public void showGameView() {
+    getRootPane().getChildren().clear();
+    getRootPane().getChildren().add(gameView);
+    logger.debug("Game view displayed");
   }
 
 
   public void setNotifiers(ButtonClickNotifier notifier) {
-    hudView.setButtonClickNotifier(notifier);
+    diceView.setButtonClickNotifier(notifier);
   }
 
   public void addPlayerViews(List<Player> players) {
@@ -53,17 +87,20 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   @Override
   public void onPlayerMoved(Player player, int steps) {
     // Update dice display
-    hudView.setDiceNumber(steps);
+    diceView.setDiceNumber(steps);
     // Update player position on the board
     boardView.drawPlayerView(player);
     logger.debug("PlayerView updated for {} ", player.getName());
-
+    playerInfoView.setPlayerName(player.getName());
+    playerInfoView.setGamePiece(player.getGamePiece().toString());
+    playerInfoView.setPlayerTile(Integer.toString(player.getCurrentTile().getTileId()));
+    playerInfoView.setMoney(Integer.toString(player.getMoney()));
+    playerInfoView.setTurnsToSkip(Integer.toString(player.getTurnsToSkip()));
   }
 
   @Override
   public void onNextPlayer(Player newPlayer) {
-    hudView.setPlayerName(newPlayer.getName());
-
+    diceView.setPlayerName(newPlayer.getName());
   }
 
   @Override
@@ -89,7 +126,7 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
     super.setButtonClickNotifier(notifier);
-    hudView.setButtonClickNotifier(notifier);
+    diceView.setButtonClickNotifier(notifier);
   }
 
 }

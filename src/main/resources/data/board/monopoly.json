@@ -50,7 +50,9 @@
       "tileId": 7,
       "nextTileId": 8,
       "type": {
-        "actionType": "skipTurnAction"
+        "actionType": "chanceAction",
+        "floor": -100,
+        "roof": 200
       }
     },
     {
@@ -65,8 +67,7 @@
       "tileId": 9,
       "nextTileId": 10,
       "type": {
-        "actionType": "propertyAction",
-        "landPrice": 120
+        "actionType": "skipTurnAction"
       }
     },
     {
@@ -81,24 +82,25 @@
       "tileId": 11,
       "nextTileId": 12,
       "type": {
-        "actionType": "propertyAction",
-        "landPrice": 160
-      }
-    },
-    {
-      "tileId": 12,
-      "nextTileId": 13,
-      "type": {
         "actionType": "chanceAction",
         "floor": -100,
         "roof": 200
       }
     },
     {
+      "tileId": 12,
+      "nextTileId": 13,
+      "type": {
+        "actionType": "propertyAction",
+        "landPrice": 140
+      }
+    },
+    {
       "tileId": 13,
       "nextTileId": 14,
       "type": {
-        "actionType": "skipTurnAction"
+        "actionType": "taxAction",
+        "moneyDeducted": 100
       }
     },
     {
@@ -113,26 +115,23 @@
       "tileId": 15,
       "nextTileId": 16,
       "type": {
-        "actionType": "chanceAction",
-        "floor": -100,
-        "roof": 200
+        "actionType": "propertyAction",
+        "landPrice": 180
       }
     },
     {
       "tileId": 16,
       "nextTileId": 17,
       "type": {
-        "actionType": "propertyAction",
-        "landPrice": 200
+        "actionType": "taxAction",
+        "moneyDeducted": 100
       }
     },
     {
       "tileId": 17,
       "nextTileId": 18,
       "type": {
-        "actionType": "chanceAction",
-        "floor": -100,
-        "roof": 200
+        "actionType": "skipTurnAction"
       }
     },
     {
@@ -147,15 +146,16 @@
       "tileId": 19,
       "nextTileId": 20,
       "type": {
-        "actionType": "skipTurnAction"
+        "actionType": "taxAction",
+        "moneyDeducted": 100
       }
     },
     {
       "tileId": 20,
       "nextTileId": 21,
       "type": {
-        "actionType": "taxAction",
-        "moneyDeducted": 150
+        "actionType": "propertyAction",
+        "landPrice": 220
       }
     },
     {
@@ -171,8 +171,8 @@
       "tileId": 22,
       "nextTileId": 23,
       "type": {
-        "actionType": "taxAction",
-        "moneyDeducted": 150
+        "actionType": "propertyAction",
+        "landPrice": 240
       }
     },
     {
@@ -186,10 +186,75 @@
     },
     {
       "tileId": 24,
-      "nextTileId": 1,
+      "nextTileId": 25,
+      "type": {
+        "actionType": "propertyAction",
+        "landPrice": 240
+      }
+    },
+    {
+      "tileId": 25,
+      "nextTileId": 26,
+      "type": {
+        "actionType": "skipTurnAction"
+      }
+    },
+    {
+      "tileId": 26,
+      "nextTileId": 27,
+      "type": {
+        "actionType": "chanceAction",
+        "floor": -100,
+        "roof": 200
+      }
+    },
+    {
+      "tileId": 27,
+      "nextTileId": 28,
+      "type": {
+        "actionType": "propertyAction",
+        "landPrice": 300
+      }
+    },
+    {
+      "tileId": 28,
+      "nextTileId": 29,
+      "type": {
+        "actionType": "propertyAction",
+        "landPrice": 300
+      }
+    },
+    {
+      "tileId": 29,
+      "nextTileId": 30,
+      "type": {
+        "actionType": "taxAction",
+        "moneyDeducted": 100
+      }
+    },
+    {
+      "tileId": 30,
+      "nextTileId": 31,
       "type": {
         "actionType": "taxAction",
         "moneyDeducted": 200
+      }
+    },
+    {
+      "tileId": 31,
+      "nextTileId": 32,
+      "type": {
+        "actionType": "chanceAction",
+        "floor": -100,
+        "roof": 200
+      }
+    },
+    {
+      "tileId": 32,
+      "nextTileId": 1,
+      "type": {
+        "actionType": "propertyAction",
+        "landPrice": 400
       }
     }
   ]
