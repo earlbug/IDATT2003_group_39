@@ -18,6 +18,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import models.GamePiece;
+import net.synedra.validatorfx.Check;
 import net.synedra.validatorfx.TooltipWrapper;
 import net.synedra.validatorfx.Validator;
 import views.menu.container.MenuView;
@@ -30,6 +31,9 @@ public class SelectPlayersView extends MenuView {
   private final HBox layout = new HBox();
   private final VBox textFields = new VBox();
   private TextField[] fields;
+
+  private Check checkTextField;
+  private Check checkComboBox;
 
   /**
    * Constructs the view.
@@ -97,8 +101,14 @@ public class SelectPlayersView extends MenuView {
   }
 
   public void setTextFields(int numberOfPlayers) {
-    validator.clear();
-
+    if (checkTextField != null) {
+      checkTextField.clear();
+      validator.remove(checkTextField);
+    }
+    if (checkComboBox != null) {
+      checkComboBox.clear();
+      validator.remove(checkComboBox);
+    }
     textFields.getChildren().clear();
     textFields.setSpacing(10);
     fields = new TextField[numberOfPlayers];
@@ -121,11 +131,9 @@ public class SelectPlayersView extends MenuView {
       textFields.getChildren().add(playerInputContainer);
     }
 
-    /** TODO: Fix validation
-
     for (int i = 0; i < numberOfPlayers; i++) {
       final int currentIndex = i;
-      validator.createCheck().dependsOn("name" + i, fields[i].textProperty()).withMethod(c -> {
+      checkTextField = validator.createCheck().dependsOn("name" + i, fields[i].textProperty()).withMethod(c -> {
         String name = c.get("name" + currentIndex);
         if (name.isEmpty()) {
           c.error("Name cannot be empty");
@@ -141,7 +149,7 @@ public class SelectPlayersView extends MenuView {
         }
       }).decorates(fields[i]).immediate();
 
-      validator.createCheck().dependsOn("gamePiece" + i, gamePieceSelectors[i].valueProperty())
+      checkComboBox = validator.createCheck().dependsOn("gamePiece" + i, gamePieceSelectors[i].valueProperty())
           .withMethod(c -> {
             GamePiece selectedGamePiece = c.get("gamePiece" + currentIndex);
             for (int j = 0; j < numberOfPlayers; j++) {
@@ -152,7 +160,6 @@ public class SelectPlayersView extends MenuView {
             }
           }).decorates(gamePieceSelectors[i]).immediate();
     }
-     */
 
   }
 
