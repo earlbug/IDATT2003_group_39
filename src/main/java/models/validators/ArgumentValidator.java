@@ -1,6 +1,8 @@
 package models.validators;
 
+import controllers.model.GameController;
 import interfaces.TileAction;
+import models.BoardGame;
 import models.GamePiece;
 import models.Tile;
 
@@ -15,6 +17,17 @@ import models.Tile;
  */
 public class ArgumentValidator {
 
+  public static void controllerSetBoardGame(BoardGame boardGame) {
+    if (boardGame == null) {
+      throw new IllegalArgumentException("Board game cannot be null");
+    }
+  }
+
+  public static void managerSetGameController(GameController gameController) {
+    if (gameController == null){
+      throw new IllegalArgumentException("GameController cannot be null");
+    }
+  }
 
   public static void playerSetCurrentTileValidator(Tile tile){
     if (tile == null){

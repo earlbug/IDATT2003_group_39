@@ -45,12 +45,13 @@ public class ViewManager {
   }
 
   private void initializeView(ViewController initialViewController) {
-    Scene scene = new Scene(initialViewController.getRootPane(), 1000, 800);
+    Scene scene = new Scene(initialViewController.getRootPane());
     scene.getStylesheets().add("styles.css");
     primaryStage.setTitle("Game");
     primaryStage.setScene(scene);
     primaryStage.setMinHeight(800);
-    primaryStage.setMinWidth(1000);
+    primaryStage.setMinWidth(1200);
+    primaryStage.setMaximized(true);
     primaryStage.show();
   }
 }

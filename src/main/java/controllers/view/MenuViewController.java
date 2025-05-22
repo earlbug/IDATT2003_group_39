@@ -1,8 +1,10 @@
 package controllers.view;
 
 import controllers.ButtonClickNotifier;
+import java.util.List;
 import java.util.Map;
 import models.GamePiece;
+import models.Player;
 import views.menu.container.MenuView;
 
 public class MenuViewController extends ViewController {
@@ -11,7 +13,6 @@ public class MenuViewController extends ViewController {
 
   /**
    * Constructor for MenuViewController.
-   *
    */
   public MenuViewController() {
     this.menuView = new MenuView();
@@ -34,6 +35,16 @@ public class MenuViewController extends ViewController {
     return menuView.getSelectPlayersView().getSelectedPlayers();
   }
 
+  @Override
+  public void addPlayerViews(List<Player> players) {
+    // Not used
+  }
+
+  @Override
+  public void showGameView() {
+    // Not used
+  }
+
   /**
    * Sets the button click notifier for the menu view.
    *
@@ -41,8 +52,17 @@ public class MenuViewController extends ViewController {
    */
   @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
-    super.setButtonClickNotifier(notifier);
     menuView.setButtonClickNotifier(notifier);
+  }
+
+  @Override
+  public void setUpView(String boardFileName, int boardNumber) {
+    // Not used
+  }
+
+  @Override
+  public void setUpView(String boardFileName) {
+    // Not used
   }
 
 }

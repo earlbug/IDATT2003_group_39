@@ -1,6 +1,9 @@
 package controllers;
 
 import controllers.model.GameController;
+import controllers.model.GameManager;
+import controllers.model.MonopolyController;
+import controllers.model.SnakesAndLaddersController;
 import controllers.view.ViewManager;
 import exception.UnknownButtonActionException;
 import observers.ButtonClickObserver;
@@ -15,19 +18,18 @@ import observers.ButtonClickObserver;
  */
 public class ButtonClickController extends ButtonClickNotifier implements ButtonClickObserver {
 
-  private final GameController gameController;
+  private final GameManager gameManager;
   private final ViewManager viewManager;
 
   /**
    * Constructs a new handler to handle button clicks.
    *
-   * @param gameController The game controller to use
+   * @param gameManager The controller manager to use
    * @param viewManager    The view manager to use
    */
-  public ButtonClickController(GameController gameController, ViewManager viewManager) {
+  public ButtonClickController(GameManager gameManager, ViewManager viewManager) {
     this.viewManager = viewManager;
-    this.gameController = gameController;
-    gameController.setViewManager(viewManager);
+    this.gameManager = gameManager;
     this.addObserver(this);
   }
 
@@ -37,46 +39,52 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
 
     switch (action) {
       case "SnakesAndLadders":
+        gameManager.switchToSnakesAndLaddersController();
         viewManager.getCurrentViewController().showBoardSelectMenu();
         break;
       case "Board1":
         viewManager.switchToSnakesAndLaddersView();
-        gameController.setBoard(1);
+        gameManager.getCurrentGameController().setViewManager(viewManager);
+        gameManager.getCurrentGameController().setBoard(1);
         viewManager.switchToMenuView();
         viewManager.getCurrentViewController().showPlayerSelectMenu();
         break;
       case "Board2":
         viewManager.switchToSnakesAndLaddersView();
-        gameController.setBoard(2);
+        gameManager.getCurrentGameController().setViewManager(viewManager);
+        gameManager.getCurrentGameController().setBoard(2);
         viewManager.switchToMenuView();
         viewManager.getCurrentViewController().showPlayerSelectMenu();
         break;
       case "Board3":
         viewManager.switchToSnakesAndLaddersView();
-        gameController.setBoard(3);
+        gameManager.getCurrentGameController().setViewManager(viewManager);
+        gameManager.getCurrentGameController().setBoard(3);
         viewManager.switchToMenuView();
         viewManager.getCurrentViewController().showPlayerSelectMenu();
         break;
       case "Start":
-        gameController.setPlayers(viewManager.getCurrentViewController().getSelectedPlayers());
-        if (gameController.isSnakesAndLaddersGame()) {
+        gameManager.getCurrentGameController().setPlayers(viewManager.getCurrentViewController().getSelectedPlayers());
+        if (gameManager.getCurrentGameController() instanceof SnakesAndLaddersController) {
           viewManager.switchToSnakesAndLaddersView();
-        } else if (gameController.isMonopolyGame()) {
+        } else if (gameManager.getCurrentGameController() instanceof MonopolyController) {
           viewManager.switchToMonopolyView();
         }
         viewManager.getCurrentViewController().showGameView();
         viewManager.getCurrentViewController().setButtonClickNotifier(this);
-        gameController.setUpGame();
-        viewManager.getCurrentViewController().addPlayerViews(gameController.getBoardGame().getPlayers());
+        viewManager.getCurrentViewController().addPlayerViews(gameManager.getCurrentGameController().getBoardGame().getPlayers());
+        gameManager.getCurrentGameController().setUpGame();
         break;
       case "Monopoly":
+        gameManager.switchToMonopolyController();
         viewManager.switchToMonopolyView();
-        gameController.setMonopolyBoard();
+        gameManager.getCurrentGameController().setViewManager(viewManager);
+        gameManager.getCurrentGameController().setBoard(0);
         viewManager.switchToMenuView();
         viewManager.getCurrentViewController().showPlayerSelectMenu();
         break;
       case "play":
-        gameController.handleOneTurn();
+        gameManager.getCurrentGameController().handleOneTurn();
         break;
       default:
         throw new UnknownButtonActionException("Unknown button action: " + action);

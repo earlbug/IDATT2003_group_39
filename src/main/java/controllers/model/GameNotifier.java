@@ -81,6 +81,10 @@ public abstract class GameNotifier {
     observers.forEach(observer -> observer.onTileActionPerformed(player));
   }
 
+  public void notifyTurnEnded(Player player) {
+    observers.forEach(observers -> observers.onEndTurn(player));
+  }
+
   /**
    * Notifies all observers that the game state has changed.
    *

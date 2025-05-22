@@ -9,8 +9,10 @@ import interfaces.Board;
 import interfaces.BoardView;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javafx.geometry.Pos;
 import models.BoardGame;
+import models.GamePiece;
 import models.Player;
 import observers.BoardGameObserver;
 import org.slf4j.Logger;
@@ -37,6 +39,21 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(MonopolyViewController.class);
 
   public MonopolyViewController() {
+  }
+
+  @Override
+  public void showBoardSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public void showPlayerSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public Map<String, GamePiece> getSelectedPlayers() {
+    return Map.of();
   }
 
   public void setGameView(GameView gameView) {
@@ -91,11 +108,6 @@ public class MonopolyViewController extends ViewController implements BoardGameO
     // Update player position on the board
     boardView.drawPlayerView(player);
     logger.debug("PlayerView updated for {} ", player.getName());
-    playerInfoView.setPlayerName(player.getName());
-    playerInfoView.setGamePiece(player.getGamePiece().toString());
-    playerInfoView.setPlayerTile(Integer.toString(player.getCurrentTile().getTileId()));
-    playerInfoView.setMoney(Integer.toString(player.getMoney()));
-    playerInfoView.setTurnsToSkip(Integer.toString(player.getTurnsToSkip()));
   }
 
   @Override
@@ -119,14 +131,28 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   }
 
   @Override
+  public void onEndTurn(Player player) {
+    playerInfoView.setPlayerName("Player: " + player.getName());
+    playerInfoView.setGamePiece("Piece: " + player.getGamePiece().toString());
+    playerInfoView.setPlayerTile("Tile: " + player.getCurrentTile().getTileId());
+    playerInfoView.setMoney("Money: " + player.getMoney());
+    playerInfoView.setTurnsToSkip("Turns to skip: " + player.getTurnsToSkip());
+    logger.debug("Player {} has ended its turn", player.getName());
+  }
+
+  @Override
   public void onGameStateChanged(BoardGame boardGame) {
 
   }
 
   @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
-    super.setButtonClickNotifier(notifier);
     diceView.setButtonClickNotifier(notifier);
+  }
+
+  @Override
+  public void setUpView(String boardFileName, int boardNumber) {
+
   }
 
 }

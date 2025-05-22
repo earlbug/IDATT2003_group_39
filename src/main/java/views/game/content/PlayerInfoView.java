@@ -6,8 +6,6 @@ import javafx.scene.text.Text;
 
 public class PlayerInfoView extends VBox {
 
-  private final VBox infoContainer;
-
   private final Text playerName;
   private final Text playerTile;
   private final Text gamePiece;
@@ -15,12 +13,12 @@ public class PlayerInfoView extends VBox {
   private final Text turnsToSkip;
 
   public PlayerInfoView() {
-    infoContainer = new VBox();
-    playerName = new Text("Player:");
-    playerTile = new Text("Tile:");
-    gamePiece = new Text("Piece:");
-    money = new Text("Money:");
-    turnsToSkip = new Text("Turns to skip:");
+    VBox infoContainer = new VBox();
+    playerName = new Text();
+    playerTile = new Text();
+    gamePiece = new Text();
+    money = new Text();
+    turnsToSkip = new Text();
 
     playerName.getStyleClass().add("player-title");
     playerTile.getStyleClass().add("player-title");
@@ -31,29 +29,30 @@ public class PlayerInfoView extends VBox {
 
     infoContainer.getStyleClass().add("player-info");
     infoContainer.setSpacing(20);
+    infoContainer.setPrefSize(150, 150);
     infoContainer.getChildren().addAll(playerName, playerTile, gamePiece, money, turnsToSkip);
     this.setPadding(new Insets(10));
     this.getChildren().add(infoContainer);
   }
 
-  public void setPlayerName(String name) {
-    playerName.setText("Player: " + name);
+  public void setPlayerName(String text) {
+    playerName.setText(text);
   }
 
-  public void setPlayerTile(String tileId) {
-    playerTile.setText("Tile: " + tileId);
+  public void setPlayerTile(String text) {
+    playerTile.setText(text);
   }
 
-  public void setGamePiece(String gamePiece) {
-    this.gamePiece.setText("Piece: " + gamePiece);
+  public void setGamePiece(String text) {
+    this.gamePiece.setText(text);
   }
 
-  public void setMoney(String money) {
-    this.money.setText("Money: " + money);
+  public void setMoney(String text) {
+    this.money.setText(text);
   }
 
-  public void setTurnsToSkip(String turns){
-    turnsToSkip.setText("Turns to skip: " + turns);
+  public void setTurnsToSkip(String text){
+    turnsToSkip.setText(text);
   }
 
 }
