@@ -10,12 +10,17 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <!-- Per Januar 2025 the LTS version is 21 -->
+    <!-- Per Januar 2025 the LTS version is 22 -->
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.12.1</version>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
@@ -26,6 +31,20 @@
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>23.0.1</version>
+    </dependency>
+
+    <!-- Validator for JavaFX text fields -->
+    <dependency>
+      <groupId>net.synedra</groupId>
+      <artifactId>validatorfx</artifactId>
+      <version>0.6.1</version>
+    </dependency>
+
+    <!-- Logging dependencies -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>2.0.15</version>
     </dependency>
   </dependencies>
   <build>
@@ -48,8 +67,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-          <!-- TODO: Replace with your own main-class -->
-          <mainClass>App.java</mainClass>
+          <mainClass>MainApp</mainClass>
         </configuration>
       </plugin>
     </plugins>
