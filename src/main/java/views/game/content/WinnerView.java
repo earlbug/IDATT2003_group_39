@@ -1,4 +1,4 @@
-package views.content;
+package views.game.content;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

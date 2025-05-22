@@ -2,8 +2,8 @@ package factory;
 
 import interfaces.Board;
 import interfaces.BoardView;
-import views.content.MonopolyBoardView;
-import views.content.SnakesAndLaddersBoardView;
+import views.game.content.MonopolyBoardView;
+import views.game.content.SnakesAndLaddersBoardView;
 
 /**
  * Factory class for creating board view instances based on game type.

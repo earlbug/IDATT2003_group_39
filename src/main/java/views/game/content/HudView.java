@@ -1,4 +1,4 @@
-package views.content;
+package views.game.content;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,7 +8,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import controllers.ButtonClickNotifier;
-import observers.ButtonClickObserver;
 
 /**
  * <h3>Represents the view of the HUD</h3>

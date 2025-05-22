@@ -1,14 +1,9 @@
-package views.container;
+package views.game.container;
 
-import models.BoardGame;
 import interfaces.BoardView;
-import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import models.Player;
-import observers.BoardGameObserver;
-import views.content.HudView;
+import views.game.content.HudView;
 
 /**
  * <h3>Represents the view of the game</h3>
@@ -72,4 +67,5 @@ public class GameView extends HBox {
   public HudView getHudView() {
     return hudView;
   }
+
 }

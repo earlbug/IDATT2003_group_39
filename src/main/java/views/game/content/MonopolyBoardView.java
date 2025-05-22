@@ -1,6 +1,4 @@
-package views.content;
-
-import static java.lang.Math.sqrt;
+package views.game.content;
 
 import interfaces.Board;
 import interfaces.BoardView;
@@ -17,13 +15,13 @@ import models.Player;
 import models.Tile;
 
 /**
- * Represents the view of the Snakes and Ladders board.
+ * MonopolyBoardView is an implementation of the BoardView.
+ * Creates the view of the Monopoly board. The Tiles in the board has to be an amount which can be
+ * divided by four to create a proper board.
+ * The first Tile is in the upper left corner and follows the edge with the direction of the clock.
  *
- * @author Tord Fosse
- * @version 1.0.0
- * @since 1.0.0
  */
-public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
+public class MonopolyBoardView extends StackPane implements BoardView {
 
   private final GridPane gridPane = new GridPane();
   private final Pane imagePane = new Pane();
@@ -31,7 +29,8 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
 
   private final Map<Player, PlayerView> playerViews = new HashMap<>();
 
-  public SnakesAndLaddersBoardView() {
+
+  public MonopolyBoardView() {
     this.getChildren().addAll(gridPane, imagePane, playersPane);
   }
 
@@ -39,32 +38,50 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
     this.playerViews.put(player, playerView);
   }
 
+  /**
+   * Creates the layout of the Monopoly board.
+   * The first Tile is in the upper left corner and follows the edge with the direction of the
+   * clock.
+   *
+   * @param board The board instance to create the view for.
+   */
   @Override
   public void drawBoardView(Board board) {
     Tile[] tiles = board.getTiles();
-    int columns = 10;
-    int rows = (int) Math.ceil((double) tiles.length / columns);
-
-    for (Tile tile : tiles) {
-      StackPane tileElement = createElement(tile);
-      int row = rows - 1 - (tile.getTileId() - 1) / columns;
-      int col = (tile.getTileId() - 1) % columns;
-
-      if ((rows - 1 - row) % 2 == 1) {
-        col = columns - 1 - col;
+    int rowLength = tiles.length / 4;
+    for (int i = 1; i < tiles.length + 1; i++) {
+      StackPane tileElement = createElement(board.getTile(i)); // Create the element
+      // Put the element in the right colum and row according to its id.
+      int row, col;
+      if (i <= rowLength) {            // Top edge
+        row = 0;
+        col = i - 1;
+      } else if (i <= rowLength * 2) { // Right edge
+        row = i - (rowLength + 1);
+        col = rowLength;
+      } else if (i <= rowLength * 3) { // Bottom edge
+        row = rowLength;
+        col = rowLength * 3 + 1 - i;
+      } else {                        // Left edge
+        row = rowLength * 4 + 1 - i;
+        col = 0;
       }
 
       gridPane.add(tileElement, col, row);
     }
-    drawBoardImage();
   }
 
-  private StackPane createElement(Tile tile) {
-    return new TileView(tile.getTileId());
+  @Override
+  public void drawBoardImage(int boardNumber) {
+    // TODO: ADD IMGAE FOR MONOPOLY BOARD
   }
 
+  /**
+   * Draws the board image.
+   *
+   */
   private void drawBoardImage() {
-    Image image = new Image("images/SnL2.png"); // TODO: Make this dynamic
+    Image image = new Image(""); // TODO: Endre denne for bilde!!!!
     ImageView imageView = new ImageView(image);
 
     imageView.setFitWidth(800);
@@ -142,14 +159,23 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
     // Position the PlayerView on the TileView with offset
     double tileX = tilePosition[0];
     double tileY = tilePosition[1];
-    playerView.setLayoutX(tileX + tileView.getWidth() / 2 - playerView.getWidth() / 2 + offsetX);
-    playerView.setLayoutY(tileY + tileView.getHeight() / 2 - playerView.getHeight() / 2 + offsetY);
+    playerView.setLayoutX(tileX + tileView.getWidth() / 2 - playerView.getFitWidth() / 2 + offsetX);
+    playerView.setLayoutY(tileY + tileView.getHeight() / 2 - playerView.getFitHeight() / 2 + offsetY);
 
     if (!playersPane.getChildren().contains(playerView)) {
       playersPane.getChildren().add(playerView);
     }
   }
 
+  /**
+   * Creates a Tile Element.
+   *
+   * @param tile The Tile to be created into a Tile Element.
+   * @return a TileView.
+   */
+  private StackPane createElement(Tile tile) {
+    return new TileView(tile.getTileId());
+  }
 
   @Override
   public Pane getView() {
