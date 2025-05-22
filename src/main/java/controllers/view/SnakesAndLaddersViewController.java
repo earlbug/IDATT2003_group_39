@@ -14,7 +14,7 @@ import models.Player;
 import observers.BoardGameObserver;
 import org.slf4j.Logger;
 import views.game.container.GameView;
-import views.game.content.HudView;
+import views.game.content.DiceView;
 import views.game.content.PlayerView;
 import views.game.content.SnakesAndLaddersBoardView;
 import views.game.content.WinnerView;
@@ -29,7 +29,7 @@ import views.game.content.WinnerView;
 public class SnakesAndLaddersViewController extends ViewController implements BoardGameObserver {
 
   private GameView gameView;
-  private HudView hudView;
+  private DiceView diceView;
   private SnakesAndLaddersBoardView boardView;
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersViewController.class);
 
@@ -43,7 +43,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
 
   public void setGameView(GameView gameView) {
     this.gameView = gameView;
-    this.hudView = gameView.getHudView();
+    this.diceView = gameView.getDiceView();
     this.boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
   }
 
@@ -70,7 +70,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
   @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
     super.setButtonClickNotifier(notifier);
-    hudView.setButtonClickNotifier(notifier);
+    diceView.setButtonClickNotifier(notifier);
   }
 
   /**
@@ -80,13 +80,13 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
    */
   @Override
   public void addPlayerViews(List<Player> players) {
-    System.out.println("Adding player views");
     SnakesAndLaddersBoardView boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
     for (Player player : players) {
       PlayerView playerView = new PlayerView();
       playerView.setPlayerGamePiece(player.getGamePiece());
       boardView.addPlayerView(player, playerView);
-      System.out.println(player.getGamePiece());
+      boardView.drawPlayerView(player);
+      logger.debug("Added view for player {}", player);
     }
   }
 
@@ -106,7 +106,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
   @Override
   public void onPlayerMoved(Player player, int steps) {
     // Update dice display
-    hudView.setDiceNumber(steps);
+    diceView.setDiceNumber(steps);
     // Update player position on the board
     boardView.drawPlayerView(player);
     logger.debug("PlayerView updated for {} ", player);
@@ -119,7 +119,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
    */
   @Override
   public void onNextPlayer(Player newPlayer) {
-    hudView.setPlayerName(newPlayer.getName());
+    diceView.setPlayerName(newPlayer.getName());
   }
 
   /**
