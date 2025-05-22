@@ -191,7 +191,7 @@ public class Player {
    *
    * @param money the amount of money the player should have.
    */
-  private void setMoney(int money) {
+  public void setMoney(int money) {
     ArgumentValidator.positiveIntValidator(money);
     this.money = money;
   }
