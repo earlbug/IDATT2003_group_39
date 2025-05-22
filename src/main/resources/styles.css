@@ -2,6 +2,26 @@
   -fx-background-color: white;
 }
 
+.menu-button {
+  -fx-background-color: black;
+  -fx-background-radius: 10;
+  -fx-font-family: "Arial Black";
+  -fx-font-size: 38px;
+  -fx-text-fill: white;
+}
+
+.button:hover {
+  -fx-border-width: 4px;
+  -fx-border-radius: 5;
+  -fx-border-color: green;
+  -fx-border-style: solid;
+}
+
+.text-field {
+  -fx-font-family: "Arial Black";
+  -fx-font-size: 25px;
+}
+
 .roll-dice-button {
   -fx-background-color: white;
   -icon-paint: white;
