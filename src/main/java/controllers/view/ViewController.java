@@ -1,39 +1,64 @@
 package controllers.view;
 
+import controllers.ButtonClickNotifier;
 import controllers.model.GameNotifier;
-import models.BoardGame;
+import java.util.List;
+import java.util.Map;
+import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
+import models.GamePiece;
 import models.Player;
-import observers.BoardGameObserver;
+import org.slf4j.Logger;
 
-public class ViewController extends GameNotifier implements BoardGameObserver {
+public class ViewController extends GameNotifier {
 
-  @Override
-  public void onPlayerMoved(Player player, int steps) {
+  private final Logger logger = org.slf4j.LoggerFactory.getLogger(ViewController.class);
+  private final StackPane rootPane;
 
+  private ButtonClickNotifier notifier;
+
+  /**
+   * Constructor for ViewController.
+   */
+  public ViewController() {
+    this.rootPane = new StackPane();
   }
 
-  @Override
-  public void onNextPlayer(Player newPlayer) {
-
+  public StackPane getRootPane() {
+    return rootPane;
   }
 
-  @Override
-  public void onWinnerDetermined(Player winner) {
-
+  public void showBoardSelectMenu() {
+    // Should be handled in the MenuViewController
   }
 
-  @Override
-  public void onPlayerLost(Player lostPlayer) {
-
+  public void showPlayerSelectMenu() {
+    // Should be handled in the MenuViewController
   }
 
-  @Override
-  public void onTileActionPerformed(Player player) {
-
+  public Map<String, GamePiece> getSelectedPlayers() {
+    // Should be handled in the MenuViewController
+    return null;
   }
 
-  @Override
-  public void onGameStateChanged(BoardGame boardGame) {
+  public void addPlayerViews(List<Player> players) {
+    // Should be handled in the GameViewController
+  };
 
+  public void showGameView() {
+    // Should be handled in the GameViewController
+  }
+
+  public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    this.notifier = notifier;
+    logger.info("ButtonClickNotifier set in ViewController");
+  }
+
+  public ButtonClickNotifier getButtonClickNotifier() {
+    return notifier;
+  }
+
+  public void setUpView(String boardFileName, int boardNumber) {
+    // Should be handled in the GameViewController
   }
 }
