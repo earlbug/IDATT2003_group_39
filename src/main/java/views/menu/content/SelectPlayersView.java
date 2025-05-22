@@ -121,7 +121,7 @@ public class SelectPlayersView extends MenuView {
       textFields.getChildren().add(playerInputContainer);
     }
 
-    /**
+    /** TODO: Fix validation
 
     for (int i = 0; i < numberOfPlayers; i++) {
       final int currentIndex = i;

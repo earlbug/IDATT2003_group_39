@@ -1,6 +1,5 @@
 package models;
 
-import javafx.scene.paint.Color;
 import models.validators.ArgumentValidator;
 
 /**

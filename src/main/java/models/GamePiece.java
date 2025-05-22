@@ -5,5 +5,5 @@ public enum GamePiece {
   CAR,
   BOAT,
   PLANE,
-  TRAIN;
+  TRAIN
 }

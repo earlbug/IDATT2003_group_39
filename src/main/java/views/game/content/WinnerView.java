@@ -9,7 +9,7 @@ import models.Player;
 
 public class WinnerView extends HBox {
 
-  private Player player;
+  private final Player player;
 
   public WinnerView(Player player) {
     this.player = player;

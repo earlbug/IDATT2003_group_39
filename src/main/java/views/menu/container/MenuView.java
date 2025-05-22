@@ -1,28 +1,16 @@
 package views.menu.container;
 
 import controllers.ButtonClickNotifier;
-import java.util.Map;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import models.GamePiece;
-import net.synedra.validatorfx.Validator;
 import views.menu.content.SelectBoardView;
 import views.menu.content.SelectPlayersView;
 
@@ -37,7 +25,6 @@ import views.menu.content.SelectPlayersView;
 public class MenuView extends StackPane {
 
   private ButtonClickNotifier notifier;
-  private SelectBoardView selectBoardView;
   private SelectPlayersView selectPlayersView;
 
   /*
@@ -75,7 +62,7 @@ public class MenuView extends StackPane {
   }
 
   public void selectSnakesAndLaddersBoards() {
-    selectBoardView = new SelectBoardView();
+    SelectBoardView selectBoardView = new SelectBoardView();
     selectBoardView.setButtonClickNotifier(notifier);
     this.getChildren().clear();
     this.getChildren().addAll(selectBoardView);

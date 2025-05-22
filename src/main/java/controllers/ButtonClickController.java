@@ -1,11 +1,8 @@
 package controllers;
 
 import controllers.model.GameController;
-import controllers.view.ViewController;
 import controllers.view.ViewManager;
 import exception.UnknownButtonActionException;
-import exception.UnknownGameException;
-import factory.GameType;
 import observers.ButtonClickObserver;
 
 /**

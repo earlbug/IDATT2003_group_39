@@ -1,8 +1,6 @@
 package controllers.model;
 
 import interfaces.TileAction;
-import java.util.List;
-import models.BoardGame;
 import models.Player;
 import models.actions.WinAction;
 import org.slf4j.Logger;

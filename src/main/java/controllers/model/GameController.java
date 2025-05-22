@@ -1,14 +1,9 @@
 package controllers.model;
 
 import controllers.view.SnakesAndLaddersViewController;
-import controllers.view.ViewController;
 import controllers.view.ViewManager;
 import exception.UnknownGameException;
 import factory.BoardFactory;
-import factory.BoardViewFactory;
-import factory.GameType;
-import interfaces.Board;
-import interfaces.BoardView;
 import interfaces.TileAction;
 import java.io.IOException;
 import java.util.Map;
@@ -18,7 +13,6 @@ import models.Player;
 import models.boards.MonopolyBoard;
 import models.boards.SnakesAndLaddersBoard;
 import org.slf4j.Logger;
-import views.game.container.GameView;
 
 /**
  * Handles game logic operations and delegates notifications.

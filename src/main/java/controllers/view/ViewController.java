@@ -4,7 +4,6 @@ import controllers.ButtonClickNotifier;
 import controllers.model.GameNotifier;
 import java.util.List;
 import java.util.Map;
-import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import models.GamePiece;
 import models.Player;
@@ -43,7 +42,7 @@ public class ViewController extends GameNotifier {
 
   public void addPlayerViews(List<Player> players) {
     // Should be handled in the GameViewController
-  };
+  }
 
   public void showGameView() {
     // Should be handled in the GameViewController

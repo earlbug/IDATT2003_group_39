@@ -9,7 +9,6 @@ import interfaces.Board;
 import interfaces.BoardView;
 import java.io.IOException;
 import java.util.List;
-import javafx.geometry.Pos;
 import models.BoardGame;
 import models.Player;
 import observers.BoardGameObserver;

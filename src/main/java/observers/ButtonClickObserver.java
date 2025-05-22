@@ -1,8 +1,5 @@
 package observers;
 
-import exception.UnknownGameException;
-import java.io.IOException;
-
 /**
  * <h3>Listener of a button click</h3>
  *

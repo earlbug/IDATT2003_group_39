@@ -1,7 +1,6 @@
 package controllers.model;
 
 import java.util.List;
-import models.BoardGame;
 import models.Player;
 import org.slf4j.Logger;
 

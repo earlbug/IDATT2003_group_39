@@ -1,14 +1,8 @@
-import controllers.view.MenuViewController;
-import controllers.view.ViewController;
 import controllers.view.ViewManager;
-import javafx.geometry.Pos;
-import javafx.scene.layout.StackPane;
 import controllers.model.GameController;
 import controllers.ButtonClickController;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import views.menu.container.MenuView;
 
 /**
  * This class represents the main application.

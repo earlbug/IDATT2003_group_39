@@ -1,10 +1,8 @@
 package controllers.view;
 
 import controllers.ButtonClickNotifier;
-import java.util.List;
 import java.util.Map;
 import models.GamePiece;
-import models.Player;
 import views.menu.container.MenuView;
 
 public class MenuViewController extends ViewController {
