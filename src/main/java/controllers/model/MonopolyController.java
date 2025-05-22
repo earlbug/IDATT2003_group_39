@@ -15,14 +15,6 @@ public class MonopolyController extends GameController {
 
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(MonopolyController.class);
 
-  /**
-   * Initializes a Monopoly game controller.
-   *
-   * @param boardGame the BoardGame to be played and controlled.
-   */
-  public MonopolyController(BoardGame boardGame) {
-    super(boardGame);
-  }
 
   /**
    * An override of the super class method, to check if monopoly specific conditions are met for a
