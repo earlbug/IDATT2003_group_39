@@ -1,24 +1,14 @@
-import controllers.view.SnakesAndLaddersViewController;
-import interfaces.Board;
-import javafx.geometry.Insets;
+import controllers.view.MenuViewController;
+import controllers.view.ViewController;
+import controllers.view.ViewManager;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import models.BoardGame;
 import controllers.model.GameController;
 import controllers.ButtonClickController;
-import exception.UnknownGameException;
-import factory.BoardFactory;
-import factory.GameType;
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import models.Player;
-import factory.BoardViewFactory;
-import interfaces.BoardView;
-import views.content.HudView;
-import views.container.GameView;
+import views.menu.container.MenuView;
 
 /**
  * This class represents the main application.
@@ -30,8 +20,14 @@ import views.container.GameView;
 public class MainApp extends Application {
 
   @Override
-  public void start(Stage primaryStage) throws IOException, UnknownGameException {
+  public void start(Stage primaryStage) {
 
+    GameController gameController = new GameController();
+    ViewManager viewManager = new ViewManager(primaryStage);
+    ButtonClickController buttonClickController = new ButtonClickController(gameController, viewManager);
+    viewManager.getCurrentViewController().setButtonClickNotifier(buttonClickController);
+
+    /*
     BoardGame boardGame = new BoardGame();
     Board board = BoardFactory.getFromFile("SnL2.json");
     BoardView boardView = BoardViewFactory.createBoardView(GameType.SNAKES_AND_LADDERS, board);
@@ -63,19 +59,12 @@ public class MainApp extends Application {
     boardView.drawPlayerView(p2);
     boardView.drawPlayerView(p3);
     boardGame.addPlayersOnStartPos();
+    */
 
     // Wrap gameView in a StackPane and center it
-    StackPane root = new StackPane(gameView);
-    gameView.setAlignment(Pos.CENTER);
-    root.setPadding(new Insets(50));
 
-    Scene scene = new Scene(root, 1000, 800);
-    scene.getStylesheets().add("styles.css");
-    primaryStage.setTitle("Game");
-    primaryStage.setScene(scene);
-    primaryStage.setMinHeight(800);
-    primaryStage.setMinWidth(1000);
-    primaryStage.show();
+
+    viewManager.switchToMenuView();
   }
 
 }
