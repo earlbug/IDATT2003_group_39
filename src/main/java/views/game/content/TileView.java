@@ -1,12 +1,6 @@
-package views.content;
+package views.game.content;
 
 
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

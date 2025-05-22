@@ -1,9 +1,17 @@
 package controllers.model;
 
+import controllers.view.SnakesAndLaddersViewController;
+import controllers.view.ViewManager;
+import exception.UnknownGameException;
+import factory.BoardFactory;
 import interfaces.TileAction;
+import java.io.IOException;
+import java.util.Map;
 import models.BoardGame;
+import models.GamePiece;
 import models.Player;
-import models.actions.WinAction;
+import models.boards.MonopolyBoard;
+import models.boards.SnakesAndLaddersBoard;
 import org.slf4j.Logger;
 
 /**
@@ -15,17 +23,59 @@ import org.slf4j.Logger;
  */
 public class GameController extends GameNotifier {
 
-  final BoardGame boardGame;
+  BoardGame boardGame;
+  private ViewManager viewManager;
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(GameController.class);
 
   /**
    * Constructor for BoardGameHandler.
-   *
-   * @param boardGame The board game to handle
    */
-  public GameController(BoardGame boardGame) {
+  public GameController() {
+  }
+
+  /**
+   * Sets the board game.
+   *
+   * @param boardGame The board game to set
+   */
+  public void setBoardGame(BoardGame boardGame) {
     this.boardGame = boardGame;
   }
+
+  /**
+   * Gets the board game.
+   *
+   * @return The board game
+   */
+  public BoardGame getBoardGame() {
+    return boardGame;
+  }
+
+  public void setBoard(int boardNumber) {
+    String boardFileName = switch (boardNumber) {
+      case 1 -> "SnL1.json";
+      case 2 -> "SnL2.json";
+      case 3 -> "SnL3.json";
+      default -> throw new IllegalArgumentException("Invalid board number: " + boardNumber);
+    };
+
+    try {
+      boardGame = new BoardGame();
+      setBoardGame(boardGame);
+      boardGame.setBoard(BoardFactory.getFromFile(boardFileName));
+
+      SnakesAndLaddersViewController viewController = (SnakesAndLaddersViewController) viewManager.getCurrentViewController();
+      viewController.setUpView(boardFileName, boardNumber);
+      addObserver(viewController);
+
+      boardGame.createDice(1);
+
+      logger.debug("Board set up: {}", boardFileName);
+    } catch (UnknownGameException | IOException e) {
+      logger.error("Error setting up game: {}", e.getMessage());
+    }
+  }
+
 
   /**
    * Handles adding a player to the game.
@@ -46,9 +96,8 @@ public class GameController extends GameNotifier {
   }
 
   /**
-   * Handles player movement by moving the player,
-   * notifying observers that the player has been moved,
-   * and preforming the TileAction, if any.
+   * Handles player movement by moving the player, notifying observers that the player has been
+   * moved, and preforming the TileAction, if any.
    *
    * @param steps Number of steps to move
    */
@@ -60,8 +109,7 @@ public class GameController extends GameNotifier {
     // Notify observers about the move
     notifyPlayerMoved(currentPlayer, steps);
 
-    TileAction tileAction = currentPlayer.getCurrentTile()
-        .getLandAction();
+    TileAction tileAction = currentPlayer.getCurrentTile().getLandAction();
     if (tileAction != null) {
       tileAction.perform(currentPlayer);
       logger.debug("Player {} performed action: {}", currentPlayer.getName(), tileAction);
@@ -73,8 +121,8 @@ public class GameController extends GameNotifier {
   }
 
   /**
-   * Handles the methods needed to take one turn in the game, like moving,
-   * and checking if anyone has lost or won, and skipping to next player.
+   * Handles the methods needed to take one turn in the game, like moving, and checking if anyone
+   * has lost or won, and skipping to next player.
    */
   public void handleOneTurn() {
     int sum = handleRollDice();
@@ -96,7 +144,6 @@ public class GameController extends GameNotifier {
 
   /**
    * Checks if a new player has lost, and notifies observers if so.
-   *
    */
   public void handlePlayerLooseCheck() {
     for (Player player : boardGame.getPlayers()) {
@@ -119,9 +166,8 @@ public class GameController extends GameNotifier {
   }
 
   /**
-   * Notifies observers that a player has won,
-   * if the winning conditions is met and the player has not already lost.
-   * Observers are notified if conditions are met.
+   * Notifies observers that a player has won, if the winning conditions is met and the player has
+   * not already lost. Observers are notified if conditions are met.
    */
   public void handlePlayerWinCheck() {
     for (Player player : boardGame.getPlayers()) {
@@ -144,9 +190,9 @@ public class GameController extends GameNotifier {
   }
 
   /**
-   * Handles changing to next player.
-   * If the next Player has lost or have to skip a round, then the player is skipped.
-   * If the player had turns to skip, then the amount of turns to skip s reduced by one round.
+   * Handles changing to next player. If the next Player has lost or have to skip a round, then the
+   * player is skipped. If the player had turns to skip, then the amount of turns to skip s reduced
+   * by one round.
    */
   public void handleNextPlayer() {
     boardGame.nextPlayer();
@@ -161,6 +207,38 @@ public class GameController extends GameNotifier {
 
     notifyNextPlayer(currentPlayer);
     logger.debug("Next player: {}", currentPlayer.getName());
+  }
+
+
+  public void setUpGame() {
+    boardGame.setPlayerIds();
+    boardGame.addPlayersOnStartPos();
+    boardGame.setCurrentPlayer(boardGame.getPlayers().getFirst());
+    logger.debug("Game set up with players: {}", boardGame.getPlayers().toArray());
+  }
+
+  public void setPlayers(Map<String, GamePiece> players) {
+    for (Map.Entry<String, GamePiece> entry : players.entrySet()) {
+      String playerName = entry.getKey();
+      GamePiece gamePiece = entry.getValue();
+      Player player = new Player(playerName, boardGame);
+      player.setGamePiece(gamePiece);
+      boardGame.addPlayer(player);
+      logger.debug("Player {} set up with game piece {}", playerName, gamePiece);
+    }
+  }
+
+  public boolean isSnakesAndLaddersGame() {
+    return boardGame.getBoard() instanceof SnakesAndLaddersBoard;
+  }
+
+  public boolean isMonopolyGame() {
+    return boardGame.getBoard() instanceof MonopolyBoard;
+  }
+
+  public void setViewManager(ViewManager viewManager) {
+    this.viewManager = viewManager;
+    logger.debug("View manager set in GameController");
   }
 }
 

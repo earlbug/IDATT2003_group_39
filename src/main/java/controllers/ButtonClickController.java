@@ -1,9 +1,9 @@
 package controllers;
 
 import controllers.model.GameController;
-import controllers.view.ViewController;
+import controllers.view.ViewManager;
+import exception.UnknownButtonActionException;
 import observers.ButtonClickObserver;
-import views.container.GameView;
 
 /**
  * <h3>Handles button clicks</h3>
@@ -16,16 +16,18 @@ import views.container.GameView;
 public class ButtonClickController extends ButtonClickNotifier implements ButtonClickObserver {
 
   private final GameController gameController;
+  private final ViewManager viewManager;
 
   /**
    * Constructs a new handler to handle button clicks.
    *
-   * @param gameController the handler handling boardGame changes.
-   * @param viewController       the current gameView of the boardGame.
+   * @param gameController The game controller to use
+   * @param viewManager    The view manager to use
    */
-  public ButtonClickController(GameController gameController, ViewController viewController) {
+  public ButtonClickController(GameController gameController, ViewManager viewManager) {
+    this.viewManager = viewManager;
     this.gameController = gameController;
-    gameController.addObserver(viewController);
+    gameController.setViewManager(viewManager);
     this.addObserver(this);
   }
 
@@ -34,11 +36,47 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
     System.out.println("Button was clicked " + action);
 
     switch (action) {
+      case "SnakesAndLadders":
+        viewManager.getCurrentViewController().showBoardSelectMenu();
+        break;
+      case "Board1":
+        viewManager.switchToSnakesAndLaddersView();
+        gameController.setBoard(1);
+        viewManager.switchToMenuView();
+        viewManager.getCurrentViewController().showPlayerSelectMenu();
+        break;
+      case "Board2":
+        viewManager.switchToSnakesAndLaddersView();
+        gameController.setBoard(2);
+        viewManager.switchToMenuView();
+        viewManager.getCurrentViewController().showPlayerSelectMenu();
+        break;
+      case "Board3":
+        viewManager.switchToSnakesAndLaddersView();
+        gameController.setBoard(3);
+        viewManager.switchToMenuView();
+        viewManager.getCurrentViewController().showPlayerSelectMenu();
+        break;
+      case "Start":
+        gameController.setPlayers(viewManager.getCurrentViewController().getSelectedPlayers());
+        if (gameController.isSnakesAndLaddersGame()) {
+          viewManager.switchToSnakesAndLaddersView();
+        } else if (gameController.isMonopolyGame()) {
+          viewManager.switchToMonopolyView();
+        }
+        viewManager.getCurrentViewController().showGameView();
+        viewManager.getCurrentViewController().setButtonClickNotifier(this);
+        gameController.setUpGame();
+        viewManager.getCurrentViewController().addPlayerViews(gameController.getBoardGame().getPlayers());
+        break;
+      case "Monopoly":
+        gameController.setUpGame();
+        break;
       case "play":
         gameController.handleOneTurn();
         break;
       default:
-        System.out.println("Unknown action" + action);
+        throw new UnknownButtonActionException("Unknown button action: " + action);
     }
   }
 }

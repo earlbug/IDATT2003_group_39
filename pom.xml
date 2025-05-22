@@ -33,6 +33,13 @@
       <version>23.0.1</version>
     </dependency>
 
+    <!-- Validator for JavaFX text fields -->
+    <dependency>
+      <groupId>net.synedra</groupId>
+      <artifactId>validatorfx</artifactId>
+      <version>0.6.1</version>
+    </dependency>
+
     <!-- Logging dependencies -->
     <dependency>
       <groupId>org.slf4j</groupId>

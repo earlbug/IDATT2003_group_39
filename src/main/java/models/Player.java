@@ -1,6 +1,5 @@
 package models;
 
-import javafx.scene.paint.Color;
 import models.validators.ArgumentValidator;
 
 /**
@@ -18,7 +17,7 @@ public class Player {
   private String name;
   private Tile currentTile = new Tile(1);
   private final BoardGame game;
-  private Color color;
+  private GamePiece gamePiece;
   private int money;
   private int turnsToSkip;
   private boolean hasLost;
@@ -160,22 +159,22 @@ public class Player {
   }
 
   /**
-   * Sets the color of the player.
+   * Sets the game piece of the player.
    *
-   * @param color the color to set
+   * @param gamePiece the game piece to set
    */
-  public void setColor(Color color) {
-    ArgumentValidator.playerSetColorValidator(color);
-    this.color = color;
+  public void setGamePiece(GamePiece gamePiece) {
+    ArgumentValidator.playerSetGamePieceValidator(gamePiece);
+    this.gamePiece = gamePiece;
   }
 
   /**
-   * Returns the color of the player.
+   * Returns the game piece of the player.
    *
-   * @return the color of the player
+   * @return the game piece of the player
    */
-  public Color getColor() {
-    return color;
+  public GamePiece getGamePiece() {
+    return gamePiece;
   }
 
   /**

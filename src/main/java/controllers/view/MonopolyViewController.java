@@ -2,16 +2,15 @@ package controllers.view;
 
 import controllers.ButtonClickNotifier;
 import java.util.List;
-import javafx.scene.layout.GridPane;
 import models.BoardGame;
 import models.Player;
+import observers.BoardGameObserver;
 import org.slf4j.Logger;
-import views.container.GameView;
-import views.content.HudView;
-import views.content.MonopolyBoardView;
-import views.content.PlayerView;
-import views.content.SnakesAndLaddersBoardView;
-import views.content.WinnerView;
+import views.game.container.GameView;
+import views.game.content.HudView;
+import views.game.content.MonopolyBoardView;
+import views.game.content.PlayerView;
+import views.game.content.WinnerView;
 
 /**
  * Controller class responsible for managing the visual representation of a Monopoly game.
@@ -20,17 +19,21 @@ import views.content.WinnerView;
  * This class extends ViewController and implements the observer pattern to react to
  * game events such as player movements, player turns, and game completion.
  */
-public class MonopolyViewController extends ViewController {
+public class MonopolyViewController extends ViewController implements BoardGameObserver {
 
-  private final GameView gameView;
-  private final HudView hudView;
-  private final MonopolyBoardView boardView;
+  private GameView gameView;
+  private HudView hudView;
+  private MonopolyBoardView boardView;
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(MonopolyViewController.class);
 
-  public MonopolyViewController(GameView gameView) {
+  public MonopolyViewController() {
+  }
+
+  public void setGameView(GameView gameView) {
     this.gameView = gameView;
     this.hudView = gameView.getHudView();
-    this.boardView = (MonopolyBoardView)  gameView.getBoardView();
+    this.boardView = (MonopolyBoardView) gameView.getBoardView();
+    this.getRootPane().getChildren().add(gameView);
   }
 
 
@@ -42,11 +45,10 @@ public class MonopolyViewController extends ViewController {
     // MonopolyBoardView boardView = (MonopolyBoardView) gameView.getBoardView();
     for (Player player : players) {
       PlayerView playerView = new PlayerView();
-      playerView.setPlayerColor(player.getColor());
+      playerView.setPlayerGamePiece(player.getGamePiece());
       boardView.addPlayerView(player, playerView);
     }
   }
-
 
   @Override
   public void onPlayerMoved(Player player, int steps) {
@@ -75,8 +77,19 @@ public class MonopolyViewController extends ViewController {
   }
 
   @Override
+  public void onTileActionPerformed(Player player) {
+
+  }
+
+  @Override
   public void onGameStateChanged(BoardGame boardGame) {
 
+  }
+
+  @Override
+  public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    super.setButtonClickNotifier(notifier);
+    hudView.setButtonClickNotifier(notifier);
   }
 
 }
