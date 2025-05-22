@@ -46,7 +46,7 @@ public class MainApp extends Application {
     BoardGame boardGame = new BoardGame();
     Board board = null;
     try {
-    board = BoardFactory.getFromFile("monopolygame_1.json");
+    board = BoardFactory.getFromFile("monopolygame_3.json");
     } catch (Exception e) {
       log.error(e.getMessage());
     }
