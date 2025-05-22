@@ -9,12 +9,9 @@ import models.GamePiece;
 import models.Player;
 import org.slf4j.Logger;
 
-public class ViewController extends GameNotifier {
+public abstract class ViewController extends GameNotifier {
 
-  private final Logger logger = org.slf4j.LoggerFactory.getLogger(ViewController.class);
   private final StackPane rootPane;
-
-  private ButtonClickNotifier notifier;
 
   /**
    * Constructor for ViewController.
@@ -27,41 +24,19 @@ public class ViewController extends GameNotifier {
     return rootPane;
   }
 
-  public void showBoardSelectMenu() {
-  // Should be handled in the MenuViewController
-}
+  public abstract void showBoardSelectMenu();
 
-  public void showPlayerSelectMenu() {
-    // Should be handled in the MenuViewController
-  }
+  public abstract void showPlayerSelectMenu();
 
-  public Map<String, GamePiece> getSelectedPlayers() {
-    // Should be handled in the MenuViewController
-    return null;
-  }
+  public abstract Map<String, GamePiece> getSelectedPlayers();
 
-  public void addPlayerViews(List<Player> players) {
-    // Should be handled in the GameViewController
-  }
+  public abstract void addPlayerViews(List<Player> players);
 
-  public void showGameView() {
-    // Should be handled in the GameViewController
-  }
+  public abstract void showGameView();
 
-  public void setButtonClickNotifier(ButtonClickNotifier notifier) {
-    this.notifier = notifier;
-    logger.info("ButtonClickNotifier set in ViewController");
-  }
+  public abstract void setButtonClickNotifier(ButtonClickNotifier notifier);
 
-  public ButtonClickNotifier getButtonClickNotifier() {
-    return notifier;
-  }
+  public abstract void setUpView(String boardFileName, int boardNumber);
 
-  public void setUpView(String boardFileName, int boardNumber) {
-    // Should be handled in the GameViewController
-  }
-
-  public void setUpView(String boardFileName) {
-      // Should be handled in the GameViewController
-  }
+  public abstract void  setUpView(String boardFileName);
 }

@@ -9,12 +9,16 @@ import interfaces.Board;
 import interfaces.BoardView;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import javafx.geometry.Pos;
 import models.BoardGame;
+import models.GamePiece;
 import models.Player;
 import observers.BoardGameObserver;
 import org.slf4j.Logger;
 import views.game.container.GameView;
 import views.game.content.DiceView;
+import views.game.content.PlayerInfoView;
 import views.game.content.PlayerView;
 import views.game.content.SnakesAndLaddersBoardView;
 import views.game.content.WinnerView;
@@ -29,21 +33,37 @@ import views.game.content.WinnerView;
 public class SnakesAndLaddersViewController extends ViewController implements BoardGameObserver {
 
   private GameView gameView;
+  private PlayerInfoView playerInfoView;
   private DiceView diceView;
   private SnakesAndLaddersBoardView boardView;
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersViewController.class);
 
   /**
    * Constructor for SnakesAndLaddersViewController.
-   *
    */
   public SnakesAndLaddersViewController() {
     logger.debug("SnakesAndLaddersViewController initialized");
   }
 
+  @Override
+  public void showBoardSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public void showPlayerSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public Map<String, GamePiece> getSelectedPlayers() {
+    return Map.of();
+  }
+
   public void setGameView(GameView gameView) {
     this.gameView = gameView;
     this.diceView = gameView.getDiceView();
+    this.playerInfoView = gameView.getPlayerInfoView();
     this.boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
   }
 
@@ -61,6 +81,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
 
       setGameView(gameView);
       boardView.drawBoardImage(boardNumber);
+      gameView.setAlignment(Pos.CENTER);
       logger.debug("View set up for board file: {}", boardFileName);
     } catch (UnknownGameException | IOException e) {
       throw new RuntimeException(e);
@@ -68,8 +89,12 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
   }
 
   @Override
+  public void setUpView(String boardFileName) {
+    // Not used
+  }
+
+  @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
-    super.setButtonClickNotifier(notifier);
     diceView.setButtonClickNotifier(notifier);
   }
 
@@ -130,6 +155,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
   @Override
   public void onWinnerDetermined(Player winner) {
     gameView.getChildren().setAll(new WinnerView(winner));
+    System.out.println("yep");
   }
 
   @Override
