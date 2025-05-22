@@ -57,7 +57,7 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
   }
 
   private StackPane createElement(Tile tile) {
-    return new TileView(tile.getTileId());
+    return new TileView(tile.getTileId(), 80);
   }
 
   @Override
