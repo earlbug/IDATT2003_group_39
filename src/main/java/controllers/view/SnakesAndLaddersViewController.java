@@ -21,7 +21,7 @@ import views.game.content.DiceView;
 import views.game.content.PlayerInfoView;
 import views.game.content.PlayerView;
 import views.game.content.SnakesAndLaddersBoardView;
-import views.game.content.WinnerView;
+import views.game.content.WinnerPopup;
 
 /**
  * Handles the view logic for the Snakes and Ladders game.
@@ -154,7 +154,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
    */
   @Override
   public void onWinnerDetermined(Player winner) {
-    gameView.getChildren().setAll(new WinnerView(winner));
+    gameView.getChildren().setAll(new WinnerPopup());
     System.out.println("yep");
   }
 

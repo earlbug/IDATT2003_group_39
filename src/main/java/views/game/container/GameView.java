@@ -5,6 +5,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import views.game.content.DiceView;
 import views.game.content.PlayerInfoView;
+import views.game.content.WinnerPopup;
 
 /**
  * <h3>Represents the view of the game</h3>
@@ -23,6 +24,7 @@ public class GameView extends HBox {
   private final BoardView boardView;
   private final PlayerInfoView playerInfoView;
   private final DiceView diceView;
+  private final WinnerPopup winnerPopup;
 
   /**
    * Constructs a new view of the game. Creates containers to hold the board and HUD.
@@ -35,6 +37,7 @@ public class GameView extends HBox {
     this.boardView = boardView;
     this.playerInfoView = new PlayerInfoView();
     this.diceView = new DiceView();
+    this.winnerPopup = new WinnerPopup();
     this.setSpacing(20);
 
     initialize();

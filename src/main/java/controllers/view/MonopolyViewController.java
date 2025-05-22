@@ -21,7 +21,7 @@ import views.game.content.DiceView;
 import views.game.content.MonopolyBoardView;
 import views.game.content.PlayerInfoView;
 import views.game.content.PlayerView;
-import views.game.content.WinnerView;
+import views.game.content.WinnerPopup;
 
 /**
  * Controller class responsible for managing the visual representation of a Monopoly game.
@@ -117,7 +117,7 @@ public class MonopolyViewController extends ViewController implements BoardGameO
 
   @Override
   public void onWinnerDetermined(Player winner) {
-    gameView.getChildren().setAll(new WinnerView(winner));
+    gameView.getChildren().setAll(new WinnerPopup());
   }
 
   @Override

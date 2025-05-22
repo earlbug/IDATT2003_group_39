@@ -38,6 +38,7 @@
 }
 
 .roll-dice-button:hover {
+  -fx-border-color: white;
   -fx-effect: dropshadow(gaussian, white, 10, 0.5, 0, 0);
 }
 
