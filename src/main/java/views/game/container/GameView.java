@@ -21,7 +21,7 @@ public class GameView extends HBox {
   private final StackPane diceContainer;
 
   private final BoardView boardView;
-  private PlayerInfoView playerInfoView;
+  private final PlayerInfoView playerInfoView;
   private final DiceView diceView;
 
   /**
@@ -33,6 +33,7 @@ public class GameView extends HBox {
     diceContainer = new StackPane();
 
     this.boardView = boardView;
+    this.playerInfoView = new PlayerInfoView();
     this.diceView = new DiceView();
     this.setSpacing(20);
 
@@ -45,10 +46,6 @@ public class GameView extends HBox {
     diceContainer.getChildren().add(diceView.getView());
 
     this.getChildren().setAll(playerInfoContainer,boardContainer, diceContainer);
-  }
-
-  public void setPlayerInfoView() {
-    this.playerInfoView = new PlayerInfoView();
   }
 
   /**
