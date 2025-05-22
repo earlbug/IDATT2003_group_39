@@ -1,7 +1,7 @@
-package controllers.view;
+package controllers.viewController;
 
 import controllers.ButtonClickNotifier;
-import controllers.model.GameNotifier;
+import controllers.modelController.GameNotifier;
 import java.util.List;
 import java.util.Map;
 import javafx.scene.layout.StackPane;

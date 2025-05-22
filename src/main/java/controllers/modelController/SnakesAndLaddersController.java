@@ -1,7 +1,7 @@
-package controllers.model;
+package controllers.modelController;
 
-import controllers.view.SnakesAndLaddersViewController;
-import controllers.view.ViewManager;
+import controllers.viewController.SnakesAndLaddersViewController;
+import controllers.viewController.ViewManager;
 import exception.UnknownGameException;
 import factory.BoardFactory;
 import interfaces.TileAction;

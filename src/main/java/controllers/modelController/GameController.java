@@ -1,6 +1,6 @@
-package controllers.model;
+package controllers.modelController;
 
-import controllers.view.ViewManager;
+import controllers.viewController.ViewManager;
 import java.util.Map;
 import models.BoardGame;
 import models.GamePiece;

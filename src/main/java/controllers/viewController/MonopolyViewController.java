@@ -1,4 +1,4 @@
-package controllers.view;
+package controllers.viewController;
 
 import controllers.ButtonClickNotifier;
 import exception.UnknownGameException;

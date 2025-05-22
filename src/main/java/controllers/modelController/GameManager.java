@@ -1,4 +1,4 @@
-package controllers.model;
+package controllers.modelController;
 
 import models.validators.ArgumentValidator;
 
