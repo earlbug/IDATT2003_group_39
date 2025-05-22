@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import models.validators.ArgumentValidator;
 import views.menu.content.SelectBoardView;
 import views.menu.content.SelectPlayersView;
 
@@ -81,6 +82,7 @@ public class MenuView extends StackPane {
    * @param notifier The notifier to handle button clicks
    */
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    ArgumentValidator.setButtonClickNotifier(notifier);
     this.notifier = notifier;
   }
 
