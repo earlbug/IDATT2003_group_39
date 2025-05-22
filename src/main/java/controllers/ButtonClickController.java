@@ -70,7 +70,10 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
         viewManager.getCurrentViewController().addPlayerViews(gameController.getBoardGame().getPlayers());
         break;
       case "Monopoly":
-        gameController.setUpGame();
+        viewManager.switchToMonopolyView();
+        gameController.setMonopolyBoard();
+        viewManager.switchToMenuView();
+        viewManager.getCurrentViewController().showPlayerSelectMenu();
         break;
       case "play":
         gameController.handleOneTurn();
