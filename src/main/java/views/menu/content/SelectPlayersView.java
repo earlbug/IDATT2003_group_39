@@ -137,7 +137,10 @@ public class SelectPlayersView extends MenuView {
         String name = c.get("name" + currentIndex);
         if (name.isEmpty()) {
           c.error("Name cannot be empty");
-        } else {
+        } else if (name.length() >= 8) {
+          c.error("Name must be less than 8 characters");
+        }
+        else {
           // Duplicate name check
           for (int j = 0; j < numberOfPlayers; j++) {
             if (j != currentIndex && j < fields.length && name.equalsIgnoreCase(fields[j].getText())
