@@ -1,6 +1,7 @@
 package models.validators;
 
-import controllers.model.GameController;
+import controllers.ButtonClickNotifier;
+import controllers.modelController.GameController;
 import interfaces.TileAction;
 import models.BoardGame;
 import models.GamePiece;
@@ -74,6 +75,12 @@ public class ArgumentValidator {
   public static void playerSetGamePieceValidator(GamePiece gamePiece) {
     if (gamePiece == null) {
       throw new IllegalArgumentException("Game piece cannot be null");
+    }
+  }
+
+  public static void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    if (notifier == null) {
+      throw new IllegalArgumentException("ButtonClickNotifier cannot be null");
     }
   }
 }
