@@ -142,6 +142,14 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     boardView.drawPlayerView(player);
   }
 
+  @Override
+  public void onEndTurn(Player player) {
+    playerInfoView.setPlayerName("Player: " + player.getName());
+    playerInfoView.setGamePiece("Piece: " + player.getGamePiece().toString());
+    playerInfoView.setPlayerTile("Tile: " + player.getCurrentTile().getTileId());
+    logger.debug("Player {} has ended its turn", player.getName());
+  }
+
   /**
    * Handles the event when the game state changes.
    *

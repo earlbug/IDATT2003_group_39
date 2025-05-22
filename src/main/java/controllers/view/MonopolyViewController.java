@@ -119,6 +119,16 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   }
 
   @Override
+  public void onEndTurn(Player player) {
+    playerInfoView.setPlayerName("Player: " + player.getName());
+    playerInfoView.setGamePiece("Piece: " + player.getGamePiece().toString());
+    playerInfoView.setPlayerTile("Tile: " + player.getCurrentTile().getTileId());
+    playerInfoView.setMoney("Money: " + player.getMoney());
+    playerInfoView.setTurnsToSkip("Turns to skip: " + player.getTurnsToSkip());
+    logger.debug("Player {} has ended its turn", player.getName());
+  }
+
+  @Override
   public void onGameStateChanged(BoardGame boardGame) {
 
   }

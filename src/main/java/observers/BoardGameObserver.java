@@ -43,6 +43,8 @@ public interface BoardGameObserver {
 
   void onTileActionPerformed(Player player);
 
+  void onEndTurn(Player player);
+
   /**
    * Called when the game state changes in any other way.
    *
