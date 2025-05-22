@@ -28,8 +28,8 @@ public class ViewController extends GameNotifier {
   }
 
   public void showBoardSelectMenu() {
-    // Should be handled in the MenuViewController
-  }
+  // Should be handled in the MenuViewController
+}
 
   public void showPlayerSelectMenu() {
     // Should be handled in the MenuViewController
@@ -59,5 +59,9 @@ public class ViewController extends GameNotifier {
 
   public void setUpView(String boardFileName, int boardNumber) {
     // Should be handled in the GameViewController
+  }
+
+  public void setUpView(String boardFileName) {
+      // Should be handled in the GameViewController
   }
 }
