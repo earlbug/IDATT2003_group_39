@@ -35,7 +35,7 @@ public class Player {
     setPlayerId(playerId);
     setHasLost(false);
     setHasWon(false);
-    setMoney(0);
+    setMoney(2000);
   }
 
   /**
