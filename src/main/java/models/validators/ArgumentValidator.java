@@ -2,6 +2,7 @@ package models.validators;
 
 import interfaces.TileAction;
 import javafx.scene.paint.Color;
+import models.GamePiece;
 import models.Tile;
 
 /**
@@ -19,12 +20,6 @@ public class ArgumentValidator {
   public static void playerSetCurrentTileValidator(Tile tile){
     if (tile == null){
       throw new IllegalArgumentException("Current tile cannot be null");
-    }
-  }
-
-  public static void playerSetColorValidator(Color color){
-    if (color == null){
-      throw new IllegalArgumentException("Color cannot be null");
     }
   }
 
@@ -64,4 +59,9 @@ public class ArgumentValidator {
     }
   }
 
+  public static void playerSetGamePieceValidator(GamePiece gamePiece) {
+    if (gamePiece == null) {
+      throw new IllegalArgumentException("Game piece cannot be null");
+    }
+  }
 }
