@@ -18,7 +18,7 @@ import controllers.ButtonClickNotifier;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class HudView extends VBox {
+public class DiceView extends VBox {
 
   final int maxWith = 300;
 
@@ -39,11 +39,11 @@ public class HudView extends VBox {
    * Constructs containers to give the user a simple view of the info. Initializes the view to add
    * the information in the containers.
    */
-  public HudView() {
+  public DiceView() {
     this.playerContainer = new VBox();
     this.diceContainer = new VBox();
 
-    this.playerTitle = new Text("Player");
+    this.playerTitle = new Text("Player to roll");
 
     this.spacer = new Region();
     this.rollDiceButton = new Button();

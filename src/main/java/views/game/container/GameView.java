@@ -3,7 +3,8 @@ package views.game.container;
 import interfaces.BoardView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import views.game.content.HudView;
+import views.game.content.DiceView;
+import views.game.content.PlayerInfoView;
 
 /**
  * <h3>Represents the view of the game</h3>
@@ -16,29 +17,38 @@ import views.game.content.HudView;
 public class GameView extends HBox {
 
   private final HBox boardContainer;
-  private final StackPane hudContainer;
+  private final StackPane playerInfoContainer;
+  private final StackPane diceContainer;
 
   private final BoardView boardView;
-  private final HudView hudView;
+  private PlayerInfoView playerInfoView;
+  private final DiceView diceView;
 
   /**
    * Constructs a new view of the game. Creates containers to hold the board and HUD.
    */
   public GameView(BoardView boardView) {
     boardContainer = new HBox();
-    hudContainer = new StackPane();
+    playerInfoContainer = new StackPane();
+    diceContainer = new StackPane();
 
     this.boardView = boardView;
-    this.hudView = new HudView();
+    this.diceView = new DiceView();
+    this.setSpacing(20);
 
     initialize();
   }
 
   private void initialize() {
     boardContainer.getChildren().add(boardView.getView());
-    hudContainer.getChildren().add(hudView.getView());
+    playerInfoContainer.getChildren().add(playerInfoView);
+    diceContainer.getChildren().add(diceView.getView());
 
-    this.getChildren().setAll(boardContainer, hudContainer);
+    this.getChildren().setAll(playerInfoContainer,boardContainer, diceContainer);
+  }
+
+  public void setPlayerInfoView() {
+    this.playerInfoView = new PlayerInfoView();
   }
 
   /**
@@ -64,8 +74,12 @@ public class GameView extends HBox {
    *
    * @return the view of HUD.
    */
-  public HudView getHudView() {
-    return hudView;
+  public DiceView getDiceView() {
+    return diceView;
+  }
+
+  public PlayerInfoView getPlayerInfoView() {
+    return playerInfoView;
   }
 
 }
