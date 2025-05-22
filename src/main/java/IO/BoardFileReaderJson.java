@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import exception.UnknownGameException;
+import exception.UnknownTileActionException;
 import factory.BoardFactory;
 import factory.GameType;
 import interfaces.Board;
@@ -136,13 +137,11 @@ public class BoardFileReaderJson implements BoardFileReader {
     }
     // Gets the next tile as an int
     Map<Tile, Integer> tileMap;
-    int nextTileId;
-    if (tileJson.has("nextTileId")) {
+    int nextTileId = -1; // Default if no next tile
+    if (tileJson.has("nextTileId") && !tileJson.get("nextTileId").isJsonNull()) {
       nextTileId = tileJson.get("nextTileId").getAsInt();
-    } else {
-      // If the Tile has no nextTile, then set nextTileId to -1
-      nextTileId = -1;
     }
+
     tileMap = new HashMap<>();
     tileMap.put(tile, nextTileId);
 
@@ -169,7 +168,7 @@ public class BoardFileReaderJson implements BoardFileReader {
       case "snakeAction" -> deserializeSnakeAction(actionTileJson);
       case "taxAction" -> deserializeTaxAction(actionTileJson);
       case "winAction" -> deserializeWinAction(actionTileJson);
-      default -> null;
+      default -> throw new UnknownTileActionException("Unknown action type: " + actionType);
     };
   }
 
@@ -267,9 +266,9 @@ public class BoardFileReaderJson implements BoardFileReader {
    * @return a SnakeAction object.
    */
   public SnakeAction deserializeSnakeAction(JsonObject snakeActionJson) {
-    int moneyDeducted = snakeActionJson.get("moneyDeducted").getAsInt();
+    int destinationTileId = snakeActionJson.get("destinationTileId").getAsInt();
 
-    SnakeAction snakeAction = new SnakeAction(moneyDeducted);
+    SnakeAction snakeAction = new SnakeAction(destinationTileId);
 
     if (snakeActionJson.has("description")) {
       snakeAction.setDescription(snakeActionJson.get("description").getAsString());

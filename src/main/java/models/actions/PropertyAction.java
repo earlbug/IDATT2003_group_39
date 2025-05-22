@@ -1,6 +1,7 @@
 package models.actions;
 
 import interfaces.TileAction;
+import models.BoardGame;
 import models.Player;
 
 /**

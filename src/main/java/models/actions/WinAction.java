@@ -1,6 +1,7 @@
 package models.actions;
 
 import interfaces.TileAction;
+import models.BoardGame;
 import models.Player;
 
 public class WinAction implements TileAction {
@@ -9,7 +10,6 @@ public class WinAction implements TileAction {
   @Override
   public void perform(Player player) {
     player.setHasWon(true);
-    setDescription("Player wins.");
   }
 
   public String getDescription() {

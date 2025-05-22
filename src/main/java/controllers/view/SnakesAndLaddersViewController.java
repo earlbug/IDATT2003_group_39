@@ -1,8 +1,8 @@
 package controllers.view;
 
 import controllers.ButtonClickNotifier;
-import controllers.model.GameController;
 import java.util.List;
+import javafx.geometry.Pos;
 import models.BoardGame;
 import models.Player;
 import org.slf4j.Logger;
@@ -66,7 +66,7 @@ public class SnakesAndLaddersViewController extends ViewController{
     // Update dice display
     hudView.setDiceNumber(steps);
     // Update player position on the board
-    boardView.updatePlayerView(player);
+    boardView.drawPlayerView(player);
     logger.debug("PlayerView updated for {} ", player);
   }
 
@@ -90,6 +90,11 @@ public class SnakesAndLaddersViewController extends ViewController{
     gameView.getChildren().setAll(new WinnerView(winner));
   }
 
+  @Override
+  public void onTileActionPerformed(Player player) {
+    boardView.drawPlayerView(player);
+  }
+
   /**
    * Handles the event when the game state changes.
    *
@@ -97,6 +102,5 @@ public class SnakesAndLaddersViewController extends ViewController{
    */
   @Override
   public void onGameStateChanged(BoardGame boardGame) {
-
   }
 }

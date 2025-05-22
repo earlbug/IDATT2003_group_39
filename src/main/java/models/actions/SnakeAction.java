@@ -1,7 +1,9 @@
 package models.actions;
 
 import interfaces.TileAction;
+import models.BoardGame;
 import models.Player;
+import models.Tile;
 
 public class SnakeAction implements TileAction {
 
@@ -24,6 +26,7 @@ public class SnakeAction implements TileAction {
 
   @Override
   public void perform(Player player) {
-
+    Tile destinationTile = player.getGame().getBoard().getTile(destinationTileId);
+    player.setCurrentTile(destinationTile);
   }
 }

@@ -1,6 +1,8 @@
 package interfaces;
 
+import models.BoardGame;
 import models.Player;
+import models.Tile;
 
 /**
  * Interface for action classes. The perform method defines what will happen to a player when it
@@ -18,6 +20,4 @@ public interface TileAction {
    * @param player The player who landed on the tile
    */
   void perform(Player player);
-
-
 }

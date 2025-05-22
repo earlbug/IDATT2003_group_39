@@ -73,6 +73,15 @@ public abstract class GameNotifier {
   }
 
   /**
+   * Notifies all observers that a tile action has been performed.
+   *
+   * @param player The player who performed the action
+   */
+  public void notifyTileActionPerformed(Player player) {
+    observers.forEach(observer -> observer.onTileActionPerformed(player));
+  }
+
+  /**
    * Notifies all observers that the game state has changed.
    *
    * @param boardGame The current state of the board game

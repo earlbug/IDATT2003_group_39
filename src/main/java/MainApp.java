@@ -1,10 +1,8 @@
-import IO.BoardFileReaderJson;
-import controllers.model.MonopolyController;
-import controllers.model.SnakesAndLaddersController;
-import controllers.view.MonopolyViewController;
 import controllers.view.SnakesAndLaddersViewController;
-import controllers.view.ViewController;
 import interfaces.Board;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import models.BoardGame;
 import controllers.model.GameController;
@@ -19,8 +17,6 @@ import javafx.stage.Stage;
 import models.Player;
 import factory.BoardViewFactory;
 import interfaces.BoardView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import views.content.HudView;
 import views.container.GameView;
 
@@ -33,122 +29,53 @@ import views.container.GameView;
  */
 public class MainApp extends Application {
 
-  private static final Logger log = LoggerFactory.getLogger(MainApp.class);
-
   @Override
   public void start(Stage primaryStage) throws IOException, UnknownGameException {
 
-    //playSnakesAndLadders(primaryStage);
-    playMonopoly(primaryStage);
-  }
-
-  public void playMonopoly(Stage primaryStage) {
     BoardGame boardGame = new BoardGame();
-    Board board = null;
-    try {
-    board = BoardFactory.getFromFile("monopolygame_3.json");
-    } catch (Exception e) {
-      log.error(e.getMessage());
-    }
-    BoardView boardView = BoardViewFactory.createBoardView(GameType.MONOPOLY, board);
-    GameView gameView = new GameView(boardView);
-    HudView hudView = gameView.getHudView();
-
-    Player p1 = new Player("Are", boardGame);
-    p1.setColor(Color.RED);
-    p1.setMoney(200);
-    Player p2 = new Player("Beathe", boardGame);
-    p2.setColor(Color.BLUE);
-    p2.setMoney(200);
-    Player p3 = new Player("Carl", boardGame);
-    p3.setColor(Color.YELLOW);
-    p3.setMoney(200);
-    Player p4 = new Player("Daniel", boardGame);
-    p4.setColor(Color.GREEN);
-    p4.setMoney(200);
-
-    MonopolyController monopolyController = new MonopolyController(boardGame);
-    MonopolyViewController viewController = new MonopolyViewController(gameView);
-    ButtonClickController buttonClickController = new ButtonClickController(monopolyController, viewController);
-    viewController.setNotifiers(buttonClickController);
-
-    boardGame.setBoard(board);
-
-    monopolyController.handleAddPlayer(p1);
-    monopolyController.handleAddPlayer(p2);
-    monopolyController.handleAddPlayer(p3);
-    monopolyController.handleAddPlayer(p4);
-    monopolyController.handlePlayerIds();
-
-    viewController.addPlayerViews(boardGame.getPlayers());
-    boardGame.createDice(1);
-    boardGame.setCurrentPlayer(p1);
-    boardView.createBoardView(board);
-    boardView.updatePlayerView(p1);
-    boardView.updatePlayerView(p2);
-    boardView.updatePlayerView(p3);
-    boardView.updatePlayerView(p4);
-    boardGame.addPlayersOnStartPos();
-
-    Scene scene = new Scene(gameView, 1280, 720);
-    scene.getStylesheets().add("styles.css");
-    primaryStage.setTitle("Game");
-    primaryStage.setScene(scene);
-    primaryStage.show();
-
-  }
-
-  public void playSnakesAndLadders(Stage primaryStage) {
-    BoardGame boardGame = new BoardGame();
-    Board board = null;
-    try {
-      board = BoardFactory.getFromFile("laddergame_1.json");
-    } catch (Exception e) {
-      log.error(e.getMessage());
-    }
+    Board board = BoardFactory.getFromFile("SnL2.json");
     BoardView boardView = BoardViewFactory.createBoardView(GameType.SNAKES_AND_LADDERS, board);
     GameView gameView = new GameView(boardView);
-    HudView hudView = gameView.getHudView();
 
-    Player p1 = new Player("Are", boardGame);
+    Player p1 = new Player("Ola", boardGame);
     p1.setColor(Color.RED);
-    Player p2 = new Player("Beathe", boardGame);
+    Player p2 = new Player("Per", boardGame);
     p2.setColor(Color.BLUE);
-    Player p3 = new Player("Carl", boardGame);
-    p3.setColor(Color.YELLOW);
-    Player p4 = new Player("Daniel", boardGame);
-    p4.setColor(Color.GREEN);
+    Player p3 = new Player("Kari", boardGame);
+    p3.setColor(Color.GREEN);
 
-
-    SnakesAndLaddersController snakesAndLaddersController = new SnakesAndLaddersController(boardGame);
+    GameController gameController = new GameController(boardGame);
     SnakesAndLaddersViewController viewController = new SnakesAndLaddersViewController(gameView);
-    ButtonClickController buttonClickController = new ButtonClickController(snakesAndLaddersController, viewController);
+    ButtonClickController buttonClickController = new ButtonClickController(gameController, viewController);
     viewController.setNotifiers(buttonClickController);
 
     boardGame.setBoard(board);
 
-    snakesAndLaddersController.handleAddPlayer(p1);
-    snakesAndLaddersController.handleAddPlayer(p2);
-    snakesAndLaddersController.handleAddPlayer(p3);
-    snakesAndLaddersController.handleAddPlayer(p4);
-    snakesAndLaddersController.handlePlayerIds();
+    gameController.handleAddPlayer(p1);
+    gameController.handleAddPlayer(p2);
+    gameController.handleAddPlayer(p3);
+    gameController.handlePlayerIds();
 
     viewController.addPlayerViews(boardGame.getPlayers());
     boardGame.createDice(1);
     boardGame.setCurrentPlayer(p1);
-    boardView.createBoardView(board);
-    boardView.updatePlayerView(p1);
-    boardView.updatePlayerView(p2);
-    boardView.updatePlayerView(p3);
-    boardView.updatePlayerView(p4);
+    boardView.drawPlayerView(p1);
+    boardView.drawPlayerView(p2);
+    boardView.drawPlayerView(p3);
     boardGame.addPlayersOnStartPos();
 
-    Scene scene = new Scene(gameView, 1280, 720);
+    // Wrap gameView in a StackPane and center it
+    StackPane root = new StackPane(gameView);
+    gameView.setAlignment(Pos.CENTER);
+    root.setPadding(new Insets(50));
+
+    Scene scene = new Scene(root, 1000, 800);
     scene.getStylesheets().add("styles.css");
     primaryStage.setTitle("Game");
     primaryStage.setScene(scene);
+    primaryStage.setMinHeight(800);
+    primaryStage.setMinWidth(1000);
     primaryStage.show();
   }
+
 }
-
-

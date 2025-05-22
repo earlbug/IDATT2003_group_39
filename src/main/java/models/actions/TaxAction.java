@@ -2,6 +2,7 @@ package models.actions;
 
 import interfaces.TileAction;
 import javax.swing.Action;
+import models.BoardGame;
 import models.Player;
 
 /**
@@ -32,6 +33,7 @@ public class TaxAction implements TileAction {
   public void perform(Player player) {
     player.deductMoney(moneyDeducted);
   }
+
 
   /**
    * Gets how much money gets deducted.

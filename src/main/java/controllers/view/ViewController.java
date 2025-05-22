@@ -28,6 +28,11 @@ public class ViewController extends GameNotifier implements BoardGameObserver {
   }
 
   @Override
+  public void onTileActionPerformed(Player player) {
+
+  }
+
+  @Override
   public void onGameStateChanged(BoardGame boardGame) {
 
   }

@@ -25,12 +25,12 @@ public class BoardViewFactory {
     return switch (gameType) {
       case SNAKES_AND_LADDERS -> {
         BoardView view = new SnakesAndLaddersBoardView();
-        view.createBoardView(board);
+        view.drawBoardView(board);
         yield view;
       }
       case MONOPOLY -> {
         BoardView view = new MonopolyBoardView();
-        view.createBoardView(board);
+        view.drawBoardView(board);
         yield view;
       }
     };

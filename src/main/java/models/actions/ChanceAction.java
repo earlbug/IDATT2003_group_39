@@ -2,7 +2,9 @@ package models.actions;
 
 import interfaces.TileAction;
 import java.util.Random;
+import models.BoardGame;
 import models.Player;
+import models.Tile;
 
 /**
  * ActionTile which either adds or deducts money from the Player landing on it.
