@@ -1,16 +1,24 @@
 package controllers.view;
 
 import controllers.ButtonClickNotifier;
+import exception.UnknownGameException;
+import factory.BoardFactory;
+import factory.BoardViewFactory;
+import factory.GameType;
+import interfaces.Board;
+import interfaces.BoardView;
+import java.io.IOException;
 import java.util.List;
 import javafx.geometry.Pos;
 import models.BoardGame;
 import models.Player;
+import observers.BoardGameObserver;
 import org.slf4j.Logger;
-import views.container.GameView;
-import views.content.HudView;
-import views.content.PlayerView;
-import views.content.SnakesAndLaddersBoardView;
-import views.content.WinnerView;
+import views.game.container.GameView;
+import views.game.content.HudView;
+import views.game.content.PlayerView;
+import views.game.content.SnakesAndLaddersBoardView;
+import views.game.content.WinnerView;
 
 /**
  * Handles the view logic for the Snakes and Ladders game.
@@ -19,25 +27,50 @@ import views.content.WinnerView;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class SnakesAndLaddersViewController extends ViewController{
+public class SnakesAndLaddersViewController extends ViewController implements BoardGameObserver {
 
-  private final GameView gameView;
-  private final HudView hudView;
-  private final SnakesAndLaddersBoardView boardView;
+  private GameView gameView;
+  private HudView hudView;
+  private SnakesAndLaddersBoardView boardView;
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersViewController.class);
 
   /**
    * Constructor for SnakesAndLaddersViewController.
    *
-   * @param gameView The game view to handle
    */
-  public SnakesAndLaddersViewController(GameView gameView) {
-    this.gameView = gameView;
-    this.hudView = gameView.getHudView();
-    this.boardView = (SnakesAndLaddersBoardView)  gameView.getBoardView();
+  public SnakesAndLaddersViewController() {
+    logger.debug("SnakesAndLaddersViewController initialized");
   }
 
-  public void setNotifiers(ButtonClickNotifier notifier) {
+  public void setGameView(GameView gameView) {
+    this.gameView = gameView;
+    this.hudView = gameView.getHudView();
+    this.boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
+  }
+
+  /**
+   * Sets up the game view and board view based on the board file.
+   *
+   * @param boardFileName The name of the board file
+   */
+  @Override
+  public void setUpView(String boardFileName, int boardNumber) {
+    try {
+      Board board = BoardFactory.getFromFile(boardFileName);
+      BoardView boardView = BoardViewFactory.createBoardView(GameType.SNAKES_AND_LADDERS, board);
+      GameView gameView = new GameView(boardView);
+
+      setGameView(gameView);
+      boardView.drawBoardImage(boardNumber);
+      logger.debug("View set up for board file: {}", boardFileName);
+    } catch (UnknownGameException | IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    super.setButtonClickNotifier(notifier);
     hudView.setButtonClickNotifier(notifier);
   }
 
@@ -46,13 +79,23 @@ public class SnakesAndLaddersViewController extends ViewController{
    *
    * @param players List of players to add
    */
+  @Override
   public void addPlayerViews(List<Player> players) {
+    System.out.println("Adding player views");
     SnakesAndLaddersBoardView boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
     for (Player player : players) {
       PlayerView playerView = new PlayerView();
-      playerView.setPlayerColor(player.getColor());
+      playerView.setPlayerGamePiece(player.getGamePiece());
       boardView.addPlayerView(player, playerView);
+      System.out.println(player.getGamePiece());
     }
+  }
+
+  @Override
+  public void showGameView() {
+    getRootPane().getChildren().clear();
+    getRootPane().getChildren().add(gameView);
+    logger.debug("Game view displayed");
   }
 
   /**
@@ -88,6 +131,11 @@ public class SnakesAndLaddersViewController extends ViewController{
   @Override
   public void onWinnerDetermined(Player winner) {
     gameView.getChildren().setAll(new WinnerView(winner));
+  }
+
+  @Override
+  public void onPlayerLost(Player lostPlayer) {
+
   }
 
   @Override

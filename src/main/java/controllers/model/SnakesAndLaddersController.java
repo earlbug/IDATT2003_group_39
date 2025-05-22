@@ -18,15 +18,6 @@ public class SnakesAndLaddersController extends GameController {
 
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersController.class);
 
-  /**
-   * Constructor for BoardGameHandler.
-   *
-   * @param boardGame The board game to handle
-   */
-  public SnakesAndLaddersController(BoardGame boardGame) {
-    super(boardGame);
-  }
-
 
   /**
    * An override of the super class method, to check if snakes and ladders

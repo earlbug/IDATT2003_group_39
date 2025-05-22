@@ -60,8 +60,15 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
     return new TileView(tile.getTileId());
   }
 
-  private void drawBoardImage() {
-    Image image = new Image("images/SnL2.png"); // TODO: Make this dynamic
+  @Override
+  public void drawBoardImage(int boardNumber) {
+    Image image;
+    switch (boardNumber) {
+      case 1 -> image = new Image("file:src/main/resources/images/SnL1.png");
+      case 2 -> image = new Image("file:src/main/resources/images/SnL2.png");
+      case 3 -> image = new Image("file:src/main/resources/images/SnL3.png");
+      default -> throw new IllegalArgumentException("Invalid board number: " + boardNumber);
+    }
     ImageView imageView = new ImageView(image);
 
     imageView.setFitWidth(800);
