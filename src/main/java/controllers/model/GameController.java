@@ -1,5 +1,6 @@
 package controllers.model;
 
+import controllers.view.MonopolyViewController;
 import controllers.view.SnakesAndLaddersViewController;
 import controllers.view.ViewManager;
 import exception.UnknownGameException;
@@ -69,6 +70,25 @@ public class GameController extends GameNotifier {
       addObserver(viewController);
 
       boardGame.createDice(1);
+
+      logger.debug("Board set up: {}", boardFileName);
+    } catch (UnknownGameException | IOException e) {
+      logger.error("Error setting up game: {}", e.getMessage());
+    }
+  }
+
+  public void setMonopolyBoard() {
+    String boardFileName = "monopoly.json";
+    try {
+      boardGame = new BoardGame();
+      setBoardGame(boardGame);
+      boardGame.setBoard(BoardFactory.getFromFile(boardFileName));
+
+      MonopolyViewController viewController = (MonopolyViewController) viewManager.getCurrentViewController();
+      viewController.setUpView(boardFileName);
+      addObserver(viewController);
+
+      boardGame.createDice(2);
 
       logger.debug("Board set up: {}", boardFileName);
     } catch (UnknownGameException | IOException e) {
