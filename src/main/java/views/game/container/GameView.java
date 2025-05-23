@@ -7,7 +7,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import views.game.content.DiceView;
 import views.game.content.PlayerInfoView;
-import views.game.content.WinnerPopup;
 
 /**
  * <h3>Represents the view of the game</h3>
