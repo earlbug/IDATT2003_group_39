@@ -36,6 +36,13 @@ public abstract class GameNotifier {
   }
 
   /**
+   * Clears all observers from the list.
+   */
+  public void clearObservers() {
+    observers.clear();
+  }
+
+  /**
    * Notifies all observers that a player has moved.
    *
    * @param player The player who moved
