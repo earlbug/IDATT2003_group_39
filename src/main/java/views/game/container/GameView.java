@@ -26,7 +26,6 @@ public class GameView extends VBox {
   private final BoardView boardView;
   private final PlayerInfoView playerInfoView;
   private final DiceView diceView;
-  private final WinnerPopup winnerPopup;
 
   /**
    * Constructs a new view of the game. Creates containers to hold the board and HUD.
@@ -39,7 +38,6 @@ public class GameView extends VBox {
     this.boardView = boardView;
     this.playerInfoView = new PlayerInfoView();
     this.diceView = new DiceView();
-    this.winnerPopup = new WinnerPopup();
     this.setSpacing(20);
 
     initialize();

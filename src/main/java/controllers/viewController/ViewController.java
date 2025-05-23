@@ -21,7 +21,7 @@ public abstract class ViewController extends GameNotifier {
 
   public StackPane getRootPane() {
     return rootPane;
-  };
+  }
 
   public abstract void showBoardSelectMenu();
 
