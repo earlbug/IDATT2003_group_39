@@ -47,6 +47,9 @@ public class PlayerView extends ImageView {
       case BOAT -> setImage(new Image("file:src/main/resources/images/pieces/boat.png"));
       case PLANE -> setImage(new Image("file:src/main/resources/images/pieces/plane.png"));
       case TRAIN -> setImage(new Image("file:src/main/resources/images/pieces/train.png"));
+      default -> {
+        throw new IllegalArgumentException("Invalid game piece: " + gamePiece);
+      }
     }
   }
 }

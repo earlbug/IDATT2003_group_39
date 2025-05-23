@@ -1,7 +1,7 @@
-package controllers.modelController;
+package controllers.model;
 
-import controllers.viewController.MonopolyViewController;
-import controllers.viewController.ViewManager;
+import controllers.view.MonopolyViewController;
+import controllers.view.ViewManager;
 import exception.UnknownGameException;
 import factory.BoardFactory;
 import interfaces.TileAction;
@@ -101,7 +101,8 @@ public class MonopolyController extends GameController {
       setBoardGame(boardGame);
       boardGame.setBoard(BoardFactory.getFromFile(boardFileName));
 
-      MonopolyViewController viewController = (MonopolyViewController) viewManager.getCurrentViewController();
+      MonopolyViewController viewController = (MonopolyViewController)
+          viewManager.getCurrentViewController();
       viewController.setUpView(boardFileName);
       clearObservers();
       addObserver(viewController);
@@ -135,6 +136,9 @@ public class MonopolyController extends GameController {
     handleNextPlayer();
   }
 
+  /**
+   * Handles the player's tile action, if any, and notifies observers.
+   */
   private void handlePlayerTileAction() {
     Player currentPlayer = boardGame.getCurrentPlayer();
     TileAction tileAction = currentPlayer.getCurrentTile().getLandAction();
@@ -148,6 +152,9 @@ public class MonopolyController extends GameController {
     notifyTileActionPerformed(currentPlayer);
   }
 
+  /**
+   * Handles the end of the player's turn and notifies observers.
+   */
   private void handlePlayerEndTurn() {
     notifyTurnEnded(boardGame.getCurrentPlayer());
   }

@@ -1,9 +1,9 @@
 package controllers;
 
-import controllers.modelController.GameManager;
-import controllers.modelController.MonopolyController;
-import controllers.modelController.SnakesAndLaddersController;
-import controllers.viewController.ViewManager;
+import controllers.model.GameManager;
+import controllers.model.MonopolyController;
+import controllers.model.SnakesAndLaddersController;
+import controllers.view.ViewManager;
 import exception.UnknownButtonActionException;
 import observers.ButtonClickObserver;
 
@@ -24,7 +24,7 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
    * Constructs a new handler to handle button clicks.
    *
    * @param gameManager The controller manager to use
-   * @param viewManager    The view manager to use
+   * @param viewManager The view manager to use
    */
   public ButtonClickController(GameManager gameManager, ViewManager viewManager) {
     this.viewManager = viewManager;
@@ -63,7 +63,8 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
         viewManager.getCurrentViewController().showPlayerSelectMenu();
         break;
       case "Start":
-        gameManager.getCurrentGameController().setPlayers(viewManager.getCurrentViewController().getSelectedPlayers());
+        gameManager.getCurrentGameController()
+            .setPlayers(viewManager.getCurrentViewController().getSelectedPlayers());
         if (gameManager.getCurrentGameController() instanceof SnakesAndLaddersController) {
           viewManager.switchToSnakesAndLaddersView();
         } else if (gameManager.getCurrentGameController() instanceof MonopolyController) {
@@ -71,7 +72,8 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
         }
         viewManager.getCurrentViewController().showView();
         viewManager.getCurrentViewController().setButtonClickNotifier(this);
-        viewManager.getCurrentViewController().addPlayerViews(gameManager.getCurrentGameController().getBoardGame().getPlayers());
+        viewManager.getCurrentViewController()
+            .addPlayerViews(gameManager.getCurrentGameController().getBoardGame().getPlayers());
         gameManager.getCurrentGameController().setUpGame();
         break;
       case "Monopoly":

@@ -11,27 +11,28 @@ import views.menu.content.SelectBoardView;
 import views.menu.content.SelectPlayersView;
 
 /**
- * This class represents the main menu window
+ * This class represents the main menu window.
  *
  * @author Tord Fosse
  * @version 1.0
  * @since 1.0
  */
-
 public class MenuView extends StackPane {
 
   private ButtonClickNotifier notifier;
   private SelectPlayersView selectPlayersView;
 
-  /*
-   * Add the buttons and titles
+  /**
+   * Constructor for the MenuView class that initializes the view.
    */
   public MenuView() {
     initialize();
   }
 
+  /**
+   * Initializes the main menu view with buttons for different games.
+   */
   private void initialize() {
-    VBox layout = new VBox();
     Button snakesAndLaddersButton = new Button("SNAKES AND LADDERS");
     Button monopolyButton = new Button("MONOPOLY");
 
@@ -48,6 +49,7 @@ public class MenuView extends StackPane {
     monopolyButton.setFocusTraversable(false);
     monopolyButton.setOnAction(actionEvent -> notifier.notifyObservers("Monopoly"));
 
+    VBox layout = new VBox();
     layout.getChildren().clear();
     layout.setSpacing(20);
     layout.getChildren().addAll(snakesAndLaddersButton, monopolyButton);
@@ -58,10 +60,16 @@ public class MenuView extends StackPane {
 
   }
 
+  /**
+   * Initializes the main menu view with buttons for different games.
+   */
   public void selectGame() {
     initialize();
   }
 
+  /**
+   * Sets the view to select the snakes and ladders board.
+   */
   public void selectSnakesAndLaddersBoards() {
     SelectBoardView selectBoardView = new SelectBoardView();
     selectBoardView.setButtonClickNotifier(notifier);
@@ -69,6 +77,9 @@ public class MenuView extends StackPane {
     this.getChildren().addAll(selectBoardView);
   }
 
+  /**
+   * Sets the view to select the players.
+   */
   public void selectPlayers() {
     selectPlayersView = new SelectPlayersView();
     selectPlayersView.setButtonClickNotifier(notifier);
@@ -77,7 +88,7 @@ public class MenuView extends StackPane {
   }
 
   /**
-   * Sets the button click notifier that will handle button clicks
+   * Sets the button click notifier that will handle button clicks.
    *
    * @param notifier The notifier to handle button clicks
    */
@@ -86,12 +97,17 @@ public class MenuView extends StackPane {
     this.notifier = notifier;
   }
 
+  /**
+   * Gets the view of the select players view.
+   *
+   * @return the view of the select players view
+   */
   public SelectPlayersView getSelectPlayersView() {
     return selectPlayersView;
   }
 
   /**
-   * Gets the main menu view
+   * Gets the main menu view.
    *
    * @return display of the main menu
    */

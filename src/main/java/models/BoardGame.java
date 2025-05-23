@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @version 0.1.0
+ * <h3>BoardGame</h3>
+ *
+ * <p>Represents a game (round), including methods for setting up the game, playing a turn etc.
+ *
  * @author Erlend Sundsdal
+ * @version 0.1.0
  * @since 0.1.0
- *
- * Represents a game (round), including methods for setting up the game, playing a turn etc.
- *
  */
 public class BoardGame {
+
   private Board board;
   private final List<Player> players = new ArrayList<>();
   private Player currentPlayer;
@@ -20,6 +22,7 @@ public class BoardGame {
 
   /**
    * Adds a player to the game.
+   *
    * @param player player to be added to the game.
    */
   public void addPlayer(Player player) {
@@ -28,6 +31,7 @@ public class BoardGame {
 
   /**
    * Sets up a number of dice to be used in the game.
+   *
    * @param numberOfDice how many dies to use
    */
   public void createDice(int numberOfDice) {
@@ -39,18 +43,18 @@ public class BoardGame {
    */
   public void nextPlayer() {
     int currentPlayerIndex = players.indexOf(currentPlayer);
-    if(currentPlayerIndex + 1 >= players.size()) {
+    if (currentPlayerIndex + 1 >= players.size()) {
       currentPlayer = players.getFirst();
     } else {
-      currentPlayer = players.get(currentPlayerIndex  + 1);
+      currentPlayer = players.get(currentPlayerIndex + 1);
     }
   }
 
-  public Board getBoard(){
+  public Board getBoard() {
     return board;
   }
 
-  public void setCurrentPlayer(Player player){
+  public void setCurrentPlayer(Player player) {
     this.currentPlayer = player;
   }
 
@@ -58,14 +62,17 @@ public class BoardGame {
     this.board = board;
   }
 
-  public Player getCurrentPlayer(){
+  public Player getCurrentPlayer() {
     return currentPlayer;
   }
 
-  public Dice getDice(){
+  public Dice getDice() {
     return dice;
   }
 
+  /**
+   * Sets the starting position for all players to the first tile on the board.
+   */
   public void addPlayersOnStartPos() {
     if (board == null || board.getTile(1) == null) {
       throw new IllegalStateException("Board or starting tile is not initialized.");
@@ -76,6 +83,10 @@ public class BoardGame {
     }
   }
 
+  /**
+   * Sets the player IDs for all players in the game. The IDs are set to the index of the player in
+   * the players list.
+   */
   public void setPlayerIds() {
     int id = 0;
     for (Player player : players) {
@@ -84,7 +95,9 @@ public class BoardGame {
   }
 
   /**
-   * Removes a player from the game. The player will then no longer exist in the game, and wil have no information about it.
+   * Removes a player from the game. The player will then no longer exist in the game, and wil have
+   * no information about it.
+   *
    * @param player Player to remove.
    */
   public void removePlayer(Player player) {

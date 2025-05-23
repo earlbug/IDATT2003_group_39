@@ -44,14 +44,14 @@ public class GameView extends VBox {
   }
 
   private void initialize() {
-    HBox layout = new HBox();
     boardContainer.getChildren().add(boardView.getView());
     playerInfoContainer.getChildren().add(playerInfoView);
     diceContainer.getChildren().add(diceView.getView());
 
+    HBox layout = new HBox();
     layout.setAlignment(Pos.CENTER);
     layout.setSpacing(20);
-    layout.getChildren().addAll(playerInfoContainer,boardContainer, diceContainer);
+    layout.getChildren().addAll(playerInfoContainer, boardContainer, diceContainer);
     this.getStyleClass().add("main-style");
     this.getChildren().setAll(layout);
   }

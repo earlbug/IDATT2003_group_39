@@ -1,13 +1,13 @@
-package controllers.modelController;
+package controllers.model;
 
-import controllers.viewController.ViewManager;
+import controllers.view.ViewManager;
 import java.util.Map;
 import models.BoardGame;
 import models.GamePiece;
 import models.Player;
 
 /**
- * Handles game logic operations and delegates notifications.
+ * Abstract class for the game controller. This class is responsible for handling the game logic
  *
  * @author Tord Fosse
  * @version 1.0.0
@@ -29,6 +29,11 @@ public abstract class GameController extends GameNotifier {
    */
   public abstract BoardGame getBoardGame();
 
+  /**
+   * Sets the board for the game.
+   *
+   * @param boardNumber The board number to set
+   */
   public abstract void setBoard(int boardNumber);
 
   /**
@@ -87,10 +92,24 @@ public abstract class GameController extends GameNotifier {
   public abstract void handleNextPlayer();
 
 
+  /**
+   * Handles setting up the game after the board and players have been set. Sets players on start
+   * position, and sets the first player to play.
+   */
   public abstract void setUpGame();
 
+  /**
+   * Sets the players in the game.
+   *
+   * @param players The players to set
+   */
   public abstract void setPlayers(Map<String, GamePiece> players);
 
+  /**
+   * Sets the view manager.
+   *
+   * @param viewManager The view manager to set
+   */
   public abstract void setViewManager(ViewManager viewManager);
 }
 

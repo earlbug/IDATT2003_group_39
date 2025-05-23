@@ -1,4 +1,4 @@
-package controllers.modelController;
+package controllers.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +88,11 @@ public abstract class GameNotifier {
     observers.forEach(observer -> observer.onTileActionPerformed(player));
   }
 
+  /**
+   * Notifies all observers that a turn has ended.
+   *
+   * @param player The player whose turn ended
+   */
   public void notifyTurnEnded(Player player) {
     observers.forEach(observers -> observers.onEndTurn(player));
   }

@@ -1,5 +1,6 @@
 package views.game.content;
 
+import controllers.ButtonClickNotifier;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,7 +9,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import controllers.ButtonClickNotifier;
 import models.validators.ArgumentValidator;
 
 /**
@@ -90,6 +90,9 @@ public class DiceView extends VBox {
     this.getChildren().setAll(playerContainer, diceContainer, spacer, exitButton);
   }
 
+  /**
+   * Disables the roll button.
+   */
   public void disableRollButton() {
     this.rollDiceButton.setDisable(true);
   }
@@ -123,7 +126,7 @@ public class DiceView extends VBox {
   }
 
   /**
-   * Sets the button click notifier that will handle button clicks
+   * Sets the button click notifier that will handle button clicks.
    *
    * @param notifier The notifier to handle button clicks
    */

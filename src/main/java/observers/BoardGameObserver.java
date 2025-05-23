@@ -12,6 +12,11 @@ import models.Player;
  */
 public interface BoardGameObserver {
 
+  /**
+   * Called when a game is started.
+   *
+   * @param game The game that started
+   */
   void onGameStarted(BoardGame game);
 
   /**
@@ -43,7 +48,17 @@ public interface BoardGameObserver {
    */
   void onPlayerLost(Player lostPlayer);
 
+  /**
+   * Called when a Tile action is performed.
+   *
+   * @param player The player who performed the action
+   */
   void onTileActionPerformed(Player player);
 
+  /**
+   * Called when a player ends their turn.
+   *
+   * @param player The player who ended their turn
+   */
   void onEndTurn(Player player);
 }

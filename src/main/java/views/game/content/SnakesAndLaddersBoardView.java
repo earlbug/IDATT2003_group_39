@@ -27,10 +27,20 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
 
   private final Map<Player, PlayerView> playerViews = new HashMap<>();
 
+  /**
+   * Constructor for the Snakes and Ladders board view. Adds the gridPane, imagePane, and
+   * playersPane.
+   */
   public SnakesAndLaddersBoardView() {
     this.getChildren().addAll(gridPane, imagePane, playersPane);
   }
 
+  /**
+   * Adds a PlayerView to the board.
+   *
+   * @param player     The player to add
+   * @param playerView The PlayerView to add
+   */
   public void addPlayerView(Player player, PlayerView playerView) {
     this.playerViews.put(player, playerView);
   }
@@ -77,7 +87,7 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
   }
 
   /**
-   * Gets the pixel coordinates of a TileView in the GridPane based on its tileId
+   * Gets the pixel coordinates of a TileView in the GridPane based on its tileId.
    *
    * @param tileView The TileView to get the position of
    * @return Double array where [0] is x-coordinate and [1] is y-coordinate, or null if not found

@@ -1,4 +1,4 @@
-package controllers.viewController;
+package controllers.view;
 
 import controllers.ButtonClickNotifier;
 import java.util.List;
@@ -9,6 +9,14 @@ import models.validators.ArgumentValidator;
 import org.slf4j.Logger;
 import views.menu.container.MenuView;
 
+/**
+ * MenuViewController is responsible for managing the menu view in the application. It handles
+ * displaying the menu and interacting with the user to select game options.
+ *
+ * @author Tord Fosse
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class MenuViewController extends ViewController {
 
   private final MenuView menuView = new MenuView();
@@ -53,11 +61,6 @@ public class MenuViewController extends ViewController {
     logger.debug("Menu view displayed");
   }
 
-  /**
-   * Sets the button click notifier for the menu view.
-   *
-   * @param notifier The button click notifier to set
-   */
   @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
     ArgumentValidator.setButtonClickNotifier(notifier);

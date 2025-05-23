@@ -1,8 +1,8 @@
 package factory;
 
-import IO.BoardFileReaderJson;
-import interfaces.Board;
+import io.BoardFileReaderJson;
 import exception.UnknownGameException;
+import interfaces.Board;
 import java.io.IOException;
 import models.boards.MonopolyBoard;
 import models.boards.SnakesAndLaddersBoard;

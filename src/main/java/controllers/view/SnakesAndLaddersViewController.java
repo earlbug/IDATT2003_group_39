@@ -1,4 +1,4 @@
-package controllers.viewController;
+package controllers.view;
 
 import controllers.ButtonClickNotifier;
 import exception.UnknownGameException;
@@ -37,7 +37,8 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
   private PlayerInfoView playerInfoView;
   private DiceView diceView;
   private SnakesAndLaddersBoardView boardView;
-  private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersViewController.class);
+  private final Logger logger = org.slf4j.LoggerFactory.getLogger(
+      SnakesAndLaddersViewController.class);
 
   /**
    * Constructor for SnakesAndLaddersViewController.
@@ -66,6 +67,12 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     return Map.of();
   }
 
+
+  /**
+   * Sets the game view and initializes the dice and player info views.
+   *
+   * @param gameView The game view to set
+   */
   public void setGameView(GameView gameView) {
     this.gameView = gameView;
     this.diceView = gameView.getDiceView();
@@ -73,11 +80,6 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     this.boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
   }
 
-  /**
-   * Sets up the game view and board view based on the board file.
-   *
-   * @param boardFileName The name of the board file
-   */
   @Override
   public void setUpView(String boardFileName, int boardNumber) {
     try {
@@ -105,11 +107,6 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     diceView.setButtonClickNotifier(notifier);
   }
 
-  /**
-   * Adds player views to the game view.
-   *
-   * @param players List of players to add
-   */
   @Override
   public void addPlayerViews(List<Player> players) {
     SnakesAndLaddersBoardView boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
@@ -139,12 +136,6 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     logger.debug("Game started with player: {}", player.getName());
   }
 
-  /**
-   * Handles the event when a player moves.
-   *
-   * @param player The player who moved
-   * @param steps  The number of steps moved
-   */
   @Override
   public void onPlayerMoved(Player player, int steps) {
     // Update dice display
@@ -154,21 +145,11 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     logger.debug("PlayerView updated for {} ", player.getName());
   }
 
-  /**
-   * Handles the event when a new player is set as the current player.
-   *
-   * @param newPlayer The new current player
-   */
   @Override
   public void onNextPlayer(Player newPlayer) {
     diceView.setPlayerName(newPlayer.getName());
   }
 
-  /**
-   * Handles the event when a player wins the game.
-   *
-   * @param winner The winning player
-   */
   @Override
   public void onWinnerDetermined(Player winner) {
     diceView.disableRollButton();

@@ -6,13 +6,27 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class WinnerPopup extends VBox{
+/**
+ * <h3>Represents the view of the winner popup</h3>
+ *
+ * <p>Displays the winner of the game.
+ *
+ * @author Tord Fosse
+ * @version 1.0.0
+ */
+public class WinnerPopup extends VBox {
 
-  private ButtonClickNotifier notifier;
-
+  /**
+   * Default constructor for the WinnerPopup class.
+   */
   public WinnerPopup() {
   }
 
+  /**
+   * Displays the winner of the game.
+   *
+   * @param winner the name of the winning player
+   */
   public void show(String winner) {
     this.setAlignment(Pos.CENTER);
     this.setPadding(new Insets(20));

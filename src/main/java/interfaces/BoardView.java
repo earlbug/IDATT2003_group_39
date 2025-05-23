@@ -7,6 +7,7 @@ import models.Player;
  * Interface for creating a view of a board in a game. This interface defines methods for creating
  * and updating the board view.
  *
+ * @author Tord Fosse
  * @version 1.0.0
  * @since 1.0.0
  */

@@ -1,4 +1,4 @@
-package controllers.viewController;
+package controllers.view;
 
 import controllers.ButtonClickNotifier;
 import exception.UnknownGameException;
@@ -38,8 +38,26 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   private MonopolyBoardView boardView;
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(MonopolyViewController.class);
 
+  /**
+   * Constructor for the MonopolyViewController class.
+   */
   public MonopolyViewController() {
     logger.debug("MonopolyViewController initialized");
+  }
+
+  /**
+   * Adds views for the players to the game board.
+   *
+   * @param players List of players to add views for
+   */
+  public void addPlayerViews(List<Player> players) {
+    MonopolyBoardView boardView = (MonopolyBoardView) gameView.getBoardView();
+    for (Player player : players) {
+      PlayerView playerView = new PlayerView();
+      playerView.setPlayerGamePiece(player.getGamePiece());
+      boardView.addPlayerView(player, playerView);
+      logger.debug("Added view for player {}", player.getName());
+    }
   }
 
   @Override
@@ -62,6 +80,11 @@ public class MonopolyViewController extends ViewController implements BoardGameO
     return Map.of();
   }
 
+  /**
+   * Sets the game view for the Monopoly game.
+   *
+   * @param gameView The GameView object to set
+   */
   public void setGameView(GameView gameView) {
     this.gameView = gameView;
     this.diceView = gameView.getDiceView();
@@ -69,6 +92,11 @@ public class MonopolyViewController extends ViewController implements BoardGameO
     this.boardView = (MonopolyBoardView) gameView.getBoardView();
     this.gameView.setAlignment(Pos.CENTER);
     getRootPane().getChildren().add(gameView);
+  }
+
+  @Override
+  public void setUpView(String boardFileName, int boardNumber) {
+
   }
 
   @Override
@@ -91,16 +119,6 @@ public class MonopolyViewController extends ViewController implements BoardGameO
     getRootPane().getChildren().clear();
     getRootPane().getChildren().add(gameView);
     logger.debug("Monopoly view displayed");
-  }
-
-  public void addPlayerViews(List<Player> players) {
-    MonopolyBoardView boardView = (MonopolyBoardView) gameView.getBoardView();
-    for (Player player : players) {
-      PlayerView playerView = new PlayerView();
-      playerView.setPlayerGamePiece(player.getGamePiece());
-      boardView.addPlayerView(player, playerView);
-      logger.debug("Added view for player {}", player.getName());
-    }
   }
 
   @Override
@@ -161,10 +179,4 @@ public class MonopolyViewController extends ViewController implements BoardGameO
     ArgumentValidator.setButtonClickNotifier(notifier);
     diceView.setButtonClickNotifier(notifier);
   }
-
-  @Override
-  public void setUpView(String boardFileName, int boardNumber) {
-
-  }
-
 }

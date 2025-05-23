@@ -1,7 +1,7 @@
-package controllers.modelController;
+package controllers.model;
 
-import controllers.viewController.SnakesAndLaddersViewController;
-import controllers.viewController.ViewManager;
+import controllers.view.SnakesAndLaddersViewController;
+import controllers.view.ViewManager;
 import exception.UnknownGameException;
 import factory.BoardFactory;
 import interfaces.TileAction;
@@ -28,7 +28,6 @@ public class SnakesAndLaddersController extends GameController {
   private ViewManager viewManager;
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersController.class);
 
-
   @Override
   public void setBoardGame(BoardGame boardGame) {
     ArgumentValidator.controllerSetBoardGame(boardGame);
@@ -54,7 +53,8 @@ public class SnakesAndLaddersController extends GameController {
       setBoardGame(boardGame);
       boardGame.setBoard(BoardFactory.getFromFile(boardFileName));
 
-      SnakesAndLaddersViewController viewController = (SnakesAndLaddersViewController) viewManager.getCurrentViewController();
+      SnakesAndLaddersViewController viewController = (SnakesAndLaddersViewController)
+          viewManager.getCurrentViewController();
       viewController.setUpView(boardFileName, boardNumber);
       clearObservers();
       addObserver(viewController);
@@ -82,12 +82,14 @@ public class SnakesAndLaddersController extends GameController {
     int sum = handleRollDice();
     handlePlayerMove(sum);
     handlePlayerLandAction();
-    handlePlayerLooseCheck();
     handlePlayerWinCheck();
     handlePlayerTurnEnd();
     handleNextPlayer();
   }
 
+  /**
+   * Handles the player's tile action, if any, and notifies observers.
+   */
   private void handlePlayerLandAction() {
     Player currentPlayer = boardGame.getCurrentPlayer();
     TileAction tileAction = currentPlayer.getCurrentTile().getLandAction();
@@ -101,6 +103,9 @@ public class SnakesAndLaddersController extends GameController {
     notifyTileActionPerformed(currentPlayer);
   }
 
+  /**
+   * Handles the end of the player's turn and notifies observers.
+   */
   private void handlePlayerTurnEnd() {
     notifyTurnEnded(boardGame.getCurrentPlayer());
   }
@@ -113,7 +118,7 @@ public class SnakesAndLaddersController extends GameController {
 
   @Override
   public void handlePlayerLooseCheck() {
-// Not used
+    // Not used
   }
 
   @Override

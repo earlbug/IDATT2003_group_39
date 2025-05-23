@@ -17,6 +17,14 @@ import net.synedra.validatorfx.TooltipWrapper;
 import net.synedra.validatorfx.Validator;
 import views.menu.container.MenuView;
 
+/**
+ * <h3>Represents the view for selecting players</h3>
+ *
+ * <p>This class allows the user to select the number of players and their names.
+ *
+ * @author Tord Fosse
+ * @version 1.0.0
+ */
 public class SelectPlayersView extends MenuView {
 
   private ButtonClickNotifier notifier;
@@ -34,8 +42,10 @@ public class SelectPlayersView extends MenuView {
     setTextFields(1);
   }
 
+  /**
+   * Initializes the view.
+   */
   private void initialize() {
-    TilePane container = new TilePane();
     Button player1 = new Button("1");
     Button player2 = new Button("2");
     Button player3 = new Button("3");
@@ -64,16 +74,12 @@ public class SelectPlayersView extends MenuView {
       }
     });
 
-    // Wrap the start button with a tooltip
-    TooltipWrapper<Button> startButtonWrapper = new TooltipWrapper<>(startButton,
-        validator.containsErrorsProperty(),
-        Bindings.concat("Cannot start game:\n", validator.createStringBinding()));
-
     Button backButton = new Button("Back");
     backButton.getStyleClass().add("exit-button");
     backButton.setOnAction(actionEvent -> notifier.notifyObservers("Menu"));
 
     this.getChildren().clear();
+    TilePane container = new TilePane();
     container.getChildren().addAll(player1, player2, player3, player4);
     container.setHgap(10);
     container.setVgap(10);
@@ -88,12 +94,23 @@ public class SelectPlayersView extends MenuView {
     VBox mainContainer = new VBox();
     mainContainer.setSpacing(20);
     mainContainer.setAlignment(Pos.CENTER);
+
+    // Wrap the start button with a tooltip
+    TooltipWrapper<Button> startButtonWrapper = new TooltipWrapper<>(startButton,
+        validator.containsErrorsProperty(),
+        Bindings.concat("Cannot start game:\n", validator.createStringBinding()));
+
     mainContainer.getChildren().addAll(layout, startButtonWrapper, backButton);
     this.getStyleClass().add("main-style");
     this.getChildren().add(mainContainer);
     StackPane.setAlignment(mainContainer, Pos.CENTER);
   }
 
+  /**
+   * Sets the text fields for player names and combo boxes game pieces.
+   *
+   * @param numberOfPlayers the number of players
+   */
   public void setTextFields(int numberOfPlayers) {
     validator = new Validator();
     initialize();
