@@ -4,21 +4,15 @@ import controllers.ButtonClickNotifier;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import models.GamePiece;
-import net.synedra.validatorfx.Check;
 import net.synedra.validatorfx.TooltipWrapper;
 import net.synedra.validatorfx.Validator;
 import views.menu.container.MenuView;
@@ -26,21 +20,16 @@ import views.menu.container.MenuView;
 public class SelectPlayersView extends MenuView {
 
   private ButtonClickNotifier notifier;
-  private final Validator validator = new Validator();
+  private Validator validator = new Validator();
   private final Button startButton = new Button("Start");
   private final HBox layout = new HBox();
   private final VBox textFields = new VBox();
   private TextField[] fields;
 
-  private Check checkTextField;
-  private Check checkComboBox;
-
   /**
    * Constructs the view.
    */
   public SelectPlayersView() {
-    this.setBackground(
-        new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
     initialize();
     setTextFields(1);
   }
@@ -101,14 +90,8 @@ public class SelectPlayersView extends MenuView {
   }
 
   public void setTextFields(int numberOfPlayers) {
-    if (checkTextField != null) {
-      checkTextField.clear();
-      validator.remove(checkTextField);
-    }
-    if (checkComboBox != null) {
-      checkComboBox.clear();
-      validator.remove(checkComboBox);
-    }
+    validator = new Validator();
+    initialize();
     textFields.getChildren().clear();
     textFields.setSpacing(10);
     fields = new TextField[numberOfPlayers];
@@ -126,6 +109,7 @@ public class SelectPlayersView extends MenuView {
 
       HBox playerInputContainer = new HBox();
       playerInputContainer.setAlignment(Pos.CENTER_LEFT);
+      playerInputContainer.setSpacing(10);
       playerInputContainer.getChildren().addAll(textField, gamePieceComboBox);
 
       textFields.getChildren().add(playerInputContainer);
@@ -133,14 +117,14 @@ public class SelectPlayersView extends MenuView {
 
     for (int i = 0; i < numberOfPlayers; i++) {
       final int currentIndex = i;
-      checkTextField = validator.createCheck().dependsOn("name" + i, fields[i].textProperty()).withMethod(c -> {
+      // Duplicate name check
+      validator.createCheck().dependsOn("name" + i, fields[i].textProperty()).withMethod(c -> {
         String name = c.get("name" + currentIndex);
         if (name.isEmpty()) {
           c.error("Name cannot be empty");
         } else if (name.length() >= 8) {
           c.error("Name must be less than 8 characters");
-        }
-        else {
+        } else {
           // Duplicate name check
           for (int j = 0; j < numberOfPlayers; j++) {
             if (j != currentIndex && j < fields.length && name.equalsIgnoreCase(fields[j].getText())
@@ -152,7 +136,7 @@ public class SelectPlayersView extends MenuView {
         }
       }).decorates(fields[i]).immediate();
 
-      checkComboBox = validator.createCheck().dependsOn("gamePiece" + i, gamePieceSelectors[i].valueProperty())
+      validator.createCheck().dependsOn("gamePiece" + i, gamePieceSelectors[i].valueProperty())
           .withMethod(c -> {
             GamePiece selectedGamePiece = c.get("gamePiece" + currentIndex);
             for (int j = 0; j < numberOfPlayers; j++) {
@@ -184,11 +168,8 @@ public class SelectPlayersView extends MenuView {
       String playerName = field.getText();
       HBox parentContainer = (HBox) field.getParent();
       GamePiece gamePiece = parentContainer.getChildren().stream()
-          .filter(node -> node instanceof ComboBox)
-          .map(node -> (ComboBox<GamePiece>) node)
-          .findFirst()
-          .map(ComboBox::getValue)
-          .orElse(null);
+          .filter(node -> node instanceof ComboBox).map(node -> (ComboBox<GamePiece>) node)
+          .findFirst().map(ComboBox::getValue).orElse(null);
       selectedPlayers.put(playerName, gamePiece);
     }
     return selectedPlayers;
