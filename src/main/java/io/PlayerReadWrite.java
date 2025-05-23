@@ -1,45 +1,48 @@
-package IO;
+package io;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import models.Player;
 
-import java.io.*;
-
 /**
- * Responsible for reading and writing player-related data to local file.
- * Opening and closing of the fileWriter is done automatically by this class.
+ * Responsible for reading and writing player-related data to local file. Opening and closing of the
+ * fileWriter is done automatically by this class.
  *
  * @author Erlend Sundsdal
- * @since 0.1.0
  * @version 0.1.0
+ * @since 0.1.0
  */
 public class PlayerReadWrite {
+
   String pathName = "src/main/resources/data/players.csv";
   char delimiter = ',';
 
+  /**
+   * Default constructor.
+   */
   public PlayerReadWrite() {
   }
 
   /**
-   * Writes a player to local storage. The method automatically opens and closes the stream.
-   * If a lot of players shall be written, another method with manual opening and closing of the stream
+   * Writes a player to local storage. The method automatically opens and closes the stream. If a
+   * lot of players shall be written, another method with manual opening and closing of the stream
    * would be preferable to avoid opening and closing for every Player.
    *
    * @param player Player object to be written to local storage.
    * @throws IOException if file could not be written to
    */
-  public void addPlayer (Player player) throws IOException {
+  public void addPlayer(Player player) throws IOException {
 
-    String stringToWrite = player.getName()
-        + delimiter
-        + player.getGamePiece()
-        + "\n";
+    String stringToWrite = player.getName() + delimiter + player.getGamePiece() + "\n";
     char[] playerAsChar = stringToWrite.toCharArray();
 
     // Closes writer automatically
     try (FileWriter writer = new FileWriter(pathName, true)) {
-      writer.write(playerAsChar,0, playerAsChar.length);
+      writer.write(playerAsChar, 0, playerAsChar.length);
     } catch (IOException e) {
       throw new IOException("Could not write Player to file: " + pathName);
     }
@@ -56,7 +59,7 @@ public class PlayerReadWrite {
     Map<String, String> playerMap = new HashMap<>();
 
     // Opens a BufferedReader
-    try(BufferedReader reader = new BufferedReader(new FileReader(pathName))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(pathName))) {
       String line;
       // Reads all lines, and adds them to the HashMap
       while ((line = reader.readLine()) != null) {

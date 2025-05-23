@@ -5,10 +5,24 @@ import java.util.HashMap;
 import java.util.Map;
 import models.Tile;
 
+/**
+ * A class representing a Snakes and Ladders board. It contains a list of tiles and methods to
+ * manipulate them.
+ *
+ * @author Tord Fosse
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class SnakesAndLaddersBoard implements Board {
 
   private final Map<Integer, Tile> tiles = new HashMap<>();
 
+  /**
+   * Gets a tile from the list of tiles.
+   *
+   * @param tileId the id of the tile to get
+   * @return the tile with the specified id
+   */
   public Tile getTile(int tileId) {
     return tiles.get(tileId - 1);
   }
@@ -26,7 +40,7 @@ public class SnakesAndLaddersBoard implements Board {
     return tiles.values().toArray(new Tile[0]);
   }
 
-  public int getNumberOfTiles(){
+  public int getNumberOfTiles() {
     return tiles.size();
   }
 }

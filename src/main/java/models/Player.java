@@ -35,7 +35,7 @@ public class Player {
     setPlayerId(playerId);
     setHasLost(false);
     setHasWon(false);
-    setMoney(0);
+    setMoney(2000);
   }
 
   /**
@@ -191,7 +191,7 @@ public class Player {
    *
    * @param money the amount of money the player should have.
    */
-  private void setMoney(int money) {
+  public void setMoney(int money) {
     ArgumentValidator.positiveIntValidator(money);
     this.money = money;
   }

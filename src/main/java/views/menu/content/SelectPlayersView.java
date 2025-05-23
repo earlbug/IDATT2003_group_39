@@ -4,28 +4,31 @@ import controllers.ButtonClickNotifier;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import models.GamePiece;
 import net.synedra.validatorfx.TooltipWrapper;
 import net.synedra.validatorfx.Validator;
 import views.menu.container.MenuView;
 
+/**
+ * <h3>Represents the view for selecting players</h3>
+ *
+ * <p>This class allows the user to select the number of players and their names.
+ *
+ * @author Tord Fosse
+ * @version 1.0.0
+ */
 public class SelectPlayersView extends MenuView {
 
   private ButtonClickNotifier notifier;
-  private final Validator validator = new Validator();
+  private Validator validator = new Validator();
   private final Button startButton = new Button("Start");
   private final HBox layout = new HBox();
   private final VBox textFields = new VBox();
@@ -35,14 +38,14 @@ public class SelectPlayersView extends MenuView {
    * Constructs the view.
    */
   public SelectPlayersView() {
-    this.setBackground(
-        new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
     initialize();
     setTextFields(1);
   }
 
+  /**
+   * Initializes the view.
+   */
   private void initialize() {
-    TilePane container = new TilePane();
     Button player1 = new Button("1");
     Button player2 = new Button("2");
     Button player3 = new Button("3");
@@ -64,19 +67,19 @@ public class SelectPlayersView extends MenuView {
     player4.setOnAction(actionEvent -> setTextFields(4));
 
     // Start button
-    startButton.getStyleClass().add("menu-button");
+    startButton.getStyleClass().add("exit-button");
     startButton.setOnAction(actionEvent -> {
       if (validator.validate()) {
         notifier.notifyObservers("Start");
       }
     });
 
-    // Wrap the start button with a tooltip
-    TooltipWrapper<Button> startButtonWrapper = new TooltipWrapper<>(startButton,
-        validator.containsErrorsProperty(),
-        Bindings.concat("Cannot start game:\n", validator.createStringBinding()));
+    Button backButton = new Button("Back");
+    backButton.getStyleClass().add("exit-button");
+    backButton.setOnAction(actionEvent -> notifier.notifyObservers("Menu"));
 
     this.getChildren().clear();
+    TilePane container = new TilePane();
     container.getChildren().addAll(player1, player2, player3, player4);
     container.setHgap(10);
     container.setVgap(10);
@@ -91,14 +94,26 @@ public class SelectPlayersView extends MenuView {
     VBox mainContainer = new VBox();
     mainContainer.setSpacing(20);
     mainContainer.setAlignment(Pos.CENTER);
-    mainContainer.getChildren().addAll(layout, startButtonWrapper);
+
+    // Wrap the start button with a tooltip
+    TooltipWrapper<Button> startButtonWrapper = new TooltipWrapper<>(startButton,
+        validator.containsErrorsProperty(),
+        Bindings.concat("Cannot start game:\n", validator.createStringBinding()));
+
+    mainContainer.getChildren().addAll(layout, startButtonWrapper, backButton);
+    this.getStyleClass().add("main-style");
     this.getChildren().add(mainContainer);
     StackPane.setAlignment(mainContainer, Pos.CENTER);
   }
 
+  /**
+   * Sets the text fields for player names and combo boxes game pieces.
+   *
+   * @param numberOfPlayers the number of players
+   */
   public void setTextFields(int numberOfPlayers) {
-    validator.clear();
-
+    validator = new Validator();
+    initialize();
     textFields.getChildren().clear();
     textFields.setSpacing(10);
     fields = new TextField[numberOfPlayers];
@@ -116,19 +131,21 @@ public class SelectPlayersView extends MenuView {
 
       HBox playerInputContainer = new HBox();
       playerInputContainer.setAlignment(Pos.CENTER_LEFT);
+      playerInputContainer.setSpacing(10);
       playerInputContainer.getChildren().addAll(textField, gamePieceComboBox);
 
       textFields.getChildren().add(playerInputContainer);
     }
 
-    /** TODO: Fix validation
-
     for (int i = 0; i < numberOfPlayers; i++) {
       final int currentIndex = i;
+      // Duplicate name check
       validator.createCheck().dependsOn("name" + i, fields[i].textProperty()).withMethod(c -> {
         String name = c.get("name" + currentIndex);
         if (name.isEmpty()) {
           c.error("Name cannot be empty");
+        } else if (name.length() >= 8) {
+          c.error("Name must be less than 8 characters");
         } else {
           // Duplicate name check
           for (int j = 0; j < numberOfPlayers; j++) {
@@ -152,7 +169,6 @@ public class SelectPlayersView extends MenuView {
             }
           }).decorates(gamePieceSelectors[i]).immediate();
     }
-     */
 
   }
 
@@ -174,11 +190,8 @@ public class SelectPlayersView extends MenuView {
       String playerName = field.getText();
       HBox parentContainer = (HBox) field.getParent();
       GamePiece gamePiece = parentContainer.getChildren().stream()
-          .filter(node -> node instanceof ComboBox)
-          .map(node -> (ComboBox<GamePiece>) node)
-          .findFirst()
-          .map(ComboBox::getValue)
-          .orElse(null);
+          .filter(node -> node instanceof ComboBox).map(node -> (ComboBox<GamePiece>) node)
+          .findFirst().map(ComboBox::getValue).orElse(null);
       selectedPlayers.put(playerName, gamePiece);
     }
     return selectedPlayers;

@@ -4,22 +4,18 @@ import interfaces.Board;
 import interfaces.BoardView;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import models.Player;
 import models.Tile;
 
 /**
- * MonopolyBoardView is an implementation of the BoardView.
- * Creates the view of the Monopoly board. The Tiles in the board has to be an amount which can be
- * divided by four to create a proper board.
+ * MonopolyBoardView is an implementation of the BoardView. Creates the view of the Monopoly board.
+ * The Tiles in the board has to be an amount which can be divided by four to create a proper board.
  * The first Tile is in the upper left corner and follows the edge with the direction of the clock.
- *
  */
 public class MonopolyBoardView extends StackPane implements BoardView {
 
@@ -30,18 +26,26 @@ public class MonopolyBoardView extends StackPane implements BoardView {
   private final Map<Player, PlayerView> playerViews = new HashMap<>();
 
 
+  /**
+   * Constructor for the MonopolyBoardView. Adds the gridPane, imagePane and playersPane.
+   */
   public MonopolyBoardView() {
     this.getChildren().addAll(gridPane, imagePane, playersPane);
   }
 
+  /**
+   * Adds a PlayerView to the board.
+   *
+   * @param player     The player to add
+   * @param playerView The PlayerView to add
+   */
   public void addPlayerView(Player player, PlayerView playerView) {
     this.playerViews.put(player, playerView);
   }
 
   /**
-   * Creates the layout of the Monopoly board.
-   * The first Tile is in the upper left corner and follows the edge with the direction of the
-   * clock.
+   * Creates the layout of the Monopoly board. The first Tile is in the upper left corner and
+   * follows the edge with the direction of the clock.
    *
    * @param board The board instance to create the view for.
    */
@@ -52,7 +56,8 @@ public class MonopolyBoardView extends StackPane implements BoardView {
     for (int i = 1; i < tiles.length + 1; i++) {
       StackPane tileElement = createElement(board.getTile(i)); // Create the element
       // Put the element in the right colum and row according to its id.
-      int row, col;
+      int row;
+      int col;
       if (i <= rowLength) {            // Top edge
         row = 0;
         col = i - 1;
@@ -73,27 +78,20 @@ public class MonopolyBoardView extends StackPane implements BoardView {
 
   @Override
   public void drawBoardImage(int boardNumber) {
-    // TODO: ADD IMGAE FOR MONOPOLY BOARD
+    if (boardNumber == 4) {
+      Image image = new Image("file:src/main/resources/images/monopoly.png");
+      ImageView imageView = new ImageView(image);
+
+      imageView.setFitWidth(810);
+      imageView.setFitHeight(810);
+      imageView.setPreserveRatio(true);
+      imagePane.getChildren().clear();
+      imagePane.getChildren().add(imageView);
+    }
   }
 
   /**
-   * Draws the board image.
-   *
-   */
-  private void drawBoardImage() {
-    Image image = new Image(""); // TODO: Endre denne for bilde!!!!
-    ImageView imageView = new ImageView(image);
-
-    imageView.setFitWidth(800);
-    imageView.setFitHeight(800);
-    imageView.setOpacity(0.5);
-    imageView.setPreserveRatio(true);
-    imageView.setEffect(new DropShadow(10, Color.BLACK));
-    imagePane.getChildren().add(imageView);
-  }
-
-  /**
-   * Gets the pixel coordinates of a TileView in the GridPane based on its tileId
+   * Gets the pixel coordinates of a TileView in the GridPane based on its tileId.
    *
    * @param tileView The TileView to get the position of
    * @return Double array where [0] is x-coordinate and [1] is y-coordinate, or null if not found
@@ -154,13 +152,14 @@ public class MonopolyBoardView extends StackPane implements BoardView {
     // Calculate offset based on player index
     double offsetX = (playerIndex % 2) * 20 - 7.5; // Alternating left-right
     double offsetY =
-        ((double) playerIndex / 2) * 20 - (totalPlayers > 2 ? 7.5 : 0); // Rows of 2 players
+        ((double) playerIndex / 2) * 15 - (totalPlayers > 2 ? 7.5 : 0); // Rows of 2 players
 
     // Position the PlayerView on the TileView with offset
     double tileX = tilePosition[0];
     double tileY = tilePosition[1];
     playerView.setLayoutX(tileX + tileView.getWidth() / 2 - playerView.getFitWidth() / 2 + offsetX);
-    playerView.setLayoutY(tileY + tileView.getHeight() / 2 - playerView.getFitHeight() / 2 + offsetY);
+    playerView.setLayoutY(
+        tileY + tileView.getHeight() / 2 - playerView.getFitHeight() / 2 + offsetY);
 
     if (!playersPane.getChildren().contains(playerView)) {
       playersPane.getChildren().add(playerView);
@@ -174,7 +173,7 @@ public class MonopolyBoardView extends StackPane implements BoardView {
    * @return a TileView.
    */
   private StackPane createElement(Tile tile) {
-    return new TileView(tile.getTileId());
+    return new TileView(tile.getTileId(), 90);
   }
 
   @Override

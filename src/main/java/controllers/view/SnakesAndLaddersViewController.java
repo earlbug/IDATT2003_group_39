@@ -9,15 +9,20 @@ import interfaces.Board;
 import interfaces.BoardView;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import javafx.geometry.Pos;
 import models.BoardGame;
+import models.GamePiece;
 import models.Player;
+import models.validators.ArgumentValidator;
 import observers.BoardGameObserver;
 import org.slf4j.Logger;
 import views.game.container.GameView;
-import views.game.content.HudView;
+import views.game.content.DiceView;
+import views.game.content.PlayerInfoView;
 import views.game.content.PlayerView;
 import views.game.content.SnakesAndLaddersBoardView;
-import views.game.content.WinnerView;
+import views.game.content.WinnerPopup;
 
 /**
  * Handles the view logic for the Snakes and Ladders game.
@@ -29,29 +34,52 @@ import views.game.content.WinnerView;
 public class SnakesAndLaddersViewController extends ViewController implements BoardGameObserver {
 
   private GameView gameView;
-  private HudView hudView;
+  private PlayerInfoView playerInfoView;
+  private DiceView diceView;
   private SnakesAndLaddersBoardView boardView;
-  private final Logger logger = org.slf4j.LoggerFactory.getLogger(SnakesAndLaddersViewController.class);
+  private final Logger logger = org.slf4j.LoggerFactory.getLogger(
+      SnakesAndLaddersViewController.class);
 
   /**
    * Constructor for SnakesAndLaddersViewController.
-   *
    */
   public SnakesAndLaddersViewController() {
     logger.debug("SnakesAndLaddersViewController initialized");
   }
 
+  @Override
+  public void showBoardSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public void showPlayerSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public void showGameSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public Map<String, GamePiece> getSelectedPlayers() {
+    return Map.of();
+  }
+
+
+  /**
+   * Sets the game view and initializes the dice and player info views.
+   *
+   * @param gameView The game view to set
+   */
   public void setGameView(GameView gameView) {
     this.gameView = gameView;
-    this.hudView = gameView.getHudView();
+    this.diceView = gameView.getDiceView();
+    this.playerInfoView = gameView.getPlayerInfoView();
     this.boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
   }
 
-  /**
-   * Sets up the game view and board view based on the board file.
-   *
-   * @param boardFileName The name of the board file
-   */
   @Override
   public void setUpView(String boardFileName, int boardNumber) {
     try {
@@ -61,6 +89,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
 
       setGameView(gameView);
       boardView.drawBoardImage(boardNumber);
+      gameView.setAlignment(Pos.CENTER);
       logger.debug("View set up for board file: {}", boardFileName);
     } catch (UnknownGameException | IOException e) {
       throw new RuntimeException(e);
@@ -68,73 +97,70 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
   }
 
   @Override
-  public void setButtonClickNotifier(ButtonClickNotifier notifier) {
-    super.setButtonClickNotifier(notifier);
-    hudView.setButtonClickNotifier(notifier);
+  public void setUpView(String boardFileName) {
+    // Not used
   }
 
-  /**
-   * Adds player views to the game view.
-   *
-   * @param players List of players to add
-   */
+  @Override
+  public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    ArgumentValidator.setButtonClickNotifier(notifier);
+    diceView.setButtonClickNotifier(notifier);
+  }
+
   @Override
   public void addPlayerViews(List<Player> players) {
-    System.out.println("Adding player views");
     SnakesAndLaddersBoardView boardView = (SnakesAndLaddersBoardView) gameView.getBoardView();
     for (Player player : players) {
       PlayerView playerView = new PlayerView();
       playerView.setPlayerGamePiece(player.getGamePiece());
       boardView.addPlayerView(player, playerView);
-      System.out.println(player.getGamePiece());
+      boardView.drawPlayerView(player);
+      logger.debug("Added view for player {}", player.getName());
     }
   }
 
   @Override
-  public void showGameView() {
+  public void showView() {
     getRootPane().getChildren().clear();
     getRootPane().getChildren().add(gameView);
-    logger.debug("Game view displayed");
+    logger.debug("SnL view displayed");
   }
 
-  /**
-   * Handles the event when a player moves.
-   *
-   * @param player The player who moved
-   * @param steps  The number of steps moved
-   */
+  @Override
+  public void onGameStarted(BoardGame game) {
+    Player player = game.getCurrentPlayer();
+    playerInfoView.setPlayerName("Player: " + player.getName());
+    playerInfoView.setGamePiece("Piece: " + player.getGamePiece().toString());
+    playerInfoView.setPlayerTile("Tile: " + player.getCurrentTile().getTileId());
+    diceView.setPlayerName(player.getName());
+    logger.debug("Game started with player: {}", player.getName());
+  }
+
   @Override
   public void onPlayerMoved(Player player, int steps) {
     // Update dice display
-    hudView.setDiceNumber(steps);
+    diceView.setDiceNumber(steps);
     // Update player position on the board
     boardView.drawPlayerView(player);
-    logger.debug("PlayerView updated for {} ", player);
+    logger.debug("PlayerView updated for {} ", player.getName());
   }
 
-  /**
-   * Handles the event when a new player is set as the current player.
-   *
-   * @param newPlayer The new current player
-   */
   @Override
   public void onNextPlayer(Player newPlayer) {
-    hudView.setPlayerName(newPlayer.getName());
+    diceView.setPlayerName(newPlayer.getName());
   }
 
-  /**
-   * Handles the event when a player wins the game.
-   *
-   * @param winner The winning player
-   */
   @Override
   public void onWinnerDetermined(Player winner) {
-    gameView.getChildren().setAll(new WinnerView(winner));
+    diceView.disableRollButton();
+    WinnerPopup winnerPopup = new WinnerPopup();
+    winnerPopup.show(winner.getName());
+    gameView.getChildren().add(winnerPopup);
   }
 
   @Override
   public void onPlayerLost(Player lostPlayer) {
-
+    // Not used
   }
 
   @Override
@@ -142,12 +168,11 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     boardView.drawPlayerView(player);
   }
 
-  /**
-   * Handles the event when the game state changes.
-   *
-   * @param boardGame The current state of the board game
-   */
   @Override
-  public void onGameStateChanged(BoardGame boardGame) {
+  public void onEndTurn(Player player) {
+    playerInfoView.setPlayerName("Player: " + player.getName());
+    playerInfoView.setGamePiece("Piece: " + player.getGamePiece().toString());
+    playerInfoView.setPlayerTile("Tile: " + player.getCurrentTile().getTileId());
+    logger.debug("Player {} has ended its turn", player.getName());
   }
 }

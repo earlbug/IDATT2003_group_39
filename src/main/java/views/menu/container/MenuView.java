@@ -1,43 +1,38 @@
 package views.menu.container;
 
 import controllers.ButtonClickNotifier;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import models.validators.ArgumentValidator;
 import views.menu.content.SelectBoardView;
 import views.menu.content.SelectPlayersView;
 
 /**
- * This class represents the main menu window
+ * This class represents the main menu window.
  *
  * @author Tord Fosse
  * @version 1.0
  * @since 1.0
  */
-
 public class MenuView extends StackPane {
 
   private ButtonClickNotifier notifier;
   private SelectPlayersView selectPlayersView;
 
-  /*
-   * Add the buttons and titles
+  /**
+   * Constructor for the MenuView class that initializes the view.
    */
   public MenuView() {
-    this.setBackground(
-        new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
     initialize();
   }
 
+  /**
+   * Initializes the main menu view with buttons for different games.
+   */
   private void initialize() {
-    VBox layout = new VBox();
     Button snakesAndLaddersButton = new Button("SNAKES AND LADDERS");
     Button monopolyButton = new Button("MONOPOLY");
 
@@ -54,13 +49,27 @@ public class MenuView extends StackPane {
     monopolyButton.setFocusTraversable(false);
     monopolyButton.setOnAction(actionEvent -> notifier.notifyObservers("Monopoly"));
 
+    VBox layout = new VBox();
+    layout.getChildren().clear();
     layout.setSpacing(20);
     layout.getChildren().addAll(snakesAndLaddersButton, monopolyButton);
     layout.setAlignment(Pos.CENTER);
+    this.getChildren().clear();
+    this.getStyleClass().add("main-style");
     this.getChildren().addAll(layout);
 
   }
 
+  /**
+   * Initializes the main menu view with buttons for different games.
+   */
+  public void selectGame() {
+    initialize();
+  }
+
+  /**
+   * Sets the view to select the snakes and ladders board.
+   */
   public void selectSnakesAndLaddersBoards() {
     SelectBoardView selectBoardView = new SelectBoardView();
     selectBoardView.setButtonClickNotifier(notifier);
@@ -68,6 +77,9 @@ public class MenuView extends StackPane {
     this.getChildren().addAll(selectBoardView);
   }
 
+  /**
+   * Sets the view to select the players.
+   */
   public void selectPlayers() {
     selectPlayersView = new SelectPlayersView();
     selectPlayersView.setButtonClickNotifier(notifier);
@@ -76,20 +88,26 @@ public class MenuView extends StackPane {
   }
 
   /**
-   * Sets the button click notifier that will handle button clicks
+   * Sets the button click notifier that will handle button clicks.
    *
    * @param notifier The notifier to handle button clicks
    */
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    ArgumentValidator.setButtonClickNotifier(notifier);
     this.notifier = notifier;
   }
 
+  /**
+   * Gets the view of the select players view.
+   *
+   * @return the view of the select players view
+   */
   public SelectPlayersView getSelectPlayersView() {
     return selectPlayersView;
   }
 
   /**
-   * Gets the main menu view
+   * Gets the main menu view.
    *
    * @return display of the main menu
    */

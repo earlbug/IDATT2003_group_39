@@ -13,6 +13,13 @@ import models.Player;
 public interface BoardGameObserver {
 
   /**
+   * Called when a game is started.
+   *
+   * @param game The game that started
+   */
+  void onGameStarted(BoardGame game);
+
+  /**
    * Called when a player has moved.
    *
    * @param player The player who moved
@@ -41,12 +48,17 @@ public interface BoardGameObserver {
    */
   void onPlayerLost(Player lostPlayer);
 
+  /**
+   * Called when a Tile action is performed.
+   *
+   * @param player The player who performed the action
+   */
   void onTileActionPerformed(Player player);
 
   /**
-   * Called when the game state changes in any other way.
+   * Called when a player ends their turn.
    *
-   * @param boardGame The updated BoardGame instance
+   * @param player The player who ended their turn
    */
-  void onGameStateChanged(BoardGame boardGame);
+  void onEndTurn(Player player);
 }

@@ -1,9 +1,13 @@
 .root {
-  -fx-background-color: white;
+  -fx-background-color: #000330;
+}
+
+.main-style {
+  -fx-background-color: #000330;
 }
 
 .menu-button {
-  -fx-background-color: black;
+  -fx-background-color: #4a81d1;
   -fx-background-radius: 10;
   -fx-font-family: "Arial Black";
   -fx-font-size: 38px;
@@ -13,8 +17,16 @@
 .button:hover {
   -fx-border-width: 4px;
   -fx-border-radius: 5;
-  -fx-border-color: green;
   -fx-border-style: solid;
+  -fx-border-color: white;
+}
+
+.exit-button {
+  -fx-background-color: #4a81d1;
+  -fx-background-radius: 10;
+  -fx-font-family: "Arial Black";
+  -fx-font-size: 30px;
+  -fx-text-fill: white;
 }
 
 .text-field {
@@ -27,7 +39,7 @@
   -icon-paint: white;
   -fx-content-display: graphic-only;
   -fx-padding: 10px;
-  -size: 40;
+  -size: 80;
   -fx-min-height: -size;
   -fx-min-width: -size;
   -fx-max-height: -size;
@@ -38,7 +50,25 @@
 }
 
 .roll-dice-button:hover {
-  -fx-effect: dropshadow(gaussian, white, 10, 0.5, 0, 0);
+  -fx-border-color: white;
+  -size: 90;
+  -fx-min-height: -size;
+  -fx-min-width: -size;
+  -fx-max-height: -size;
+  -fx-max-width: -size;
+}
+
+.game-info-container {
+  -fx-border-radius: 20;
+  -fx-border-width: 4;
+  -fx-border-color: #8787ff;
+}
+
+.player-info {
+  -fx-background-color: transparent;
+  -fx-padding: 10;
+  -fx-border-radius: 10;
+  -fx-background-insets: 5px;
 }
 
 .player-title {
@@ -52,13 +82,8 @@
 }
 
 .player-container {
-  -fx-background-color: black;
+  -fx-background-color: transparent;
   -fx-padding: 10;
-  -fx-border-radius: 10;
-  -fx-background-insets: 5px;
-  -fx-border-style: solid;
-  -fx-border-color: black;
-  -fx-border-width: 5px;
 }
 
 .dice-number {
@@ -67,13 +92,7 @@
 }
 
 .dice-container {
-  -fx-background-color: black;
-  -fx-padding: 10;
-  -fx-border-radius: 10;
-  -fx-background-insets: 5px;
-  -fx-border-style: solid;
-  -fx-border-color: black;
-  -fx-border-width: 5px;
+  -fx-background-color: transparent;
 }
 
 .player-avatar {

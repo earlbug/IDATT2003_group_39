@@ -1,9 +1,12 @@
 package views.game.container;
 
 import interfaces.BoardView;
+import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import views.game.content.HudView;
+import javafx.scene.layout.VBox;
+import views.game.content.DiceView;
+import views.game.content.PlayerInfoView;
 
 /**
  * <h3>Represents the view of the game</h3>
@@ -13,40 +16,51 @@ import views.game.content.HudView;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class GameView extends HBox {
+public class GameView extends VBox {
 
   private final HBox boardContainer;
-  private final StackPane hudContainer;
+  private final StackPane playerInfoContainer;
+  private final StackPane diceContainer;
 
   private final BoardView boardView;
-  private final HudView hudView;
+  private final PlayerInfoView playerInfoView;
+  private final DiceView diceView;
 
   /**
    * Constructs a new view of the game. Creates containers to hold the board and HUD.
    */
   public GameView(BoardView boardView) {
     boardContainer = new HBox();
-    hudContainer = new StackPane();
+    playerInfoContainer = new StackPane();
+    diceContainer = new StackPane();
 
     this.boardView = boardView;
-    this.hudView = new HudView();
+    this.playerInfoView = new PlayerInfoView();
+    this.diceView = new DiceView();
+    this.setSpacing(20);
 
     initialize();
   }
 
   private void initialize() {
     boardContainer.getChildren().add(boardView.getView());
-    hudContainer.getChildren().add(hudView.getView());
+    playerInfoContainer.getChildren().add(playerInfoView);
+    diceContainer.getChildren().add(diceView.getView());
 
-    this.getChildren().setAll(boardContainer, hudContainer);
+    HBox layout = new HBox();
+    layout.setAlignment(Pos.CENTER);
+    layout.setSpacing(20);
+    layout.getChildren().addAll(playerInfoContainer, boardContainer, diceContainer);
+    this.getStyleClass().add("main-style");
+    this.getChildren().setAll(layout);
   }
 
   /**
    * Gets the view of the game.
    *
-   * @return the view as a Hbox.
+   * @return the view as a Vbox.
    */
-  public HBox getView() {
+  public VBox getView() {
     return this;
   }
 
@@ -64,8 +78,12 @@ public class GameView extends HBox {
    *
    * @return the view of HUD.
    */
-  public HudView getHudView() {
-    return hudView;
+  public DiceView getDiceView() {
+    return diceView;
+  }
+
+  public PlayerInfoView getPlayerInfoView() {
+    return playerInfoView;
   }
 
 }

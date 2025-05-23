@@ -36,6 +36,13 @@ public abstract class GameNotifier {
   }
 
   /**
+   * Clears all observers from the list.
+   */
+  public void clearObservers() {
+    observers.clear();
+  }
+
+  /**
    * Notifies all observers that a player has moved.
    *
    * @param player The player who moved
@@ -82,11 +89,20 @@ public abstract class GameNotifier {
   }
 
   /**
-   * Notifies all observers that the game state has changed.
+   * Notifies all observers that a turn has ended.
    *
-   * @param boardGame The current state of the board game
+   * @param player The player whose turn ended
    */
-  public void notifyGameStateChanged(BoardGame boardGame) {
-    observers.forEach(observer -> observer.onGameStateChanged(boardGame));
+  public void notifyTurnEnded(Player player) {
+    observers.forEach(observers -> observers.onEndTurn(player));
+  }
+
+  /**
+   * Notifies all observers that the game has started.
+   *
+   * @param boardGame The game that started
+   */
+  public void notifyGameStarted(BoardGame boardGame) {
+    observers.forEach(observer -> observer.onGameStarted(boardGame));
   }
 }

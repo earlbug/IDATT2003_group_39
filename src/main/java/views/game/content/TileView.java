@@ -21,15 +21,16 @@ public class TileView extends StackPane {
   /**
    * Constructs a new TileView that initializes the form of a tile.
    */
-  public TileView(int tileId) {
+  public TileView(int tileId, int size) {
     this.tileId = tileId;
-    Rectangle background = new Rectangle(80, 80);
-    background.setFill(Color.TRANSPARENT);
+    Rectangle rectangle = new Rectangle(size,  size);
+    rectangle.setFill(Color.TRANSPARENT);
 
     Text text = new Text(String.valueOf(tileId));
+    text.setFill(Color.RED);
 
 
-    StackPane layeredPane = new StackPane(background, text);
+    StackPane layeredPane = new StackPane(rectangle, text);
     this.getChildren().setAll(layeredPane);
   }
 

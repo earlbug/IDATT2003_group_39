@@ -1,13 +1,15 @@
 package views.game.content;
 
+import controllers.ButtonClickNotifier;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import controllers.ButtonClickNotifier;
+import models.validators.ArgumentValidator;
 
 /**
  * <h3>Represents the view of the HUD</h3>
@@ -18,7 +20,7 @@ import controllers.ButtonClickNotifier;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class HudView extends VBox {
+public class DiceView extends VBox {
 
   final int maxWith = 300;
 
@@ -32,6 +34,7 @@ public class HudView extends VBox {
 
   private final Button rollDiceButton;
   private final Text diceNumberText = new Text();
+  private final Button exitButton = new Button("Quit");
 
   private ButtonClickNotifier buttonClickNotifier;
 
@@ -39,11 +42,11 @@ public class HudView extends VBox {
    * Constructs containers to give the user a simple view of the info. Initializes the view to add
    * the information in the containers.
    */
-  public HudView() {
+  public DiceView() {
     this.playerContainer = new VBox();
     this.diceContainer = new VBox();
 
-    this.playerTitle = new Text("Player");
+    this.playerTitle = new Text("Player to roll");
 
     this.spacer = new Region();
     this.rollDiceButton = new Button();
@@ -67,7 +70,7 @@ public class HudView extends VBox {
 
     rollDiceButton.getStyleClass().add("roll-dice-button");
     rollDiceButton.setAlignment(Pos.CENTER);
-    rollDiceButton.setOnAction(actionEvent -> buttonClickNotifier.notifyObservers("play"));
+    rollDiceButton.setOnAction(actionEvent -> buttonClickNotifier.notifyObservers("Play"));
 
     diceNumberText.getStyleClass().add("dice-number");
 
@@ -76,8 +79,22 @@ public class HudView extends VBox {
     diceContainer.setMaxWidth(maxWith);
     diceContainer.getChildren().setAll(diceNumberText, rollDiceButton);
 
+    exitButton.getStyleClass().add("exit-button");
+    exitButton.setOnAction(actionEvent -> buttonClickNotifier.notifyObservers("Menu"));
+
+    VBox.setVgrow(spacer, Priority.ALWAYS);
+
+    this.getStyleClass().add("game-info-container");
+    this.setSpacing(20);
     this.setPadding(new Insets(10));
-    this.getChildren().setAll(playerContainer, spacer, diceContainer);
+    this.getChildren().setAll(playerContainer, diceContainer, spacer, exitButton);
+  }
+
+  /**
+   * Disables the roll button.
+   */
+  public void disableRollButton() {
+    this.rollDiceButton.setDisable(true);
   }
 
   /**
@@ -109,11 +126,12 @@ public class HudView extends VBox {
   }
 
   /**
-   * Sets the button click notifier that will handle button clicks
+   * Sets the button click notifier that will handle button clicks.
    *
    * @param notifier The notifier to handle button clicks
    */
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    ArgumentValidator.setButtonClickNotifier(notifier);
     this.buttonClickNotifier = notifier;
   }
 }
