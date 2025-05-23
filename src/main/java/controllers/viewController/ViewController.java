@@ -7,7 +7,6 @@ import java.util.Map;
 import javafx.scene.layout.StackPane;
 import models.GamePiece;
 import models.Player;
-import org.slf4j.Logger;
 
 public abstract class ViewController extends GameNotifier {
 
@@ -22,11 +21,13 @@ public abstract class ViewController extends GameNotifier {
 
   public StackPane getRootPane() {
     return rootPane;
-  }
+  };
 
   public abstract void showBoardSelectMenu();
 
   public abstract void showPlayerSelectMenu();
+
+  public abstract void showGameSelectMenu();
 
   public abstract Map<String, GamePiece> getSelectedPlayers();
 

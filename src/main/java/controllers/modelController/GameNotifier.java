@@ -86,11 +86,11 @@ public abstract class GameNotifier {
   }
 
   /**
-   * Notifies all observers that the game state has changed.
+   * Notifies all observers that the game has started.
    *
-   * @param boardGame The current state of the board game
+   * @param boardGame The game that started
    */
-  public void notifyGameStateChanged(BoardGame boardGame) {
-    observers.forEach(observer -> observer.onGameStateChanged(boardGame));
+  public void notifyGameStarted(BoardGame boardGame) {
+    observers.forEach(observer -> observer.onGameStarted(boardGame));
   }
 }

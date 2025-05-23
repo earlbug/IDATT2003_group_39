@@ -157,7 +157,8 @@ public void setUpGame() {
   boardGame.setPlayerIds();
   boardGame.addPlayersOnStartPos();
   boardGame.setCurrentPlayer(boardGame.getPlayers().getFirst());
-  logger.debug("Game set up with players: {}", boardGame.getPlayers().toArray());
+  notifyGameStarted(boardGame);
+  logger.debug("Game fully set up");
 }
 
 @Override

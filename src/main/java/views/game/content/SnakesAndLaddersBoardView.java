@@ -4,13 +4,11 @@ import interfaces.Board;
 import interfaces.BoardView;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import models.Player;
 import models.Tile;
 
@@ -73,9 +71,7 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
 
     imageView.setFitWidth(800);
     imageView.setFitHeight(800);
-    imageView.setOpacity(0.5);
     imageView.setPreserveRatio(true);
-    imageView.setEffect(new DropShadow(10, Color.BLACK));
     imagePane.getChildren().clear();
     imagePane.getChildren().add(imageView);
   }

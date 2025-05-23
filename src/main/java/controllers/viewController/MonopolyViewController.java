@@ -104,6 +104,17 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   }
 
   @Override
+  public void onGameStarted(BoardGame game) {
+    Player player = game.getCurrentPlayer();
+    playerInfoView.setPlayerName("Player: " + player.getName());
+    playerInfoView.setGamePiece("Piece: " + player.getGamePiece().toString());
+    playerInfoView.setPlayerTile("Tile: " + player.getCurrentTile().getTileId());
+    playerInfoView.setMoney("Money: " + player.getMoney());
+    playerInfoView.setTurnsToSkip("Turns to skip: " + player.getTurnsToSkip());
+    logger.debug("Game started with player {}", player.getName());
+  }
+
+  @Override
   public void onPlayerMoved(Player player, int steps) {
     // Update dice display
     diceView.setDiceNumber(steps);

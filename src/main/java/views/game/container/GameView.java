@@ -1,8 +1,10 @@
 package views.game.container;
 
 import interfaces.BoardView;
+import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import views.game.content.DiceView;
 import views.game.content.PlayerInfoView;
 import views.game.content.WinnerPopup;
@@ -15,7 +17,7 @@ import views.game.content.WinnerPopup;
  * @author Tord Fosse
  * @since 0.1.0
  */
-public class GameView extends HBox {
+public class GameView extends VBox {
 
   private final HBox boardContainer;
   private final StackPane playerInfoContainer;
@@ -44,19 +46,24 @@ public class GameView extends HBox {
   }
 
   private void initialize() {
+    HBox layout = new HBox();
     boardContainer.getChildren().add(boardView.getView());
     playerInfoContainer.getChildren().add(playerInfoView);
     diceContainer.getChildren().add(diceView.getView());
 
-    this.getChildren().setAll(playerInfoContainer,boardContainer, diceContainer);
+    layout.setAlignment(Pos.CENTER);
+    layout.setSpacing(20);
+    layout.getChildren().addAll(playerInfoContainer,boardContainer, diceContainer);
+    this.getStyleClass().add("main-style");
+    this.getChildren().setAll(layout);
   }
 
   /**
    * Gets the view of the game.
    *
-   * @return the view as a Hbox.
+   * @return the view as a Vbox.
    */
-  public HBox getView() {
+  public VBox getView() {
     return this;
   }
 

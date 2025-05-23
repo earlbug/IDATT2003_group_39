@@ -1,5 +1,5 @@
-import controllers.model.GameManager;
-import controllers.view.ViewManager;
+import controllers.modelController.GameManager;
+import controllers.viewController.ViewManager;
 import controllers.ButtonClickController;
 import javafx.application.Application;
 import javafx.stage.Stage;

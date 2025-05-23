@@ -12,6 +12,8 @@ import models.Player;
  */
 public interface BoardGameObserver {
 
+  void onGameStarted(BoardGame game);
+
   /**
    * Called when a player has moved.
    *
@@ -44,11 +46,4 @@ public interface BoardGameObserver {
   void onTileActionPerformed(Player player);
 
   void onEndTurn(Player player);
-
-  /**
-   * Called when the game state changes in any other way.
-   *
-   * @param boardGame The updated BoardGame instance
-   */
-  void onGameStateChanged(BoardGame boardGame);
 }
