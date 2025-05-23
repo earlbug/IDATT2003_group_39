@@ -27,6 +27,7 @@ public class TileView extends StackPane {
     rectangle.setFill(Color.TRANSPARENT);
 
     Text text = new Text(String.valueOf(tileId));
+    text.setFill(Color.RED);
 
 
     StackPane layeredPane = new StackPane(rectangle, text);
