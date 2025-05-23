@@ -20,16 +20,10 @@ public class WinnerPopup extends VBox{
     this.setPadding(new Insets(20));
     this.setSpacing(20);
 
-    Text winnerText = new Text(winner + "wins!");
-    winnerText.setFont(new Font(24));
+    Text winnerText = new Text(winner + " won!");
+    winnerText.getStyleClass().add("player-title");
 
-    Button backButton = new Button("MENU");
-    backButton.setOnAction(actionEvent -> notifier.notifyObservers("Menu"));
-
-    this.getChildren().addAll(winnerText, backButton);
+    this.getChildren().addAll(winnerText);
   }
 
-  public void setButtonClickNotifier(ButtonClickNotifier notifier) {
-    this.notifier = notifier;
-  }
 }
