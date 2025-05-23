@@ -1,10 +1,9 @@
 package controllers;
 
-import controllers.model.GameController;
-import controllers.model.GameManager;
-import controllers.model.MonopolyController;
-import controllers.model.SnakesAndLaddersController;
-import controllers.view.ViewManager;
+import controllers.modelController.GameManager;
+import controllers.modelController.MonopolyController;
+import controllers.modelController.SnakesAndLaddersController;
+import controllers.viewController.ViewManager;
 import exception.UnknownButtonActionException;
 import observers.ButtonClickObserver;
 
@@ -70,7 +69,7 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
         } else if (gameManager.getCurrentGameController() instanceof MonopolyController) {
           viewManager.switchToMonopolyView();
         }
-        viewManager.getCurrentViewController().showGameView();
+        viewManager.getCurrentViewController().showView();
         viewManager.getCurrentViewController().setButtonClickNotifier(this);
         viewManager.getCurrentViewController().addPlayerViews(gameManager.getCurrentGameController().getBoardGame().getPlayers());
         gameManager.getCurrentGameController().setUpGame();
@@ -83,7 +82,11 @@ public class ButtonClickController extends ButtonClickNotifier implements Button
         viewManager.switchToMenuView();
         viewManager.getCurrentViewController().showPlayerSelectMenu();
         break;
-      case "play":
+      case "Menu":
+        viewManager.switchToMenuView();
+        viewManager.getCurrentViewController().showGameSelectMenu();
+        break;
+      case "Play":
         gameManager.getCurrentGameController().handleOneTurn();
         break;
       default:

@@ -1,6 +1,8 @@
 package views.game.content;
 
 import javafx.geometry.Insets;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -14,6 +16,7 @@ public class PlayerInfoView extends VBox {
 
   public PlayerInfoView() {
     VBox infoContainer = new VBox();
+    Region spacer = new Region();
     playerName = new Text();
     playerTile = new Text();
     gamePiece = new Text();
@@ -29,10 +32,14 @@ public class PlayerInfoView extends VBox {
 
     infoContainer.getStyleClass().add("player-info");
     infoContainer.setSpacing(20);
-    infoContainer.setPrefSize(150, 150);
+    infoContainer.setPrefSize(300, 100);
     infoContainer.getChildren().addAll(playerName, playerTile, gamePiece, money, turnsToSkip);
+
+    VBox.setVgrow(spacer, Priority.ALWAYS);
+
+    this.getStyleClass().add("game-info-container");
     this.setPadding(new Insets(10));
-    this.getChildren().add(infoContainer);
+    this.getChildren().addAll(infoContainer, spacer);
   }
 
   public void setPlayerName(String text) {

@@ -32,8 +32,6 @@ public class MenuView extends StackPane {
    * Add the buttons and titles
    */
   public MenuView() {
-    this.setBackground(
-        new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
     initialize();
   }
 
@@ -55,11 +53,18 @@ public class MenuView extends StackPane {
     monopolyButton.setFocusTraversable(false);
     monopolyButton.setOnAction(actionEvent -> notifier.notifyObservers("Monopoly"));
 
+    layout.getChildren().clear();
     layout.setSpacing(20);
     layout.getChildren().addAll(snakesAndLaddersButton, monopolyButton);
     layout.setAlignment(Pos.CENTER);
+    this.getChildren().clear();
+    this.getStyleClass().add("main-style");
     this.getChildren().addAll(layout);
 
+  }
+
+  public void selectGame() {
+    initialize();
   }
 
   public void selectSnakesAndLaddersBoards() {

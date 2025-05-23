@@ -32,11 +32,12 @@ public abstract class ViewController extends GameNotifier {
 
   public abstract void addPlayerViews(List<Player> players);
 
-  public abstract void showGameView();
+  public abstract void showView();
 
   public abstract void setButtonClickNotifier(ButtonClickNotifier notifier);
 
   public abstract void setUpView(String boardFileName, int boardNumber);
 
-  public abstract void  setUpView(String boardFileName);
+  public abstract void setUpView(String boardFileName);
+
 }

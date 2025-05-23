@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import models.BoardGame;
 import models.GamePiece;
 import models.Player;
+import models.validators.ArgumentValidator;
 import observers.BoardGameObserver;
 import org.slf4j.Logger;
 import views.game.container.GameView;
@@ -24,10 +25,9 @@ import views.game.content.PlayerView;
 import views.game.content.WinnerPopup;
 
 /**
- * Controller class responsible for managing the visual representation of a Monopoly game.
- * Acts as a bridge between the game model and its visual components, updating the UI
- * in response to game state changes.
- * This class extends ViewController and implements the observer pattern to react to
+ * Controller class responsible for managing the visual representation of a Monopoly game. Acts as a
+ * bridge between the game model and its visual components, updating the UI in response to game
+ * state changes. This class extends ViewController and implements the observer pattern to react to
  * game events such as player movements, player turns, and game completion.
  */
 public class MonopolyViewController extends ViewController implements BoardGameObserver {
@@ -39,6 +39,7 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   private final Logger logger = org.slf4j.LoggerFactory.getLogger(MonopolyViewController.class);
 
   public MonopolyViewController() {
+    logger.debug("MonopolyViewController initialized");
   }
 
   @Override
@@ -48,6 +49,11 @@ public class MonopolyViewController extends ViewController implements BoardGameO
 
   @Override
   public void showPlayerSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public void showGameSelectMenu() {
     // Not used
   }
 
@@ -62,7 +68,7 @@ public class MonopolyViewController extends ViewController implements BoardGameO
     this.playerInfoView = gameView.getPlayerInfoView();
     this.boardView = (MonopolyBoardView) gameView.getBoardView();
     this.gameView.setAlignment(Pos.CENTER);
-    this.getRootPane().getChildren().add(gameView);
+    getRootPane().getChildren().add(gameView);
   }
 
   @Override
@@ -81,23 +87,19 @@ public class MonopolyViewController extends ViewController implements BoardGameO
   }
 
   @Override
-  public void showGameView() {
+  public void showView() {
     getRootPane().getChildren().clear();
     getRootPane().getChildren().add(gameView);
-    logger.debug("Game view displayed");
-  }
-
-
-  public void setNotifiers(ButtonClickNotifier notifier) {
-    diceView.setButtonClickNotifier(notifier);
+    logger.debug("Monopoly view displayed");
   }
 
   public void addPlayerViews(List<Player> players) {
-    // MonopolyBoardView boardView = (MonopolyBoardView) gameView.getBoardView();
+    MonopolyBoardView boardView = (MonopolyBoardView) gameView.getBoardView();
     for (Player player : players) {
       PlayerView playerView = new PlayerView();
       playerView.setPlayerGamePiece(player.getGamePiece());
       boardView.addPlayerView(player, playerView);
+      logger.debug("Added view for player {}", player.getName());
     }
   }
 
@@ -138,11 +140,6 @@ public class MonopolyViewController extends ViewController implements BoardGameO
     playerInfoView.setMoney("Money: " + player.getMoney());
     playerInfoView.setTurnsToSkip("Turns to skip: " + player.getTurnsToSkip());
     logger.debug("Player {} has ended its turn", player.getName());
-  }
-
-  @Override
-  public void onGameStateChanged(BoardGame boardGame) {
-
   }
 
   @Override

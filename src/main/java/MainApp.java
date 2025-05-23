@@ -18,9 +18,10 @@ public class MainApp extends Application {
     GameManager gameManager = new GameManager();
     ViewManager viewManager = new ViewManager(primaryStage);
     ButtonClickController buttonClickController = new ButtonClickController(gameManager, viewManager);
-    viewManager.getCurrentViewController().setButtonClickNotifier(buttonClickController);
 
     viewManager.switchToMenuView();
+    viewManager.getCurrentViewController().setButtonClickNotifier(buttonClickController);
+    viewManager.getCurrentViewController().showView();
   }
 
 }

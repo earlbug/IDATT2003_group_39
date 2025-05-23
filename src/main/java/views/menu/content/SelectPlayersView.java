@@ -57,7 +57,7 @@ public class SelectPlayersView extends MenuView {
     player4.setOnAction(actionEvent -> setTextFields(4));
 
     // Start button
-    startButton.getStyleClass().add("menu-button");
+    startButton.getStyleClass().add("exit-button");
     startButton.setOnAction(actionEvent -> {
       if (validator.validate()) {
         notifier.notifyObservers("Start");
@@ -68,6 +68,10 @@ public class SelectPlayersView extends MenuView {
     TooltipWrapper<Button> startButtonWrapper = new TooltipWrapper<>(startButton,
         validator.containsErrorsProperty(),
         Bindings.concat("Cannot start game:\n", validator.createStringBinding()));
+
+    Button backButton = new Button("Back");
+    backButton.getStyleClass().add("exit-button");
+    backButton.setOnAction(actionEvent -> notifier.notifyObservers("Menu"));
 
     this.getChildren().clear();
     container.getChildren().addAll(player1, player2, player3, player4);
@@ -84,7 +88,8 @@ public class SelectPlayersView extends MenuView {
     VBox mainContainer = new VBox();
     mainContainer.setSpacing(20);
     mainContainer.setAlignment(Pos.CENTER);
-    mainContainer.getChildren().addAll(layout, startButtonWrapper);
+    mainContainer.getChildren().addAll(layout, startButtonWrapper, backButton);
+    this.getStyleClass().add("main-style");
     this.getChildren().add(mainContainer);
     StackPane.setAlignment(mainContainer, Pos.CENTER);
   }

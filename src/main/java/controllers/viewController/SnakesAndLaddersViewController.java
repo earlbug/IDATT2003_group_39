@@ -154,13 +154,15 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
    */
   @Override
   public void onWinnerDetermined(Player winner) {
-    gameView.getChildren().setAll(new WinnerPopup());
-    System.out.println("yep");
+    diceView.disableRollButton();
+    WinnerPopup winnerPopup = new WinnerPopup();
+    winnerPopup.show(winner.getName());
+    gameView.getChildren().add(winnerPopup);
   }
 
   @Override
   public void onPlayerLost(Player lostPlayer) {
-
+    // Not used
   }
 
   @Override

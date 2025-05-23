@@ -1,4 +1,4 @@
-package controllers.view;
+package controllers.viewController;
 
 import controllers.ButtonClickNotifier;
 import java.util.List;
@@ -9,15 +9,14 @@ import views.menu.container.MenuView;
 
 public class MenuViewController extends ViewController {
 
-  private final MenuView menuView;
+  private final MenuView menuView = new MenuView();
+  private final Logger logger = org.slf4j.LoggerFactory.getLogger(MenuViewController.class);
 
   /**
    * Constructor for MenuViewController.
    */
   public MenuViewController() {
-    this.menuView = new MenuView();
-
-    this.getRootPane().getChildren().add(menuView);
+    logger.debug("MenuViewController initialized");
   }
 
   @Override
@@ -31,6 +30,11 @@ public class MenuViewController extends ViewController {
   }
 
   @Override
+  public void showGameSelectMenu() {
+    menuView.selectGame();
+  }
+
+  @Override
   public Map<String, GamePiece> getSelectedPlayers() {
     return menuView.getSelectPlayersView().getSelectedPlayers();
   }
@@ -41,8 +45,10 @@ public class MenuViewController extends ViewController {
   }
 
   @Override
-  public void showGameView() {
-    // Not used
+  public void showView() {
+    getRootPane().getChildren().clear();
+    getRootPane().getChildren().add(menuView);
+    logger.debug("Menu view displayed");
   }
 
   /**

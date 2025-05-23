@@ -3,6 +3,7 @@ package views.game.content;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -32,6 +33,7 @@ public class DiceView extends VBox {
 
   private final Button rollDiceButton;
   private final Text diceNumberText = new Text();
+  private final Button exitButton = new Button("Quit");
 
   private ButtonClickNotifier buttonClickNotifier;
 
@@ -67,7 +69,7 @@ public class DiceView extends VBox {
 
     rollDiceButton.getStyleClass().add("roll-dice-button");
     rollDiceButton.setAlignment(Pos.CENTER);
-    rollDiceButton.setOnAction(actionEvent -> buttonClickNotifier.notifyObservers("play"));
+    rollDiceButton.setOnAction(actionEvent -> buttonClickNotifier.notifyObservers("Play"));
 
     diceNumberText.getStyleClass().add("dice-number");
 
@@ -76,8 +78,19 @@ public class DiceView extends VBox {
     diceContainer.setMaxWidth(maxWith);
     diceContainer.getChildren().setAll(diceNumberText, rollDiceButton);
 
+    exitButton.getStyleClass().add("exit-button");
+    exitButton.setOnAction(actionEvent -> buttonClickNotifier.notifyObservers("Menu"));
+
+    VBox.setVgrow(spacer, Priority.ALWAYS);
+
+    this.getStyleClass().add("game-info-container");
+    this.setSpacing(20);
     this.setPadding(new Insets(10));
-    this.getChildren().setAll(playerContainer, spacer, diceContainer);
+    this.getChildren().setAll(playerContainer, diceContainer, spacer, exitButton);
+  }
+
+  public void disableRollButton() {
+    this.rollDiceButton.setDisable(true);
   }
 
   /**
