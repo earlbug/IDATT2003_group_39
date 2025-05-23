@@ -63,7 +63,6 @@ public class Tile {
    * @param nextTile the next tile.
    */
   public void setNextTile(Tile nextTile) {
-    ArgumentValidator.tileSetNextTileValidator(nextTile);
     this.nextTile = nextTile;
   }
 

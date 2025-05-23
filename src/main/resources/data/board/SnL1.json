@@ -399,7 +399,6 @@
     },
     {
       "tileId": 100,
-      "nextTileId": null,
       "type": {
         "actionType": "winAction"
       }
