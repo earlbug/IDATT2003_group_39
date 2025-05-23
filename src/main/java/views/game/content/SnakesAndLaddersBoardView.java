@@ -138,13 +138,14 @@ public class SnakesAndLaddersBoardView extends StackPane implements BoardView {
     // Calculate offset based on player index
     double offsetX = (playerIndex % 2) * 20 - 7.5; // Alternating left-right
     double offsetY =
-        ((double) playerIndex / 2) * 20 - (totalPlayers > 2 ? 7.5 : 0); // Rows of 2 players
+        ((double) playerIndex / 2) * 15 - (totalPlayers > 2 ? 7.5 : 0); // Rows of 2 players
 
     // Position the PlayerView on the TileView with offset
     double tileX = tilePosition[0];
     double tileY = tilePosition[1];
     playerView.setLayoutX(tileX + tileView.getWidth() / 2 - playerView.getFitWidth() / 2 + offsetX);
-    playerView.setLayoutY(tileY + tileView.getHeight() / 2 - playerView.getFitHeight() / 2 + offsetY);
+    playerView.setLayoutY(
+        tileY + tileView.getHeight() / 2 - playerView.getFitHeight() / 2 + offsetY);
 
     if (!playersPane.getChildren().contains(playerView)) {
       playersPane.getChildren().add(playerView);
