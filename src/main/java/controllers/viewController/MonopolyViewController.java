@@ -155,6 +155,7 @@ public class MonopolyViewController extends ViewController implements BoardGameO
 
   @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    ArgumentValidator.setButtonClickNotifier(notifier);
     diceView.setButtonClickNotifier(notifier);
   }
 

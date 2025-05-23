@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import models.GamePiece;
 import models.Player;
+import models.validators.ArgumentValidator;
+import org.slf4j.Logger;
 import views.menu.container.MenuView;
 
 public class MenuViewController extends ViewController {
@@ -58,6 +60,7 @@ public class MenuViewController extends ViewController {
    */
   @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    ArgumentValidator.setButtonClickNotifier(notifier);
     menuView.setButtonClickNotifier(notifier);
   }
 
@@ -70,5 +73,4 @@ public class MenuViewController extends ViewController {
   public void setUpView(String boardFileName) {
     // Not used
   }
-
 }

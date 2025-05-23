@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import controllers.ButtonClickNotifier;
+import models.validators.ArgumentValidator;
 
 /**
  * <h3>Represents the view of the HUD</h3>
@@ -127,6 +128,7 @@ public class DiceView extends VBox {
    * @param notifier The notifier to handle button clicks
    */
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    ArgumentValidator.setButtonClickNotifier(notifier);
     this.buttonClickNotifier = notifier;
   }
 }

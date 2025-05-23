@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import models.BoardGame;
 import models.GamePiece;
 import models.Player;
+import models.validators.ArgumentValidator;
 import observers.BoardGameObserver;
 import org.slf4j.Logger;
 import views.game.container.GameView;
@@ -52,6 +53,11 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
 
   @Override
   public void showPlayerSelectMenu() {
+    // Not used
+  }
+
+  @Override
+  public void showGameSelectMenu() {
     // Not used
   }
 
@@ -95,6 +101,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
 
   @Override
   public void setButtonClickNotifier(ButtonClickNotifier notifier) {
+    ArgumentValidator.setButtonClickNotifier(notifier);
     diceView.setButtonClickNotifier(notifier);
   }
 
@@ -111,15 +118,25 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
       playerView.setPlayerGamePiece(player.getGamePiece());
       boardView.addPlayerView(player, playerView);
       boardView.drawPlayerView(player);
-      logger.debug("Added view for player {}", player);
+      logger.debug("Added view for player {}", player.getName());
     }
   }
 
   @Override
-  public void showGameView() {
+  public void showView() {
     getRootPane().getChildren().clear();
     getRootPane().getChildren().add(gameView);
-    logger.debug("Game view displayed");
+    logger.debug("SnL view displayed");
+  }
+
+  @Override
+  public void onGameStarted(BoardGame game) {
+    Player player = game.getCurrentPlayer();
+    playerInfoView.setPlayerName("Player: " + player.getName());
+    playerInfoView.setGamePiece("Piece: " + player.getGamePiece().toString());
+    playerInfoView.setPlayerTile("Tile: " + player.getCurrentTile().getTileId());
+    diceView.setPlayerName(player.getName());
+    logger.debug("Game started with player: {}", player.getName());
   }
 
   /**
@@ -134,7 +151,7 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     diceView.setDiceNumber(steps);
     // Update player position on the board
     boardView.drawPlayerView(player);
-    logger.debug("PlayerView updated for {} ", player);
+    logger.debug("PlayerView updated for {} ", player.getName());
   }
 
   /**
@@ -176,14 +193,5 @@ public class SnakesAndLaddersViewController extends ViewController implements Bo
     playerInfoView.setGamePiece("Piece: " + player.getGamePiece().toString());
     playerInfoView.setPlayerTile("Tile: " + player.getCurrentTile().getTileId());
     logger.debug("Player {} has ended its turn", player.getName());
-  }
-
-  /**
-   * Handles the event when the game state changes.
-   *
-   * @param boardGame The current state of the board game
-   */
-  @Override
-  public void onGameStateChanged(BoardGame boardGame) {
   }
 }
