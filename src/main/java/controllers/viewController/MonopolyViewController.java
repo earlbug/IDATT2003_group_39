@@ -130,7 +130,10 @@ public class MonopolyViewController extends ViewController implements BoardGameO
 
   @Override
   public void onWinnerDetermined(Player winner) {
-    gameView.getChildren().setAll(new WinnerPopup());
+    diceView.disableRollButton();
+    WinnerPopup winnerPopup = new WinnerPopup();
+    winnerPopup.show(winner.getName());
+    gameView.getChildren().add(winnerPopup);
   }
 
   @Override
